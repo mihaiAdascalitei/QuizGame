@@ -86,26 +86,26 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void showEmptyErrorMessage() {
-        setAlert(true, true);
+        setLoginAlert(true, true);
     }
 
     private void showLengthErrorMessage() {
-        setAlert(true, false);
+        setLoginAlert(true, false);
     }
 
     private void showNotFoundErrorMessage() {
-        setAlert(false, false);
+        setLoginAlert(false, false);
         showAlert(getString(R.string.user_not_exists));
     }
 
     private void loginSuccess() {
-        setAlert(false, false);
+        setLoginAlert(false, false);
         //start home activity and pass user into it
     }
 
-    private void setAlert(boolean value, boolean isEmpty) {
-        tvAlertUsername.setVisibility(value ? View.VISIBLE : View.GONE);
-        tvAlertPassword.setVisibility(value ? View.VISIBLE : View.GONE);
+    private void setLoginAlert(boolean visible, boolean isEmpty) {
+        tvAlertUsername.setVisibility(visible ? View.VISIBLE : View.GONE);
+        tvAlertPassword.setVisibility(visible ? View.VISIBLE : View.GONE);
         tvAlertUsername.setText(getString(isEmpty ? R.string.username_empty_error : R.string.username_length_error));
         tvAlertPassword.setText(getString(isEmpty ? R.string.password_empty_error : R.string.username_length_error));
     }
