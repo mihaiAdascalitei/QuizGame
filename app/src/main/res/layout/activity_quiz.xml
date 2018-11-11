@@ -6,11 +6,4 @@
     android:layout_height="match_parent"
     tools:context=".QuizActivity">
 
-    <Button
-    	android:height="wrap_content"
-    	android:width="match_parent"
-    	app:constraintLeft_toLeftOf="parent"
-    	android:text="Button"/>
-   
-
 </android.support.constraint.ConstraintLayout>

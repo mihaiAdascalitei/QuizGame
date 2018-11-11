@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">QuizGame</string>
+    <string name="username_hint">Username</string>
+    <string name="passwors_hint">Password</string>
+    <string name="login_text">Login</string>
+    <string name="registration_question">New here? <u>Register!</u></string>
+    <string name="confirm_hint">Confirm password</string>
+    <string name="terms_and_cond">Accept terms and conditions</string>
+    <string name="save">Save</string>
+    <string name="alert_title">Wait...</string>
+    <string name="button_ok">Ok</string>
+    <string name="user_not_exists">Wrong username or password, please verify or try again!</string>
+    <string name="username_empty_error">Username must not be empty!</string>
+    <string name="username_length_error">Length must be greater than 5!</string>
+    <string name="password_empty_error">Password must not be empty!</string>
+    <string name="register">Register</string>
 </resources>
