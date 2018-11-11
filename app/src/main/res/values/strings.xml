@@ -14,4 +14,7 @@
     <string name="username_length_error">Length must be greater than 5!</string>
     <string name="password_empty_error">Password must not be empty!</string>
     <string name="register">Register</string>
+    <string name="username_taken">Username is already taken, please insert a different one!</string>
+    <string name="terms_and_conds_error">Terms and conditions mut be accepted, please accept in order to continue!</string>
+    <string name="password_match_error">Passwords do not match!</string>
 </resources>

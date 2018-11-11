@@ -48,12 +48,22 @@
                 android:textColorHint="@color/dark_green" />
         </android.support.design.widget.TextInputLayout>
 
+        <TextView
+            android:id="@+id/tv_register_alert_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/username_empty_error"
+            android:textColor="@color/alert_red"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/til_username" />
+
         <View
             android:id="@+id/register_username_separator"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/colorPrimary"
-            app:layout_constraintTop_toBottomOf="@id/til_username" />
+            app:layout_constraintTop_toBottomOf="@id/tv_register_alert_username" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til_password"
@@ -77,12 +87,22 @@
                 android:textColorHint="@color/dark_green" />
         </android.support.design.widget.TextInputLayout>
 
+        <TextView
+            android:id="@+id/tv_register_alert_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/username_empty_error"
+            android:textColor="@color/alert_red"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/til_password" />
+
         <View
             android:id="@+id/register_password_separator"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/colorPrimary"
-            app:layout_constraintTop_toBottomOf="@id/til_password" />
+            app:layout_constraintTop_toBottomOf="@id/tv_register_alert_password" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til_confirm"
@@ -105,12 +125,22 @@
                 android:textColorHint="@color/dark_green" />
         </android.support.design.widget.TextInputLayout>
 
+        <TextView
+            android:id="@+id/tv_register_alert_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/username_empty_error"
+            android:textColor="@color/alert_red"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/til_confirm" />
+
         <View
             android:id="@+id/register_confirm_separator"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/colorPrimary"
-            app:layout_constraintTop_toBottomOf="@id/til_confirm" />
+            app:layout_constraintTop_toBottomOf="@id/tv_register_alert_confirm" />
 
         <TextView
             android:id="@+id/tv_terms_and_conds"
