@@ -20,7 +20,7 @@ public class LoginController {
         } else if (username.length() < 5 || password.length() < 5) {
             callback.onLoginAttempt(LoginResponseStatus.LENGTH);
         } else {
-            callback.onLoginAttempt(LoginResponseStatus.NOT_FOUND);
+            callback.onLoginAttempt(LoginResponseStatus.SUCCESS);
         }
     }
 

@@ -101,6 +101,7 @@ public class LoginActivity extends BaseActivity {
     private void loginSuccess() {
         setLoginAlert(false, false);
         //start home activity and pass user into it
+        showDialog(true);
     }
 
     private void setLoginAlert(boolean visible, boolean isEmpty) {
