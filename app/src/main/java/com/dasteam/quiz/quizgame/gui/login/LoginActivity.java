@@ -7,11 +7,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
 import com.dasteam.quiz.quizgame.gui.login.status.LoginResponseStatus;
 import com.dasteam.quiz.quizgame.gui.register.RegisterActivity;
+import com.dasteam.quiz.quizgame.model.PlayerModel;
+import com.dasteam.quiz.quizgame.network.DataRetriever;
 
 public class LoginActivity extends BaseActivity {
 
@@ -63,7 +66,7 @@ public class LoginActivity extends BaseActivity {
         String username = etUsername.getText().toString();
         String password = etPassword.getText().toString();
 
-        loginController.login(username, password, this::handleLoginResponse);
+        loginController.validateData(username, password, this::handleLoginResponse);
     }
 
     private void handleLoginResponse(LoginResponseStatus response) {
@@ -100,8 +103,22 @@ public class LoginActivity extends BaseActivity {
 
     private void loginSuccess() {
         setLoginAlert(false, false);
-        //start home activity and pass user into it
+        String username = etUsername.getText().toString();
+        String password = etPassword.getText().toString();
         showDialog(true);
+        loginController.login(username, password, new DataRetriever<PlayerModel>() {
+            @Override
+            public void onDataRetrieved(PlayerModel data, int code) {
+                showDialog(false);
+                Toast.makeText(LoginActivity.this, code, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onDataFailed(String throwable) {
+                showDialog(false);
+                Toast.makeText(LoginActivity.this, "a", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void setLoginAlert(boolean visible, boolean isEmpty) {

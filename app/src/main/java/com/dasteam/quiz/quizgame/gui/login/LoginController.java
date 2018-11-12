@@ -3,6 +3,8 @@ package com.dasteam.quiz.quizgame.gui.login;
 import android.text.TextUtils;
 
 import com.dasteam.quiz.quizgame.gui.login.status.LoginResponseStatus;
+import com.dasteam.quiz.quizgame.model.PlayerModel;
+import com.dasteam.quiz.quizgame.network.DataRetriever;
 import com.dasteam.quiz.quizgame.network.RetrofitRepository;
 
 public class LoginController {
@@ -13,7 +15,7 @@ public class LoginController {
         repository = new RetrofitRepository();
     }
 
-    public void login(String username, String password, ControllerCallback callback) {
+    public void validateData(String username, String password, ControllerCallback callback) {
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
             callback.onLoginAttempt(LoginResponseStatus.EMPTY);
 
@@ -22,6 +24,10 @@ public class LoginController {
         } else {
             callback.onLoginAttempt(LoginResponseStatus.SUCCESS);
         }
+    }
+
+    public void login(String username, String password, DataRetriever<PlayerModel> retriever) {
+        repository.login(username, password, retriever);
     }
 
 }
