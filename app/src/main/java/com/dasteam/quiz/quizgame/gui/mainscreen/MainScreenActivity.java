@@ -28,7 +28,6 @@ public class MainScreenActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
                 return true;
             case R.id.menu_item_premium:
 

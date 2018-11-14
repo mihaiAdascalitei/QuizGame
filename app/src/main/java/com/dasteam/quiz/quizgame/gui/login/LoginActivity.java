@@ -153,5 +153,6 @@ public class LoginActivity extends BaseActivity {
     private void startMainScreen(PlayerModel player) {
         startActivity(new Intent(this,
                 MainScreenActivity.class).putExtra(MainScreenActivity.MAIN_SCREEN_PLAYER, player));
+        finish();
     }
 }
