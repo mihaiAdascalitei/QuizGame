@@ -1,6 +1,7 @@
 package com.dasteam.quiz.quizgame.gui.register;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -12,7 +13,10 @@ import android.widget.TextView;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
+import com.dasteam.quiz.quizgame.gui.login.LoginActivity;
 import com.dasteam.quiz.quizgame.gui.register.status.RegisterResponseStatus;
+import com.dasteam.quiz.quizgame.model.PlayerModel;
+import com.dasteam.quiz.quizgame.network.DataRetriever;
 
 public class RegisterActivity extends BaseActivity {
 
@@ -89,7 +93,7 @@ public class RegisterActivity extends BaseActivity {
         String password = etPassword.getText().toString();
         String confirm = etConfirm.getText().toString();
 
-        registerController.register(username, password, confirm, cbTerms.isChecked(), this::handleRegisterResponse);
+        registerController.validateData(username, password, confirm, cbTerms.isChecked(), this::handleRegisterResponse);
     }
 
     private void handleRegisterResponse(RegisterResponseStatus status) {
@@ -119,6 +123,30 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private void saveSuccessfull() {
+        String username = etUsername.getText().toString();
+        String password = etPassword.getText().toString();
+
+        showDialog(true);
+        registerController.register(username, password, new DataRetriever<PlayerModel>() {
+            @Override
+            public void onDataRetrieved(PlayerModel data) {
+                showDialog(false);
+                backToLogin(data);
+            }
+
+            @Override
+            public void onDataFailed(String message, int code) {
+                showDialog(false);
+                showAlert(message);
+            }
+        });
+    }
+
+    private void backToLogin(PlayerModel player) {
+        Intent intent = new Intent();
+        intent.putExtra(LoginActivity.EXTRA_PLAYER_KEY, player);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     private void showLengthError() {

@@ -3,17 +3,24 @@ package com.dasteam.quiz.quizgame.gui.login;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
 import com.dasteam.quiz.quizgame.gui.login.status.LoginResponseStatus;
 import com.dasteam.quiz.quizgame.gui.register.RegisterActivity;
+import com.dasteam.quiz.quizgame.model.PlayerModel;
+import com.dasteam.quiz.quizgame.network.DataRetriever;
 
 public class LoginActivity extends BaseActivity {
+
+    private static final int REQUEST_REGISTER_CODE = 10;
+    public static final String EXTRA_PLAYER_KEY = "EXTRA_PLAYER_KEY";
 
     private Button btnLogin;
     private EditText etUsername;
@@ -43,6 +50,23 @@ public class LoginActivity extends BaseActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        switch (requestCode) {
+            case REQUEST_REGISTER_CODE:
+                if (resultCode == RESULT_OK) {
+                    if (data != null) {
+                        PlayerModel player = (PlayerModel) data.getSerializableExtra(EXTRA_PLAYER_KEY);
+                        etUsername.setText(player.getUsername());
+                        etPassword.setText(player.getPassword());
+                    }
+                }
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
     protected void attachController() {
         loginController = new LoginController();
     }
@@ -56,14 +80,14 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void startRegisterActivity() {
-        startActivity(new Intent(this, RegisterActivity.class));
+        startActivityForResult(new Intent(this, RegisterActivity.class), REQUEST_REGISTER_CODE);
     }
 
     private void login() {
         String username = etUsername.getText().toString();
         String password = etPassword.getText().toString();
 
-        loginController.login(username, password, this::handleLoginResponse);
+        loginController.validateData(username, password, this::handleLoginResponse);
     }
 
     private void handleLoginResponse(LoginResponseStatus response) {
@@ -100,7 +124,22 @@ public class LoginActivity extends BaseActivity {
 
     private void loginSuccess() {
         setLoginAlert(false, false);
-        //start home activity and pass user into it
+        String username = etUsername.getText().toString();
+        String password = etPassword.getText().toString();
+        showDialog(true);
+        loginController.login(username, password, new DataRetriever<PlayerModel>() {
+            @Override
+            public void onDataRetrieved(PlayerModel data) {
+                showDialog(false);
+                Toast.makeText(LoginActivity.this, data.getUsername(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onDataFailed(String throwable, int code) {
+                showDialog(false);
+                showNotFoundErrorMessage();
+            }
+        });
     }
 
     private void setLoginAlert(boolean visible, boolean isEmpty) {
