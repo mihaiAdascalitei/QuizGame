@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
 import com.dasteam.quiz.quizgame.gui.login.status.LoginResponseStatus;
+import com.dasteam.quiz.quizgame.gui.mainscreen.MainScreenActivity;
 import com.dasteam.quiz.quizgame.gui.register.RegisterActivity;
 import com.dasteam.quiz.quizgame.model.PlayerModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
@@ -131,7 +132,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onDataRetrieved(PlayerModel data) {
                 showDialog(false);
-                Toast.makeText(LoginActivity.this, data.getUsername(), Toast.LENGTH_SHORT).show();
+                startMainScreen(data);
             }
 
             @Override
@@ -147,5 +148,10 @@ public class LoginActivity extends BaseActivity {
         tvAlertPassword.setVisibility(visible ? View.VISIBLE : View.GONE);
         tvAlertUsername.setText(getString(isEmpty ? R.string.username_empty_error : R.string.username_length_error));
         tvAlertPassword.setText(getString(isEmpty ? R.string.password_empty_error : R.string.username_length_error));
+    }
+
+    private void startMainScreen(PlayerModel player) {
+        startActivity(new Intent(this,
+                MainScreenActivity.class).putExtra(MainScreenActivity.MAIN_SCREEN_PLAYER, player));
     }
 }

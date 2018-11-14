@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.custom.LoadingDialog;
@@ -27,11 +28,14 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract void setListeners();
 
-    private void init() {
-        loading = new LoadingDialog(this);
+    protected void configureToolbar(String title) {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(title);
+        setSupportActionBar(toolbar);
     }
 
-    public void showAlert(String message) {
+
+    protected void showAlert(String message) {
         new AlertDialog
                 .Builder(this)
                 .setTitle(getString(R.string.alert_title))
@@ -48,5 +52,10 @@ public abstract class BaseActivity extends AppCompatActivity {
             loading.cancel();
         }
     }
+
+    private void init() {
+        loading = new LoadingDialog(this);
+    }
+
 
 }

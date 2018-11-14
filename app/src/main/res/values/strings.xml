@@ -17,4 +17,7 @@
     <string name="username_taken">Username is already taken, please insert a different one!</string>
     <string name="terms_and_conds_error">Terms and conditions mut be accepted, please accept in order to continue!</string>
     <string name="password_match_error">Passwords do not match!</string>
+    <string name="premium">Premium</string>
+    <string name="settings">Settings</string>
+    <string name="main_screen">Quiz</string>
 </resources>

@@ -20,7 +20,6 @@ import com.dasteam.quiz.quizgame.network.DataRetriever;
 
 public class RegisterActivity extends BaseActivity {
 
-    private Toolbar toolbar;
     private RegisterController registerController;
     private EditText etUsername;
     private EditText etPassword;
@@ -34,12 +33,11 @@ public class RegisterActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_register);
-        configureToolbar();
+        configureToolbar(getString(R.string.register));
     }
 
     @Override
     protected void attachViews() {
-        toolbar = findViewById(R.id.toolbar);
         etUsername = findViewById(R.id.et_register_username);
         etPassword = findViewById(R.id.et_register_password);
         etConfirm = findViewById(R.id.et_register_confirm);
@@ -57,11 +55,6 @@ public class RegisterActivity extends BaseActivity {
     @Override
     protected void setListeners() {
 
-    }
-
-    private void configureToolbar() {
-        toolbar.setTitle(getString(R.string.register));
-        setSupportActionBar(toolbar);
     }
 
 

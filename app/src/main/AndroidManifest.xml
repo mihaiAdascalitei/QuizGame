@@ -14,9 +14,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".QuizActivity">
-
-        </activity>
+        <activity android:name=".QuizActivity"></activity>
         <activity android:name=".gui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".gui.register.RegisterActivity" />
+        <activity android:name=".gui.mainscreen.MainScreenActivity"></activity>
     </application>
 
 </manifest>
