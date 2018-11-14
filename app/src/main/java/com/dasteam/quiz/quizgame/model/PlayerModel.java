@@ -2,7 +2,9 @@ package com.dasteam.quiz.quizgame.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PlayerModel {
+import java.io.Serializable;
+
+public class PlayerModel implements Serializable {
     @SerializedName("id")
     private String id;
 
