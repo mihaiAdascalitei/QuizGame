@@ -9,4 +9,5 @@
     <color name="dark_green">#1B5E20</color>
     <color name="background_color">@color/colorPrimary</color>
     <color name="alert_red">#F44336</color>
+    <color name="player_mode_green">#009688</color>
 </resources>

@@ -44,9 +44,10 @@ public class MainScreenActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_main_screen);
-        configureToolbar(getString(R.string.main_screen));
         getExtraData();
+        configureToolbar();
     }
+
 
     @Override
     protected void attachViews() {
@@ -70,5 +71,9 @@ public class MainScreenActivity extends BaseActivity {
         }
     }
 
+    private void configureToolbar() {
+        String title = getString(R.string.main_screen) + " " + player.getUsername();
+        configureToolbar(title);
+    }
 
 }
