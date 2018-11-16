@@ -21,4 +21,6 @@
     <string name="settings">Settings</string>
     <string name="main_screen">Hi, </string>
     <string name="power_ups_title">Power-ups bank</string>
+    <string name="singleplayer">Singleplayer</string>
+    <string name="multiplayer">Multiplayer</string>
 </resources>
