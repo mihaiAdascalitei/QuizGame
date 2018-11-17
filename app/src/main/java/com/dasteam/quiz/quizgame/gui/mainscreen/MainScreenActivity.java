@@ -80,7 +80,7 @@ public class MainScreenActivity extends BaseActivity {
     }
 
     private void openProfileScreen() {
-        startActivity(new Intent(this, ProfileActivity.class).putExtra(ProfileActivity.PROFILE_PLAYER, player));
+        startActivity(new Intent(this, ProfileActivity.class));
     }
 
 }

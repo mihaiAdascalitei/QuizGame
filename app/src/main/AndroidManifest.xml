@@ -4,6 +4,8 @@
     package="com.dasteam.quiz.quizgame">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".base.QuizApplication"
@@ -25,7 +27,7 @@
         </activity>
         <activity android:name=".gui.register.RegisterActivity" />
         <activity android:name=".gui.mainscreen.MainScreenActivity" />
-        <activity android:name=".gui.profile.ProfileActivity"></activity>
+        <activity android:name=".gui.profile.ProfileActivity" />
     </application>
 
 </manifest>
