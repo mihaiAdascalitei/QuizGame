@@ -1,6 +1,7 @@
 package com.dasteam.quiz.quizgame.gui.mainscreen;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,6 +9,7 @@ import android.view.MenuItem;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
+import com.dasteam.quiz.quizgame.gui.profile.ProfileActivity;
 import com.dasteam.quiz.quizgame.model.PlayerModel;
 
 public class MainScreenActivity extends BaseActivity {
@@ -28,6 +30,7 @@ public class MainScreenActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                openProfileScreen();
                 return true;
             case R.id.menu_item_premium:
 
@@ -74,6 +77,10 @@ public class MainScreenActivity extends BaseActivity {
     private void configureToolbar() {
         String title = getString(R.string.main_screen) + " " + player.getUsername();
         configureToolbar(title);
+    }
+
+    private void openProfileScreen() {
+        startActivity(new Intent(this, ProfileActivity.class).putExtra(ProfileActivity.PROFILE_PLAYER, player));
     }
 
 }
