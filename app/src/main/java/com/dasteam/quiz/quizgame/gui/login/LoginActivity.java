@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
+import com.dasteam.quiz.quizgame.gui.login.status.CachedPlayerCallback;
 import com.dasteam.quiz.quizgame.gui.login.status.LoginResponseStatus;
 import com.dasteam.quiz.quizgame.gui.mainscreen.MainScreenActivity;
 import com.dasteam.quiz.quizgame.gui.register.RegisterActivity;
@@ -36,6 +37,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_login);
+        checkChachedPlayer();
     }
 
     @Override
@@ -132,6 +134,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onDataRetrieved(PlayerModel data) {
                 showDialog(false);
+                cacheLoggingPlayer(data);
                 startMainScreen(data);
             }
 
@@ -154,5 +157,17 @@ public class LoginActivity extends BaseActivity {
         startActivity(new Intent(this,
                 MainScreenActivity.class).putExtra(MainScreenActivity.MAIN_SCREEN_PLAYER, player));
         finish();
+    }
+
+    private void checkChachedPlayer() {
+        loginController.checkPlayerAlreadyLogged(player -> {
+            if (player != null) {
+                startMainScreen(player);
+            }
+        });
+    }
+
+    private void cacheLoggingPlayer(PlayerModel player) {
+        loginController.cachePlayer(player);
     }
 }
