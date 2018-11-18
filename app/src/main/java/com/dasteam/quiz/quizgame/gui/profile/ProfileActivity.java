@@ -2,25 +2,29 @@ package com.dasteam.quiz.quizgame.gui.profile;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
 import com.dasteam.quiz.quizgame.gui.login.LoginActivity;
-import com.dasteam.quiz.quizgame.gui.profile.background.LogoutCallback;
 import com.dasteam.quiz.quizgame.gui.profile.background.LogoutTask;
 import com.dasteam.quiz.quizgame.model.PlayerModel;
-import com.dasteam.quiz.quizgame.provider.QuizProvider;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.PicassoProvider;
+
+import java.io.File;
+import java.io.IOException;
 
 public class ProfileActivity extends BaseActivity {
     private static final int IMAGE_PICK = 10;
@@ -80,6 +84,7 @@ public class ProfileActivity extends BaseActivity {
 
     private void getExtraData() {
         profileController.getPlayer(playerModel -> {
+
             player = playerModel;
             updateFields();
         });
@@ -102,6 +107,8 @@ public class ProfileActivity extends BaseActivity {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), IMAGE_PICK);
 
     }
@@ -109,15 +116,15 @@ public class ProfileActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-            if (requestCode == IMAGE_PICK) {
+        if (requestCode == IMAGE_PICK) {
+            if (resultCode == RESULT_OK) {
 
                 if (data != null) {
                     Uri profileImage = data.getData();
                     loadImageIntoView(profileImage);
                     player.setProfileImage(profileImage.toString());
                     profileController.updatePlayer(player);
+
                 }
 
             }
@@ -125,9 +132,10 @@ public class ProfileActivity extends BaseActivity {
     }
 
     private void loadImageIntoView(Uri profileImage) {
-
-        Picasso.get().load(profileImage).noPlaceholder().centerCrop().fit()
+        Glide.with(this)
+                .load(profileImage)
                 .into(ivProfileIcon);
+
     }
 
     private void updateFields() {
@@ -137,5 +145,6 @@ public class ProfileActivity extends BaseActivity {
         if (profileImage != null) {
             loadImageIntoView(Uri.parse(profileImage));
         }
+
     }
 }

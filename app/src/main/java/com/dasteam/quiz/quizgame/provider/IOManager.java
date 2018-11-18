@@ -28,6 +28,7 @@ public class IOManager {
             FileOutputStream fos = QuizProvider.provideAppContext().openFileOutput(INTERNAL_PLAYER, Context.MODE_PRIVATE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(object);
+            Log.i(IOManager.class.getName(), "Object written successfully : " + object.toString());
             oos.close();
             fos.close();
         } catch (IOException e) {
@@ -44,6 +45,7 @@ public class IOManager {
             Object object = ois.readObject();
 
             if (object instanceof PlayerModel) {
+                Log.i(IOManager.class.getName(), "Object retrieved successfully : " + object.toString());
                 return (PlayerModel) object;
             }
         } catch (IOException | ClassNotFoundException e) {
