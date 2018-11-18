@@ -2,12 +2,8 @@ package com.dasteam.quiz.quizgame.gui.profile;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,10 +17,6 @@ import com.dasteam.quiz.quizgame.base.BaseActivity;
 import com.dasteam.quiz.quizgame.gui.login.LoginActivity;
 import com.dasteam.quiz.quizgame.gui.profile.background.LogoutTask;
 import com.dasteam.quiz.quizgame.model.PlayerModel;
-import com.squareup.picasso.Picasso;
-
-import java.io.File;
-import java.io.IOException;
 
 public class ProfileActivity extends BaseActivity {
     private static final int IMAGE_PICK = 10;

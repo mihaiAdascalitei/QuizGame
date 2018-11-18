@@ -1,22 +1,35 @@
 package com.dasteam.quiz.quizgame.gui.mainscreen;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
+import com.dasteam.quiz.quizgame.gui.mainscreen.animate.AnimatorTouchListener;
 import com.dasteam.quiz.quizgame.gui.profile.ProfileActivity;
 import com.dasteam.quiz.quizgame.model.PlayerModel;
+import com.dasteam.quiz.quizgame.utils.Animator;
+
+import static com.dasteam.quiz.quizgame.utils.Animator.animate;
+import static com.dasteam.quiz.quizgame.utils.Animator.rotate;
 
 public class MainScreenActivity extends BaseActivity {
 
     public static String MAIN_SCREEN_PLAYER = "MAIN_SCREEN_PLAYER";
     private MainScreenController mainController;
     private PlayerModel player;
+
+    private RelativeLayout rlSingleplayer;
+    private RelativeLayout rlMultiplayer;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -54,7 +67,8 @@ public class MainScreenActivity extends BaseActivity {
 
     @Override
     protected void attachViews() {
-
+        rlMultiplayer = findViewById(R.id.rl_multiplayer);
+        rlSingleplayer = findViewById(R.id.rl_singleplayer);
     }
 
     @Override
@@ -63,9 +77,11 @@ public class MainScreenActivity extends BaseActivity {
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void setListeners() {
-
+        rlSingleplayer.setOnTouchListener(new AnimatorTouchListener());
+        rlMultiplayer.setOnTouchListener(new AnimatorTouchListener());
     }
 
     private void getExtraData() {
