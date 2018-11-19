@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
+import com.dasteam.quiz.quizgame.gui.lobby.LobbyActivity;
 import com.dasteam.quiz.quizgame.gui.mainscreen.animate.AnimatorTouchListener;
 import com.dasteam.quiz.quizgame.gui.profile.ProfileActivity;
 import com.dasteam.quiz.quizgame.model.PlayerModel;
@@ -80,8 +81,8 @@ public class MainScreenActivity extends BaseActivity {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void setListeners() {
-        rlSingleplayer.setOnTouchListener(new AnimatorTouchListener());
-        rlMultiplayer.setOnTouchListener(new AnimatorTouchListener());
+        rlSingleplayer.setOnTouchListener(new AnimatorTouchListener(() -> { }));
+        rlMultiplayer.setOnTouchListener(new AnimatorTouchListener(this::openLobbyScreen));
     }
 
     private void getExtraData() {
@@ -97,6 +98,10 @@ public class MainScreenActivity extends BaseActivity {
 
     private void openProfileScreen() {
         startActivity(new Intent(this, ProfileActivity.class));
+    }
+
+    private void openLobbyScreen() {
+        startActivity(new Intent(this, LobbyActivity.class));
     }
 
 }
