@@ -1,5 +1,7 @@
 package com.dasteam.quiz.quizgame.model;
 
+import android.net.Uri;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -13,6 +15,8 @@ public class PlayerModel implements Serializable {
 
     @SerializedName("password")
     private String password;
+
+    private String profileImage;
 
     public String getId() {
         return id;
@@ -36,5 +40,13 @@ public class PlayerModel implements Serializable {
 
     public String getPassword() {
         return this.password;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 }

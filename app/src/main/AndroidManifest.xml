@@ -4,8 +4,11 @@
     package="com.dasteam.quiz.quizgame">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".base.QuizApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +17,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".QuizActivity"></activity>
+        <activity android:name=".gui.quiz.QuizActivity" />
         <activity android:name=".gui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +26,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".gui.register.RegisterActivity" />
-        <activity android:name=".gui.mainscreen.MainScreenActivity"></activity>
+        <activity android:name=".gui.mainscreen.MainScreenActivity" />
+        <activity android:name=".gui.profile.ProfileActivity" />
+        <activity android:name=".gui.lobby.LobbyActivity"></activity>
     </application>
 
 </manifest>
