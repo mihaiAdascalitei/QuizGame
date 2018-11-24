@@ -15,14 +15,19 @@ import com.dasteam.quiz.quizgame.model.LobbyPlayerModel;
 
 import java.util.List;
 
+import static com.dasteam.quiz.quizgame.model.PlayerModel.RANK_FIRST;
+import static com.dasteam.quiz.quizgame.model.PlayerModel.RANK_SECOND;
+import static com.dasteam.quiz.quizgame.model.PlayerModel.RANK_THIRD;
+
 public class LobbyAdapter extends RecyclerView.Adapter<LobbyAdapter.LobbyHolder> {
 
     private final Context context;
     private List<LobbyPlayerModel> data;
 
-    public LobbyAdapter(Context context){
+    public LobbyAdapter(Context context) {
         this.context = context;
     }
+
     @NonNull
     @Override
     public LobbyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -50,9 +55,6 @@ public class LobbyAdapter extends RecyclerView.Adapter<LobbyAdapter.LobbyHolder>
         private TextView tvUsername;
         private ImageView ivRank;
 
-        private static final int RANK_FIRST = 1;
-        private static final int RANK_SECOND = 2;
-        private static final int RANK_THIRD = 3;
 
         public LobbyHolder(@NonNull View itemView) {
             super(itemView);

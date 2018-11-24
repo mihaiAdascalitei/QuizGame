@@ -10,12 +10,14 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
 import com.dasteam.quiz.quizgame.gui.lobby.LobbyActivity;
 import com.dasteam.quiz.quizgame.gui.mainscreen.animate.AnimatorTouchListener;
 import com.dasteam.quiz.quizgame.gui.profile.ProfileActivity;
+import com.dasteam.quiz.quizgame.gui.ranking.RankingActivity;
 import com.dasteam.quiz.quizgame.model.PlayerModel;
 import com.dasteam.quiz.quizgame.utils.Animator;
 
@@ -30,6 +32,9 @@ public class MainScreenActivity extends BaseActivity {
 
     private RelativeLayout rlSingleplayer;
     private RelativeLayout rlMultiplayer;
+    private TextView tvRanking;
+    private TextView tvAds;
+    private TextView tvPowerUps;
 
 
     @Override
@@ -70,6 +75,9 @@ public class MainScreenActivity extends BaseActivity {
     protected void attachViews() {
         rlMultiplayer = findViewById(R.id.rl_multiplayer);
         rlSingleplayer = findViewById(R.id.rl_singleplayer);
+        tvRanking = findViewById(R.id.tv_ranking);
+        tvAds = findViewById(R.id.tv_ads);
+        tvPowerUps = findViewById(R.id.tv_power_up);
     }
 
     @Override
@@ -81,8 +89,10 @@ public class MainScreenActivity extends BaseActivity {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void setListeners() {
-        rlSingleplayer.setOnTouchListener(new AnimatorTouchListener(() -> { }));
+        rlSingleplayer.setOnTouchListener(new AnimatorTouchListener(() -> {
+        }));
         rlMultiplayer.setOnTouchListener(new AnimatorTouchListener(this::openLobbyScreen));
+        tvRanking.setOnClickListener(v -> openRankings());
     }
 
     private void getExtraData() {
@@ -102,6 +112,10 @@ public class MainScreenActivity extends BaseActivity {
 
     private void openLobbyScreen() {
         startActivity(new Intent(this, LobbyActivity.class));
+    }
+
+    private void openRankings() {
+        startActivity(new Intent(this, RankingActivity.class));
     }
 
 }

@@ -29,6 +29,7 @@
         <activity android:name=".gui.mainscreen.MainScreenActivity" />
         <activity android:name=".gui.profile.ProfileActivity" />
         <activity android:name=".gui.lobby.LobbyActivity" />
+        <activity android:name=".gui.ranking.RankingActivity"></activity>
     </application>
 
 </manifest>

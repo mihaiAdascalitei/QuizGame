@@ -178,11 +178,11 @@
         android:layout_margin="10dp"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/iv_power_up" />
+        app:layout_constraintBottom_toTopOf="@id/tv_power_up" />
 
 
     <TextView
-        android:id="@+id/iv_power_up"
+        android:id="@+id/tv_power_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -193,12 +193,12 @@
         android:text="Power ups"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/iv_dashboard"
+        app:layout_constraintEnd_toStartOf="@id/tv_ranking"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/iv_dashboard"
+        android:id="@+id/tv_ranking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -209,11 +209,11 @@
         android:text="Ranking"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/iv_power_up"
-        app:layout_constraintStart_toEndOf="@id/iv_ads" />
+        app:layout_constraintEnd_toStartOf="@id/tv_power_up"
+        app:layout_constraintStart_toEndOf="@id/tv_ads" />
 
     <TextView
-        android:id="@+id/iv_ads"
+        android:id="@+id/tv_ads"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -225,6 +225,6 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/iv_dashboard" />
+        app:layout_constraintStart_toEndOf="@id/tv_ranking" />
 
 </android.support.constraint.ConstraintLayout>
