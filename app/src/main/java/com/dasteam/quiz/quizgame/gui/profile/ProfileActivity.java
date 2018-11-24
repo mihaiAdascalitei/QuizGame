@@ -91,6 +91,7 @@ public class ProfileActivity extends BaseActivity {
     }
 
     private void openLoginScreen() {
+        finishAffinity();
         startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
         finish();
     }
