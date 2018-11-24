@@ -172,4 +172,6 @@ public class LoginActivity extends BaseActivity {
     private void cacheLoggingPlayer(PlayerModel player) {
         loginController.cachePlayer(player);
     }
+
+
 }
