@@ -10,4 +10,7 @@
     <color name="background_color">@color/colorPrimary</color>
     <color name="alert_red">#F44336</color>
     <color name="player_mode_green">#009688</color>
+    <color name="first_place">#FFFF00</color>
+    <color name="second_place">#BDBDBD</color>
+    <color name="third_place">#BCAAA4</color>
 </resources>

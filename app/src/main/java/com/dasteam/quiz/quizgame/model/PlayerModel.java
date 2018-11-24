@@ -7,6 +7,11 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class PlayerModel implements Serializable {
+
+    public static final int RANK_FIRST = 1;
+    public static final int RANK_SECOND = 2;
+    public static final int RANK_THIRD = 3;
+
     @SerializedName("id")
     private String id;
 
@@ -15,6 +20,7 @@ public class PlayerModel implements Serializable {
 
     @SerializedName("password")
     private String password;
+
 
     private String profileImage;
 

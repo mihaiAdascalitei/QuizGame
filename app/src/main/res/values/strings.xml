@@ -30,4 +30,5 @@
     <string name="profile">Profile</string>
     <string name="random_match">Random match</string>
     <string name="lobby">Lobby</string>
+    <string name="ranking">Ranking</string>
 </resources>
