@@ -14,10 +14,11 @@
         android:layout_height="?attr/actionBarSize" />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_lobby"
         android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_margin="10dp"
         android:background="@drawable/round_lobby"
-        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/btn_random_play"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 

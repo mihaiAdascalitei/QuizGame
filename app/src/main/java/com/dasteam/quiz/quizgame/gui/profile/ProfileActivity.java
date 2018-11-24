@@ -91,7 +91,8 @@ public class ProfileActivity extends BaseActivity {
     }
 
     private void openLoginScreen() {
-        startActivity(new Intent(this, LoginActivity.class));
+        startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
+        finish();
     }
 
     private void loadImage() {
@@ -99,7 +100,6 @@ public class ProfileActivity extends BaseActivity {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), IMAGE_PICK);
 
