@@ -41,4 +41,5 @@
     <string name="already_premium">You have already activated your premium account.</string>
     <string name="exp_date_alert">Expiration date must not be empty!</string>
     <string name="cancel">Cancel</string>
+    <string name="default_alert">Something went wrong, please try again!</string>
 </resources>

@@ -1,10 +1,12 @@
 package com.dasteam.quiz.quizgame.gui.premium.picker;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dasteam.quiz.quizgame.R;
 
@@ -49,8 +51,8 @@ public class DatePickerDialog extends Dialog {
     }
 
     private void initPickerMonth() {
-        npMonth.setMinValue(2);
-        npMonth.setMaxValue(12);
+        npMonth.setMinValue(0);
+        npMonth.setMaxValue(11);
         for (int i = 0; i < 12; i++) {
             months[i] = String.valueOf(i + 1);
         }
@@ -58,8 +60,8 @@ public class DatePickerDialog extends Dialog {
     }
 
     private void initPickerYear() {
-        npYear.setMinValue(2);
-        npYear.setMaxValue(12);
+        npYear.setMinValue(0);
+        npYear.setMaxValue(11);
         int year = Calendar.getInstance().get(Calendar.YEAR);
         for (int i = 0; i < 12; i++) {
             years[i] = String.valueOf(year + i);
@@ -69,9 +71,11 @@ public class DatePickerDialog extends Dialog {
     }
 
     private void pick() {
-        int month = npMonth.getValue();
-        int year = npYear.getValue();
-        callback.onOkSelected("asdf");
+        String month = months[npMonth.getValue()];
+        String year = years[npYear.getValue()];
+        @SuppressLint("DefaultLocale")
+        String selectedDate = String.format("%02d", Integer.valueOf(month)) + "/" + year.substring(2);
+        callback.onOkSelected(selectedDate);
         cancel();
     }
 

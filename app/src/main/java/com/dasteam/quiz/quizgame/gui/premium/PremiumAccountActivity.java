@@ -17,6 +17,7 @@ import com.dasteam.quiz.quizgame.gui.premium.picker.DatePickerCallback;
 import com.dasteam.quiz.quizgame.gui.premium.status.PremiumValidateStatus;
 import com.dasteam.quiz.quizgame.model.PlayerModel;
 import com.dasteam.quiz.quizgame.gui.premium.picker.DatePickerDialog;
+import com.dasteam.quiz.quizgame.network.DataRetriever;
 
 public class PremiumAccountActivity extends BaseActivity {
     public static final String PREMIUM_PLAYER = "PREMIUM_PLAYER";
@@ -109,7 +110,7 @@ public class PremiumAccountActivity extends BaseActivity {
     private void handlePremiumResponse(PremiumValidateStatus status) {
         switch (status) {
             case SUCCESS:
-                hideAlerts();
+                makeAccountAsPremium();
                 break;
             case CCV_LENGTH:
                 showCcvAlert();
@@ -150,5 +151,34 @@ public class PremiumAccountActivity extends BaseActivity {
 
     private void popupDate() {
         new DatePickerDialog(this, date -> tvCardExpDate.setText(date)).show();
+    }
+
+    private void makeAccountAsPremium() {
+        hideAlerts();
+        showDialog(true);
+        accountController.makePremium(player.getId(), new DataRetriever<Boolean>() {
+            @Override
+            public void onDataRetrieved(Boolean data) {
+                showDialog(false);
+                if (data) {
+                    showPremiumLayout();
+                } else {
+                    showAlert(getString(R.string.default_alert));
+
+                }
+            }
+
+            @Override
+            public void onDataFailed(String message, int code) {
+                showDialog(false);
+                showAlert(getString(R.string.default_alert));
+            }
+        });
+    }
+
+    private void showPremiumLayout() {
+        clCardForm.setVisibility(View.GONE);
+        tvAlreadyPremium.setVisibility(View.VISIBLE);
+        ivAlreadyPremium.setVisibility(View.VISIBLE);
     }
 }

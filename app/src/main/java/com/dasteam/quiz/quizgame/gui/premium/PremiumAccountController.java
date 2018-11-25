@@ -3,8 +3,16 @@ package com.dasteam.quiz.quizgame.gui.premium;
 import android.text.TextUtils;
 
 import com.dasteam.quiz.quizgame.gui.premium.status.PremiumValidateStatus;
+import com.dasteam.quiz.quizgame.network.DataRetriever;
+import com.dasteam.quiz.quizgame.network.RetrofitRepository;
 
 public class PremiumAccountController {
+
+    private RetrofitRepository repository;
+
+    public PremiumAccountController() {
+        repository = new RetrofitRepository();
+    }
 
     public void validateData(String cardNumber, String ccv, String expDate, PremiumCallback callback) {
         if (cardNumber.trim().length() != 16) {
@@ -16,5 +24,9 @@ public class PremiumAccountController {
         } else {
             callback.onBuyPremiumAttempt(PremiumValidateStatus.SUCCESS);
         }
+    }
+
+    public void makePremium(String id, DataRetriever<Boolean> retriever) {
+        repository.makePremium(id, retriever);
     }
 }

@@ -1,9 +1,11 @@
 package com.dasteam.quiz.quizgame.network;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.dasteam.quiz.quizgame.model.PlayerModel;
 import com.dasteam.quiz.quizgame.network.call.LoginCall;
+import com.dasteam.quiz.quizgame.network.call.PremiumCall;
 import com.dasteam.quiz.quizgame.network.call.RegisterCall;
 
 import java.net.HttpURLConnection;
@@ -64,5 +66,20 @@ public class RetrofitRepository {
             }
         });
 
+    }
+
+    public void makePremium(String id, DataRetriever<Boolean> retriever) {
+        Call<String> call = RetrofitService.getInstance().getRetrofit().create(PremiumCall.class).makePremium(id);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+                retriever.onDataRetrieved(response.code() == HttpURLConnection.HTTP_OK);
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+                retriever.onDataRetrieved(false);
+            }
+        });
     }
 }
