@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/background_color"
+    tools:context=".gui.premium.PremiumAccountActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cv_card_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:animateLayoutChanges="true"
+        android:background="@drawable/round_white_rectangle"
+        android:padding="10dp"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <EditText
+            android:id="@+id/et_card_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableEnd="@drawable/ic_credit_card"
+            android:drawableRight="@drawable/ic_credit_card"
+            android:hint="@string/card_number_hint"
+            android:inputType="number"
+            android:maxLength="16"
+            android:padding="10dp"
+            android:text="1234567891234512"
+            android:textColor="@color/dark_green"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/tv_premium_card_number_alert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/card_number_alert"
+            android:textColor="@color/alert_red"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_card_number" />
+
+        <View
+            android:id="@+id/card_number_separator"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/dark_green"
+            app:layout_constraintTop_toBottomOf="@id/tv_premium_card_number_alert" />
+
+        <TextView
+            android:id="@+id/tv_exp_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@android:color/transparent"
+            android:drawableEnd="@drawable/ic_calendar_today"
+            android:drawableRight="@drawable/ic_calendar_today"
+            android:hint="@string/exp_card_hint"
+            android:maxLength="5"
+            android:textColor="@color/dark_green"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toStartOf="@id/exp_date_separator"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_number_separator" />
+
+
+        <View
+            android:id="@+id/exp_date_separator"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:background="@color/dark_green"
+            app:layout_constraintBottom_toTopOf="@id/tv_premium_bottom_alert"
+            app:layout_constraintEnd_toStartOf="@id/et_ccv"
+            app:layout_constraintStart_toEndOf="@id/tv_exp_date"
+            app:layout_constraintTop_toBottomOf="@id/card_number_separator" />
+
+        <EditText
+            android:id="@+id/et_ccv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@android:color/transparent"
+            android:drawableEnd="@drawable/ic_lock"
+            android:drawableRight="@drawable/ic_lock"
+            android:hint="@string/ccv_hint"
+            android:inputType="number"
+            android:maxLength="3"
+            android:textColor="@color/dark_green"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/exp_date_separator"
+            app:layout_constraintTop_toBottomOf="@id/card_number_separator" />
+
+        <TextView
+            android:id="@+id/tv_premium_bottom_alert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ccv_alert"
+            android:textColor="@color/alert_red"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_ccv" />
+
+        <View
+            android:id="@+id/ccv_bottom_separator"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/dark_green"
+            app:layout_constraintTop_toBottomOf="@id/tv_premium_bottom_alert" />
+
+        <Button
+            android:id="@+id/btn_premium_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/round_premium_account"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:text="@string/btn_premium"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/ccv_bottom_separator" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <ImageView
+        android:id="@+id/iv_premium_activated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_premium"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/tv_premium_activated"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_premium_activated"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/already_premium"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

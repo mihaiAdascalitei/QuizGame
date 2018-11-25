@@ -16,6 +16,7 @@ import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
 import com.dasteam.quiz.quizgame.gui.lobby.LobbyActivity;
 import com.dasteam.quiz.quizgame.gui.mainscreen.animate.AnimatorTouchListener;
+import com.dasteam.quiz.quizgame.gui.premium.PremiumAccountActivity;
 import com.dasteam.quiz.quizgame.gui.profile.ProfileActivity;
 import com.dasteam.quiz.quizgame.gui.ranking.RankingActivity;
 import com.dasteam.quiz.quizgame.model.PlayerModel;
@@ -52,7 +53,7 @@ public class MainScreenActivity extends BaseActivity {
                 openProfileScreen();
                 return true;
             case R.id.menu_item_premium:
-
+                openPremiumAccount();
                 return true;
             case R.id.menu_item_settings:
                 return true;
@@ -93,6 +94,7 @@ public class MainScreenActivity extends BaseActivity {
         }));
         rlMultiplayer.setOnTouchListener(new AnimatorTouchListener(this::openLobbyScreen));
         tvRanking.setOnClickListener(v -> openRankings());
+        tvAds.setOnClickListener(v -> openPremiumAccount());
     }
 
     private void getExtraData() {
@@ -116,6 +118,11 @@ public class MainScreenActivity extends BaseActivity {
 
     private void openRankings() {
         startActivity(new Intent(this, RankingActivity.class));
+    }
+
+    private void openPremiumAccount() {
+        startActivity(new Intent(this, PremiumAccountActivity.class)
+                .putExtra(PremiumAccountActivity.PREMIUM_PLAYER, player));
     }
 
 }

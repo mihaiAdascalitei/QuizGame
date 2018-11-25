@@ -7,8 +7,8 @@
     <string name="confirm_hint">Confirm password</string>
     <string name="terms_and_cond">Accept terms and conditions</string>
     <string name="save">Save</string>
-    <string name="alert_title">Wait...</string>
-    <string name="button_ok">Ok</string>
+    <string name="alert_title">Wait…</string>
+    <string name="button_ok">OK</string>
     <string name="user_not_exists">Wrong username or password, please verify or try again!</string>
     <string name="username_empty_error">Username must not be empty!</string>
     <string name="username_length_error">Length must be greater than 5!</string>
@@ -31,4 +31,14 @@
     <string name="random_match">Random match</string>
     <string name="lobby">Lobby</string>
     <string name="ranking">Ranking</string>
+    <string name="activate_premium">Activate premium account</string>
+    <string name="card_number_hint">Card number</string>
+    <string name="ccv_hint">CCV</string>
+    <string name="exp_card_hint">mm/yy</string>
+    <string name="btn_premium">Buy premium</string>
+    <string name="card_number_alert">Card must contain 16 digits!</string>
+    <string name="ccv_alert">CCV must contain 3 digits!</string>
+    <string name="already_premium">You have already activated your premium account.</string>
+    <string name="exp_date_alert">Expiration date must not be empty!</string>
+    <string name="cancel">Cancel</string>
 </resources>

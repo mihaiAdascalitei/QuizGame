@@ -21,6 +21,9 @@ public class PlayerModel implements Serializable {
     @SerializedName("password")
     private String password;
 
+    @SerializedName("has_premium")
+    private int hasPremium;
+
 
     private String profileImage;
 
@@ -54,5 +57,13 @@ public class PlayerModel implements Serializable {
 
     public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
+    }
+
+    public int hasPremium() {
+        return hasPremium;
+    }
+
+    public void setHasPremium(int hasPremium) {
+        this.hasPremium = hasPremium;
     }
 }
