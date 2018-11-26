@@ -3,8 +3,10 @@ package com.dasteam.quiz.quizgame.gui.premium;
 import android.text.TextUtils;
 
 import com.dasteam.quiz.quizgame.gui.premium.status.PremiumValidateStatus;
+import com.dasteam.quiz.quizgame.model.PlayerModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
 import com.dasteam.quiz.quizgame.network.RetrofitRepository;
+import com.dasteam.quiz.quizgame.provider.QuizProvider;
 
 public class PremiumAccountController {
 
@@ -26,7 +28,11 @@ public class PremiumAccountController {
         }
     }
 
-    public void makePremium(String id, DataRetriever<Boolean> retriever) {
+    public void makePremium(String id, DataRetriever<PlayerModel> retriever) {
         repository.makePremium(id, retriever);
+    }
+
+    public void cachePlayer(PlayerModel player) {
+        QuizProvider.provideIoManager().savePlayer(player);
     }
 }

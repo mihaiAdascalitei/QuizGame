@@ -27,7 +27,6 @@ import static com.dasteam.quiz.quizgame.utils.Animator.rotate;
 
 public class MainScreenActivity extends BaseActivity {
 
-    public static String MAIN_SCREEN_PLAYER = "MAIN_SCREEN_PLAYER";
     private MainScreenController mainController;
     private PlayerModel player;
 
@@ -67,7 +66,7 @@ public class MainScreenActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_main_screen);
-        getExtraData();
+        fetchCachedData();
         configureToolbar();
     }
 
@@ -97,9 +96,20 @@ public class MainScreenActivity extends BaseActivity {
         tvAds.setOnClickListener(v -> openPremiumAccount());
     }
 
-    private void getExtraData() {
-        if (getIntent().hasExtra(MAIN_SCREEN_PLAYER)) {
-            player = (PlayerModel) getIntent().getSerializableExtra(MAIN_SCREEN_PLAYER);
+    private void fetchCachedData() {
+        player = mainController.getPlayer();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        fetchCachedData();
+    }
+
+    private void fetchPlayerIfUpdated() {
+        PlayerModel fetchedPlayer = mainController.getPlayer();
+        if (fetchedPlayer != null) {
+            player = fetchedPlayer;
         }
     }
 

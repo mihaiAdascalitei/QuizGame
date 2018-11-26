@@ -68,17 +68,21 @@ public class RetrofitRepository {
 
     }
 
-    public void makePremium(String id, DataRetriever<Boolean> retriever) {
-        Call<String> call = RetrofitService.getInstance().getRetrofit().create(PremiumCall.class).makePremium(id);
-        call.enqueue(new Callback<String>() {
+    public void makePremium(String id, DataRetriever<PlayerModel> retriever) {
+        Call<PlayerModel> call = RetrofitService.getInstance().getRetrofit().create(PremiumCall.class).makePremium(id);
+        call.enqueue(new Callback<PlayerModel>() {
             @Override
-            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
-                retriever.onDataRetrieved(response.code() == HttpURLConnection.HTTP_OK);
+            public void onResponse(@NonNull Call<PlayerModel> call, @NonNull Response<PlayerModel> response) {
+                if (response.code() == HttpURLConnection.HTTP_OK && response.isSuccessful()) {
+                    retriever.onDataRetrieved(response.body());
+                } else {
+                    retriever.onDataFailed(response.message(), response.code());
+                }
             }
 
             @Override
-            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-                retriever.onDataRetrieved(false);
+            public void onFailure(@NonNull Call<PlayerModel> call, @NonNull Throwable t) {
+                retriever.onDataFailed(t.getMessage(), HttpURLConnection.HTTP_BAD_REQUEST);
             }
         });
     }

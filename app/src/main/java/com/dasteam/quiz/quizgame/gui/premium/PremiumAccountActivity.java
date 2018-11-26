@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
@@ -156,16 +157,13 @@ public class PremiumAccountActivity extends BaseActivity {
     private void makeAccountAsPremium() {
         hideAlerts();
         showDialog(true);
-        accountController.makePremium(player.getId(), new DataRetriever<Boolean>() {
+        accountController.makePremium(player.getId(), new DataRetriever<PlayerModel>() {
             @Override
-            public void onDataRetrieved(Boolean data) {
+            public void onDataRetrieved(PlayerModel data) {
                 showDialog(false);
-                if (data) {
-                    showPremiumLayout();
-                } else {
-                    showAlert(getString(R.string.default_alert));
-
-                }
+                accountController.cachePlayer(data);
+                player = data;
+                setPremiumMode();
             }
 
             @Override
@@ -176,9 +174,4 @@ public class PremiumAccountActivity extends BaseActivity {
         });
     }
 
-    private void showPremiumLayout() {
-        clCardForm.setVisibility(View.GONE);
-        tvAlreadyPremium.setVisibility(View.VISIBLE);
-        ivAlreadyPremium.setVisibility(View.VISIBLE);
-    }
 }
