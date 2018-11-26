@@ -136,7 +136,7 @@ public class LoginActivity extends BaseActivity {
             public void onDataRetrieved(PlayerModel data) {
                 showDialog(false);
                 cacheLoggingPlayer(data);
-                startMainScreen(data);
+                startMainScreen();
             }
 
             @Override
@@ -154,16 +154,16 @@ public class LoginActivity extends BaseActivity {
         tvAlertPassword.setText(getString(isEmpty ? R.string.password_empty_error : R.string.username_length_error));
     }
 
-    private void startMainScreen(PlayerModel player) {
+    private void startMainScreen() {
         startActivity(new Intent(this,
-                MainScreenActivity.class).putExtra(MainScreenActivity.MAIN_SCREEN_PLAYER, player));
+                MainScreenActivity.class));
         finish();
     }
 
     private void checkChachedPlayer() {
         loginController.checkPlayerAlreadyLogged(player -> {
             if (player != null) {
-                startMainScreen(player);
+                startMainScreen();
 
             }
         });
