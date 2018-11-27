@@ -1,17 +1,17 @@
 package com.dasteam.quiz.quizgame.gui.lobby;
 
 import android.annotation.SuppressLint;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
 import com.dasteam.quiz.quizgame.gui.lobby.adapter.LobbyAdapter;
-import com.dasteam.quiz.quizgame.model.LobbyPlayerModel;
+import com.dasteam.quiz.quizgame.model.player.LobbyPlayerModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +22,7 @@ public class LobbyActivity extends BaseActivity {
     private LobbyController lobbyController;
     private LobbyAdapter lobbyAdapter;
     private RecyclerView rvLobby;
+    private TextView tvPlayerCount;
 
     @SuppressLint("MissingSuperCall")
     @Override
@@ -35,6 +36,7 @@ public class LobbyActivity extends BaseActivity {
     @Override
     protected void attachViews() {
         rvLobby = findViewById(R.id.rv_lobby);
+        tvPlayerCount = findViewById(R.id.tv_lobby_count_players);
     }
 
     @Override
@@ -82,5 +84,7 @@ public class LobbyActivity extends BaseActivity {
         }
 
         lobbyAdapter.setData(dummyData);
+
+        tvPlayerCount.setText(String.valueOf(lobbyAdapter.getItemCount()));
     }
 }

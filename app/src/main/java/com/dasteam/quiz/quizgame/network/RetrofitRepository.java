@@ -1,9 +1,8 @@
 package com.dasteam.quiz.quizgame.network;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
-import com.dasteam.quiz.quizgame.model.PlayerModel;
+import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.network.call.LoginCall;
 import com.dasteam.quiz.quizgame.network.call.PremiumCall;
 import com.dasteam.quiz.quizgame.network.call.RegisterCall;

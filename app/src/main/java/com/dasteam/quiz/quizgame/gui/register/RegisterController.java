@@ -3,7 +3,7 @@ package com.dasteam.quiz.quizgame.gui.register;
 import android.text.TextUtils;
 
 import com.dasteam.quiz.quizgame.gui.register.status.RegisterResponseStatus;
-import com.dasteam.quiz.quizgame.model.PlayerModel;
+import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
 import com.dasteam.quiz.quizgame.network.RetrofitRepository;
 

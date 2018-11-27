@@ -10,13 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
-import com.dasteam.quiz.quizgame.gui.premium.picker.DatePickerCallback;
 import com.dasteam.quiz.quizgame.gui.premium.status.PremiumValidateStatus;
-import com.dasteam.quiz.quizgame.model.PlayerModel;
+import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.gui.premium.picker.DatePickerDialog;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
 

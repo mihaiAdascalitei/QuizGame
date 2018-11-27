@@ -3,14 +3,13 @@ package com.dasteam.quiz.quizgame.provider;
 import android.content.Context;
 import android.util.Log;
 
-import com.dasteam.quiz.quizgame.model.PlayerModel;
+import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.security.Provider;
 
 public class IOManager {
     private static final String INTERNAL_PLAYER = "INTERNAL_PLAYER";

@@ -4,20 +4,17 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
-import com.dasteam.quiz.quizgame.gui.login.status.CachedPlayerCallback;
 import com.dasteam.quiz.quizgame.gui.login.status.LoginResponseStatus;
 import com.dasteam.quiz.quizgame.gui.mainscreen.MainScreenActivity;
 import com.dasteam.quiz.quizgame.gui.register.RegisterActivity;
-import com.dasteam.quiz.quizgame.model.PlayerModel;
+import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
 
 public class LoginActivity extends BaseActivity {

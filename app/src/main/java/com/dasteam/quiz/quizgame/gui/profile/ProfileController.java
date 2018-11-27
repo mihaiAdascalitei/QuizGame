@@ -1,6 +1,6 @@
 package com.dasteam.quiz.quizgame.gui.profile;
 
-import com.dasteam.quiz.quizgame.model.PlayerModel;
+import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.provider.QuizProvider;
 
 public class ProfileController {
