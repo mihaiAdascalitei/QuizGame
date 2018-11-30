@@ -19,6 +19,9 @@ public class PowerUpsModel {
     @SerializedName("power_description")
     private String powerDescription;
 
+    @SerializedName("power_count")
+    private String powerCount;
+
     public String getId() {
         return id;
     }

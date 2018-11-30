@@ -1,8 +1,8 @@
 package com.dasteam.quiz.quizgame.gui.powerups.adapter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +11,19 @@ import android.widget.TextView;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.model.powerups.PowerUpsModel;
+import com.dasteam.quiz.quizgame.utils.DrawableUtil;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class PowerUpsAdapter extends RecyclerView.Adapter<PowerUpsAdapter.PowerUpsHolder> {
-    List<PowerUpsModel> powers;
+    private List<PowerUpsModel> powers;
+    private Context context;
+
+    public PowerUpsAdapter(Context context) {
+        this.context = context;
+    }
+
 
     public void setData(List<PowerUpsModel> data) {
         powers = data;
@@ -58,6 +66,8 @@ public class PowerUpsAdapter extends RecyclerView.Adapter<PowerUpsAdapter.PowerU
 
         public void bind(PowerUpsModel power) {
             tvPowerName.setText(power.getPowerName());
+            int icon = DrawableUtil.resIdByName(context, power.getPowerIconKey());
+            Picasso.get().load(icon).into(ivPowerIcon);
 
         }
     }

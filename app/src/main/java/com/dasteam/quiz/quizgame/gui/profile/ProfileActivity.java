@@ -150,6 +150,6 @@ public class ProfileActivity extends BaseActivity {
     }
 
     private void openPowerUps() {
-        startActivity(new Intent(this, PowerUpsActivity.class));
+        startActivity(new Intent(this, PowerUpsActivity.class).putExtra(PowerUpsActivity.POWER_UPS_PLAYER, player));
     }
 }
