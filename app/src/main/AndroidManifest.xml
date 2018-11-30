@@ -31,7 +31,9 @@
         <activity android:name=".gui.lobby.LobbyActivity" />
         <activity android:name=".gui.ranking.RankingActivity" />
         <activity android:name=".gui.premium.PremiumAccountActivity" />
-        <activity android:name=".gui.powerups.PowerUpsActivity"></activity>
+        <activity android:name=".gui.powerups.PowerUpsActivity" />
+        <activity android:name=".gui.powerups.buypowerups.BuyPowerUpsActivity"
+            android:theme="@style/TranslucentTheme"/>
     </application>
 
 </manifest>

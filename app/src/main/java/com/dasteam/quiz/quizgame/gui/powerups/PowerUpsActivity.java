@@ -1,6 +1,7 @@
 package com.dasteam.quiz.quizgame.gui.powerups;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
 import com.dasteam.quiz.quizgame.gui.powerups.adapter.PowerUpsAdapter;
+import com.dasteam.quiz.quizgame.gui.powerups.buypowerups.BuyPowerUpsActivity;
 import com.dasteam.quiz.quizgame.model.powerups.PowerUpsModel;
 
 import java.util.ArrayList;
@@ -66,7 +68,7 @@ public class PowerUpsActivity extends BaseActivity {
 
     @Override
     protected void setListeners() {
-
+        btnBuy.setOnClickListener(v -> buyPowerUps());
     }
 
     private void init() {
@@ -86,5 +88,9 @@ public class PowerUpsActivity extends BaseActivity {
             dummyData.add(powerUpsModel);
         }
         adapter.setData(dummyData);
+    }
+
+    private void buyPowerUps() {
+        startActivity(new Intent(this, BuyPowerUpsActivity.class));
     }
 }
