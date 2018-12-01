@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
@@ -16,8 +17,12 @@ import com.dasteam.quiz.quizgame.gui.powerups.buypowerups.BuyPowerUpsActivity;
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.model.powerups.PowerUpsModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
+import com.dasteam.quiz.quizgame.utils.QuizUtils;
 
 import java.util.List;
+
+import static com.dasteam.quiz.quizgame.utils.QuizUtils.integer;
+import static com.dasteam.quiz.quizgame.utils.QuizUtils.string;
 
 public class PowerUpsActivity extends BaseActivity {
     public static final String POWER_UPS_PLAYER = "POWER_UPS_PLAYER";
@@ -27,7 +32,9 @@ public class PowerUpsActivity extends BaseActivity {
     private Button btnBuy;
     private PowerUpsAdapter adapter;
     private PlayerModel player;
+    private TextView tvToolbarCredit;
 
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_keyboard_backspace);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -50,8 +57,8 @@ public class PowerUpsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_power_ups);
-        configureToolbar(getString(R.string.power_ups_title));
         init();
+        configureToolbar();
         initAdapter();
         initAdapterData();
     }
@@ -60,6 +67,7 @@ public class PowerUpsActivity extends BaseActivity {
     protected void attachViews() {
         btnBuy = findViewById(R.id.btn_buy_power_ups);
         rvPowerUps = findViewById(R.id.rv_power_ups);
+        tvToolbarCredit = findViewById(R.id.tv_power_ups_toolbar_credit);
     }
 
     @Override
@@ -80,6 +88,8 @@ public class PowerUpsActivity extends BaseActivity {
     private void initAdapter() {
         rvPowerUps.setLayoutManager(new LinearLayoutManager(this));
         rvPowerUps.setAdapter(adapter);
+        adapter.setCallback(this::sell);
+
     }
 
     private void initAdapterData() {
@@ -99,7 +109,18 @@ public class PowerUpsActivity extends BaseActivity {
         });
     }
 
+    private void configureToolbar() {
+        configureToolbar(getString(R.string.power_ups_title));
+        tvToolbarCredit.setText(player.getCredit());
+    }
+
     private void buyPowerUps() {
-        startActivity(new Intent(this, BuyPowerUpsActivity.class));
+        startActivity(new Intent(this, BuyPowerUpsActivity.class).putExtra(BuyPowerUpsActivity.CURRENT_PLAYER, player));
+    }
+
+    private void sell(PowerUpsModel power, int position) {
+        String credit = string(integer(power.getPowerPrice()) + integer(player.getCredit()));
+        tvToolbarCredit.setText(credit);
+        adapter.removeItem(power, position);
     }
 }

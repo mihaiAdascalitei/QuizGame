@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
 import com.dasteam.quiz.quizgame.gui.powerups.buypowerups.adapter.BuyPowerUpsAdapter;
+import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.model.powerups.PowerUpsModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
 
@@ -21,10 +22,12 @@ import java.util.List;
 
 public class BuyPowerUpsActivity extends BaseActivity {
 
+    public static final String CURRENT_PLAYER = "CURRENT_PLAYER";
     private RecyclerView rvBuyPowerUps;
     private TextView tvTryAgain;
     private BuyPowerUpsAdapter adapter;
     private BuyPowerUpsController buyPowerUpsController;
+    private PlayerModel player;
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_close);
@@ -50,6 +53,7 @@ public class BuyPowerUpsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_buy_power_ups);
         configureToolbar("");
+        getExtraData();
         init();
         initAdapter();
         setAdapterData();
@@ -72,7 +76,7 @@ public class BuyPowerUpsActivity extends BaseActivity {
     }
 
     private void init() {
-        adapter = new BuyPowerUpsAdapter(this);
+        adapter = new BuyPowerUpsAdapter(this, player.hasPremium());
     }
 
     private void initAdapter() {
@@ -101,5 +105,9 @@ public class BuyPowerUpsActivity extends BaseActivity {
 
     private void setTryAgainVisibility(boolean visible) {
         tvTryAgain.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
+    private void getExtraData() {
+        player = (PlayerModel) getIntent().getSerializableExtra(CURRENT_PLAYER);
     }
 }

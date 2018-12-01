@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:background="@color/background_color"
     tools:context=".gui.powerups.PowerUpsActivity">
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar"
+        layout="@layout/power_ups_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize" />
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_power_ups"

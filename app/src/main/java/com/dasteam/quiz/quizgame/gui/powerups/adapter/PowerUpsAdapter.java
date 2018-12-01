@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dasteam.quiz.quizgame.R;
+import com.dasteam.quiz.quizgame.gui.powerups.ItemSellCallback;
 import com.dasteam.quiz.quizgame.model.powerups.PowerUpsModel;
 import com.dasteam.quiz.quizgame.utils.DrawableUtil;
 import com.squareup.picasso.Picasso;
@@ -19,6 +20,7 @@ import java.util.List;
 public class PowerUpsAdapter extends RecyclerView.Adapter<PowerUpsAdapter.PowerUpsHolder> {
     private List<PowerUpsModel> powers;
     private Context context;
+    private ItemSellCallback callback;
 
     public PowerUpsAdapter(Context context) {
         this.context = context;
@@ -28,6 +30,15 @@ public class PowerUpsAdapter extends RecyclerView.Adapter<PowerUpsAdapter.PowerU
     public void setData(List<PowerUpsModel> data) {
         powers = data;
         notifyDataSetChanged();
+    }
+
+    public void setCallback(ItemSellCallback callback) {
+        this.callback = callback;
+    }
+
+    public void removeItem(PowerUpsModel power, int position) {
+        powers.remove(power);
+        notifyItemRemoved(position);
     }
 
     @NonNull
@@ -68,6 +79,8 @@ public class PowerUpsAdapter extends RecyclerView.Adapter<PowerUpsAdapter.PowerU
             tvPowerName.setText(power.getPowerName());
             int icon = DrawableUtil.resIdByName(context, power.getPowerIconKey());
             Picasso.get().load(icon).into(ivPowerIcon);
+
+            tvSell.setOnClickListener(v -> callback.onItemSell(power, getAdapterPosition()));
 
         }
     }

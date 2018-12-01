@@ -31,6 +31,7 @@ public class ProfileActivity extends BaseActivity {
     private TextView tvPowerUps;
     private TextView tvSettings;
     private TextView tvResetPassword;
+    private TextView tvCredit;
 
 
     @SuppressLint("MissingSuperCall")
@@ -49,6 +50,7 @@ public class ProfileActivity extends BaseActivity {
         tvPowerUps = findViewById(R.id.tv_profile_power_ups);
         tvResetPassword = findViewById(R.id.tv_profile_reset_password);
         tvSettings = findViewById(R.id.tv_profile_settings);
+        tvCredit = findViewById(R.id.tv_profile_credit);
     }
 
     @Override
@@ -141,6 +143,7 @@ public class ProfileActivity extends BaseActivity {
 
     private void updateFields() {
         tvUsername.setText(player.getUsername());
+        tvCredit.setText(player.getCredit());
 
         String profileImage = player.getProfileImage();
         if (profileImage != null) {

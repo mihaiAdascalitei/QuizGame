@@ -22,15 +22,18 @@ public class BuyPowerUpsAdapter extends RecyclerView.Adapter<BuyPowerUpsAdapter.
     private List<PowerUpsModel> powers;
     private Context context;
     private ItemBuyCallback callback;
+    private boolean playerHasPremium;
 
-    public BuyPowerUpsAdapter(Context context) {
+    public BuyPowerUpsAdapter(Context context, boolean playerHasPremium) {
         this.context = context;
+        this.playerHasPremium = playerHasPremium;
     }
 
     public void setData(List<PowerUpsModel> data) {
         powers = data;
         notifyDataSetChanged();
     }
+
 
     public void setItemBuyCallback(ItemBuyCallback callback) {
         this.callback = callback;
@@ -82,7 +85,7 @@ public class BuyPowerUpsAdapter extends RecyclerView.Adapter<BuyPowerUpsAdapter.
         public void bind(PowerUpsModel power) {
             tvPowerUpTitle.setText(power.getPowerName());
             tvPowerUpDescription.setText(power.getPowerDescription());
-            tvPowerUpPrice.setText(power.getPowerPrice());
+            tvPowerUpPrice.setText(playerHasPremium ? context.getString(R.string.free_bonus) : power.getPowerPrice());
             int icon = DrawableUtil.resIdByName(context, power.getPowerIconKey());
             Picasso.get().load(icon).into(ivPowerUpIcon);
 

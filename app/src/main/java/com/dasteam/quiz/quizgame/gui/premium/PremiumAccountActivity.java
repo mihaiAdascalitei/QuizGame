@@ -92,7 +92,7 @@ public class PremiumAccountActivity extends BaseActivity {
 
     private void setPremiumMode() {
 
-        boolean hasPremium = player.hasPremium() == 1;
+        boolean hasPremium = player.hasPremium();
         clCardForm.setVisibility(hasPremium ? View.GONE : View.VISIBLE);
         tvAlreadyPremium.setVisibility(hasPremium ? View.VISIBLE : View.GONE);
         ivAlreadyPremium.setVisibility(hasPremium ? View.VISIBLE : View.GONE);

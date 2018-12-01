@@ -46,4 +46,7 @@
     <string name="power_up_sell">Sell</string>
     <string name="current_players">Current lobby players : </string>
     <string name="try_again">Try again</string>
+    <string name="credit_description">Credit:</string>
+    <string name="free_bonus">Free</string>
+    <string name="current_credit">Current credit:</string>
 </resources>
