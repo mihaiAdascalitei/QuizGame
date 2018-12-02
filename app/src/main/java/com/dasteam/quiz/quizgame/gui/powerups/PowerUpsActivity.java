@@ -7,7 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dasteam.quiz.quizgame.R;
@@ -33,6 +35,8 @@ public class PowerUpsActivity extends BaseActivity {
     private PowerUpsAdapter adapter;
     private PlayerModel player;
     private TextView tvToolbarCredit;
+    private TextView tvNoPowerUps;
+    private ImageView ivNoPowerUps;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -68,6 +72,8 @@ public class PowerUpsActivity extends BaseActivity {
         btnBuy = findViewById(R.id.btn_buy_power_ups);
         rvPowerUps = findViewById(R.id.rv_power_ups);
         tvToolbarCredit = findViewById(R.id.tv_power_ups_toolbar_credit);
+        tvNoPowerUps = findViewById(R.id.tv_no_power_ups);
+        ivNoPowerUps = findViewById(R.id.iv_power_ups_ninja);
     }
 
     @Override
@@ -99,6 +105,7 @@ public class PowerUpsActivity extends BaseActivity {
             public void onDataRetrieved(List<PowerUpsModel> data) {
                 showDialog(false);
                 adapter.setData(data);
+                setNoPowerUpsVisibility(adapter.getItemCount() == 0);
             }
 
             @Override
@@ -122,5 +129,12 @@ public class PowerUpsActivity extends BaseActivity {
         String credit = string(integer(power.getPowerPrice()) + integer(player.getCredit()));
         tvToolbarCredit.setText(credit);
         adapter.removeItem(power, position);
+        setNoPowerUpsVisibility(adapter.getItemCount() == 0);
+    }
+
+
+    private void setNoPowerUpsVisibility(boolean visible) {
+        tvNoPowerUps.setVisibility(visible ? View.VISIBLE : View.GONE);
+        ivNoPowerUps.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 }
