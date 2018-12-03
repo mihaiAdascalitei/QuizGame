@@ -126,8 +126,8 @@ public class BuyPowerUpsActivity extends BaseActivity {
 
     private void buyPower(PowerUpsModel power, String credit) {
         showLoading(true);
-        buyPowerUpsController.buyPowerUps(power.getPlayerId(),
-                power.getPowerId(),
+        buyPowerUpsController.buyPowerUps(player.getId(),
+                power.getId(),
                 power.getPowerCount() == null ? "0" : power.getPowerCount(), new DataRetriever<List<PowerUpsModel>>() {
                     @Override
                     public void onDataRetrieved(List<PowerUpsModel> data) {

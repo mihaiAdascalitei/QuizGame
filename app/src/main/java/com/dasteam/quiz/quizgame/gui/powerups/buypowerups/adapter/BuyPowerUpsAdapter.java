@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,7 +89,6 @@ public class BuyPowerUpsAdapter extends RecyclerView.Adapter<BuyPowerUpsAdapter.
             tvPowerUpPrice.setText(playerHasPremium ? context.getString(R.string.free_bonus) : power.getPowerPrice());
             int icon = DrawableUtil.resIdByName(context, power.getPowerIconKey());
             Picasso.get().load(icon).into(ivPowerUpIcon);
-
             clBuyItem.setOnClickListener(v -> callback.onItemBuy(power));
         }
     }
