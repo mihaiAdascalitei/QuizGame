@@ -49,5 +49,6 @@
     <string name="credit_description">Credit:</string>
     <string name="free_bonus">Free</string>
     <string name="current_credit">Current credit:</string>
-    <string name="no_power_ups">Uhh...you have no power ups yet! Clicking the button below you are able to buy some !</string>
+    <string name="no_power_ups">Uhh…you have no power ups yet! Clicking the button below you are able to buy some !</string>
+    <string name="not_enough_credit">You have not enough credit!</string>
 </resources>

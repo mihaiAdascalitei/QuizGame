@@ -4,8 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class PowerUpsModel {
 
-    @SerializedName("id")
-    private String id;
 
     @SerializedName("power_name")
     private String powerName;
@@ -22,13 +20,12 @@ public class PowerUpsModel {
     @SerializedName("power_count")
     private String powerCount;
 
-    public String getId() {
-        return id;
-    }
+    @SerializedName("player_id")
+    private String playerId;
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    @SerializedName("power_id")
+    private String powerId;
+
 
     public String getPowerName() {
         return powerName;
@@ -60,5 +57,29 @@ public class PowerUpsModel {
 
     public void setPowerDescription(String powerDescription) {
         this.powerDescription = powerDescription;
+    }
+
+    public String getPowerCount() {
+        return powerCount;
+    }
+
+    public void setPowerCount(String powerCount) {
+        this.powerCount = powerCount;
+    }
+
+    public String getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(String playerId) {
+        this.playerId = playerId;
+    }
+
+    public String getPowerId() {
+        return powerId;
+    }
+
+    public void setPowerId(String powerId) {
+        this.powerId = powerId;
     }
 }

@@ -9,8 +9,8 @@ public class ProfileController {
         QuizProvider.provideIoManager().savePlayer(player);
     }
 
-    public void getPlayer(CacheProfileCallback callback) {
-        PlayerModel player = QuizProvider.provideIoManager().getPlayer();
-        callback.getCachedPlayer(player);
+    public PlayerModel getPlayer() {
+        return QuizProvider.provideIoManager().getPlayer();
+
     }
 }

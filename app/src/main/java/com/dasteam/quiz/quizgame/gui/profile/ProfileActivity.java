@@ -66,6 +66,12 @@ public class ProfileActivity extends BaseActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        getExtraData();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_keyboard_backspace);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -85,17 +91,14 @@ public class ProfileActivity extends BaseActivity {
     }
 
     private void getExtraData() {
-        profileController.getPlayer(playerModel -> {
-
-            player = playerModel;
-            updateFields();
-        });
+        player = profileController.getPlayer();
+        updateFields();
     }
 
     private void logout() {
-        showDialog(true);
+        showLoading(true);
         new LogoutTask(() -> {
-            showDialog(false);
+            showLoading(false);
             openLoginScreen();
         }).execute();
     }

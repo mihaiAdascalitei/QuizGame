@@ -1,7 +1,6 @@
 package com.dasteam.quiz.quizgame.gui.powerups.buypowerups;
 
 import android.annotation.SuppressLint;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,9 +15,12 @@ import com.dasteam.quiz.quizgame.gui.powerups.buypowerups.adapter.BuyPowerUpsAda
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.model.powerups.PowerUpsModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
+import com.dasteam.quiz.quizgame.utils.QuizUtils;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static com.dasteam.quiz.quizgame.utils.QuizUtils.integer;
+import static com.dasteam.quiz.quizgame.utils.QuizUtils.string;
 
 public class BuyPowerUpsActivity extends BaseActivity {
 
@@ -39,6 +41,7 @@ public class BuyPowerUpsActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                setResult(RESULT_OK);
                 finish();
                 return true;
             default:
@@ -82,21 +85,22 @@ public class BuyPowerUpsActivity extends BaseActivity {
     private void initAdapter() {
         rvBuyPowerUps.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         rvBuyPowerUps.setAdapter(adapter);
+        adapter.setItemBuyCallback(this::buy);
     }
 
     private void setAdapterData() {
-        showDialog(true);
+        showLoading(true);
         buyPowerUpsController.getPowerUps(new DataRetriever<List<PowerUpsModel>>() {
             @Override
             public void onDataRetrieved(List<PowerUpsModel> data) {
-                showDialog(false);
+                showLoading(false);
                 setTryAgainVisibility(false);
                 adapter.setData(data);
             }
 
             @Override
             public void onDataFailed(String message, int code) {
-                showDialog(false);
+                showLoading(false);
                 showAlert(getString(R.string.default_alert));
                 setTryAgainVisibility(true);
             }
@@ -110,4 +114,53 @@ public class BuyPowerUpsActivity extends BaseActivity {
     private void getExtraData() {
         player = (PlayerModel) getIntent().getSerializableExtra(CURRENT_PLAYER);
     }
+
+    private void buy(PowerUpsModel power) {
+        if (integer(power.getPowerPrice()) > integer(player.getCredit())) {
+            showAlert(getString(R.string.not_enough_credit));
+        } else {
+            String credit = string(integer(player.getCredit()) - integer(power.getPowerPrice()));
+            buyPower(power, player.hasPremium() ? null : credit);
+        }
+    }
+
+    private void buyPower(PowerUpsModel power, String credit) {
+        showLoading(true);
+        buyPowerUpsController.buyPowerUps(power.getPlayerId(),
+                power.getPowerId(),
+                power.getPowerCount() == null ? "0" : power.getPowerCount(), new DataRetriever<List<PowerUpsModel>>() {
+                    @Override
+                    public void onDataRetrieved(List<PowerUpsModel> data) {
+                        if (credit != null) {
+                            updateCredit(player.getId(), credit);
+                        } else {
+                            showLoading(false);
+                        }
+                    }
+
+                    @Override
+                    public void onDataFailed(String message, int code) {
+                        showLoading(false);
+                        showAlert(getString(R.string.default_alert));
+                    }
+                });
+    }
+
+    private void updateCredit(String playerId, String credit) {
+        buyPowerUpsController.updateCredit(playerId, credit, new DataRetriever<PlayerModel>() {
+            @Override
+            public void onDataRetrieved(PlayerModel data) {
+                showLoading(false);
+                player = data;
+                buyPowerUpsController.cachePlayer(data);
+            }
+
+            @Override
+            public void onDataFailed(String message, int code) {
+                showLoading(false);
+                showAlert(getString(R.string.default_alert));
+            }
+        });
+    }
+
 }

@@ -45,7 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .show();
     }
 
-    protected void showDialog(boolean show) {
+    protected void showLoading(boolean show) {
         if (show) {
             loading.show();
         } else {

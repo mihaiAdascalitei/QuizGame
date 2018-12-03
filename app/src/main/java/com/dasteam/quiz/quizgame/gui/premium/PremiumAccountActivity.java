@@ -154,11 +154,11 @@ public class PremiumAccountActivity extends BaseActivity {
 
     private void makeAccountAsPremium() {
         hideAlerts();
-        showDialog(true);
+        showLoading(true);
         accountController.makePremium(player.getId(), new DataRetriever<PlayerModel>() {
             @Override
             public void onDataRetrieved(PlayerModel data) {
-                showDialog(false);
+                showLoading(false);
                 accountController.cachePlayer(data);
                 player = data;
                 setPremiumMode();
@@ -166,7 +166,7 @@ public class PremiumAccountActivity extends BaseActivity {
 
             @Override
             public void onDataFailed(String message, int code) {
-                showDialog(false);
+                showLoading(false);
                 showAlert(getString(R.string.default_alert));
             }
         });

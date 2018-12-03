@@ -89,7 +89,7 @@ public class BuyPowerUpsAdapter extends RecyclerView.Adapter<BuyPowerUpsAdapter.
             int icon = DrawableUtil.resIdByName(context, power.getPowerIconKey());
             Picasso.get().load(icon).into(ivPowerUpIcon);
 
-            clBuyItem.setOnClickListener(v -> callback.onItemBuy());
+            clBuyItem.setOnClickListener(v -> callback.onItemBuy(power));
         }
     }
 }

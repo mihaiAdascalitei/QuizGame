@@ -127,18 +127,18 @@ public class LoginActivity extends BaseActivity {
         setLoginAlert(false, false);
         String username = etUsername.getText().toString();
         String password = etPassword.getText().toString();
-        showDialog(true);
+        showLoading(true);
         loginController.login(username, password, new DataRetriever<PlayerModel>() {
             @Override
             public void onDataRetrieved(PlayerModel data) {
-                showDialog(false);
+                showLoading(false);
                 cacheLoggingPlayer(data);
                 startMainScreen();
             }
 
             @Override
             public void onDataFailed(String throwable, int code) {
-                showDialog(false);
+                showLoading(false);
                 showNotFoundErrorMessage();
             }
         });

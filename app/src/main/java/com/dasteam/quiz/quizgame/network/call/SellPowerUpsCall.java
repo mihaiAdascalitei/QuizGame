@@ -8,7 +8,8 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 
-public interface BuyPowerUpsCall {
-    @POST("/buyPowerUps")
-    public Call<List<PowerUpsModel>> buyPowerUps(@Body PowerUpsModel power);
+public interface SellPowerUpsCall {
+
+    @POST("/sellPowerUps")
+    public Call<List<PowerUpsModel>> sellPowerUps(@Body PowerUpsModel power);
 }
