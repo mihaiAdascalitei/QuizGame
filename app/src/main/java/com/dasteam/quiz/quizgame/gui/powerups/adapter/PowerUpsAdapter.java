@@ -63,6 +63,7 @@ public class PowerUpsAdapter extends RecyclerView.Adapter<PowerUpsAdapter.PowerU
         private TextView tvPowerName;
         private ImageView ivPowerIcon;
         private TextView tvSell;
+        private TextView tvPowerCount;
 
         public PowerUpsHolder(@NonNull View itemView) {
             super(itemView);
@@ -73,10 +74,13 @@ public class PowerUpsAdapter extends RecyclerView.Adapter<PowerUpsAdapter.PowerU
             tvPowerName = itemView.findViewById(R.id.tv_power_ups_item_name);
             ivPowerIcon = itemView.findViewById(R.id.iv_power_ups_item_icon);
             tvSell = itemView.findViewById(R.id.tv_power_ups_item_sell);
+            tvPowerCount = itemView.findViewById(R.id.tv_power_up_count);
         }
 
         public void bind(PowerUpsModel power) {
             tvPowerName.setText(power.getPowerName());
+            tvPowerCount.setText(power.getPowerCount());
+
             int icon = DrawableUtil.resIdByName(context, power.getPowerIconKey());
             Picasso.get().load(icon).into(ivPowerIcon);
 

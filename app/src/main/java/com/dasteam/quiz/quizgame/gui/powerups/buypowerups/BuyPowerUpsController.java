@@ -24,4 +24,8 @@ public class BuyPowerUpsController {
     public void cachePlayer(PlayerModel player) {
         QuizProvider.provideIoManager().savePlayer(player);
     }
+
+    public void checkPlayerPower(String playerId, String powerId, DataRetriever<List<PowerUpsModel>> retriever) {
+        QuizProvider.provideRepository().checkPlayerPowerUp(playerId, powerId, retriever);
+    }
 }

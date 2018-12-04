@@ -36,7 +36,7 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
                 android:hint="@string/username_hint"
-                android:text="mihai"
+                android:text="zokkk"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/dark_green"
@@ -72,7 +72,7 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
                 android:hint="@string/passwors_hint"
-                android:text="mihai"
+                android:text="zokkk"
                 android:inputType="textPassword"
                 android:textColor="@color/dark_green"
                 android:textColorHint="@color/dark_green" />

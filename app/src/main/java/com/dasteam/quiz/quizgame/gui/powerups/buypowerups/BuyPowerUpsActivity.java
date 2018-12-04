@@ -116,43 +116,72 @@ public class BuyPowerUpsActivity extends BaseActivity {
     }
 
     private void buy(PowerUpsModel power) {
-        if (integer(power.getPowerPrice()) > integer(player.getCredit())) {
-            showAlert(getString(R.string.not_enough_credit));
+        String credit = null;
+
+        if (!player.hasPremium()) {
+            if (integer(power.getPowerPrice()) > integer(player.getCredit())) {
+                showAlert(getString(R.string.not_enough_credit));
+            } else {
+                credit = string(integer(player.getCredit()) - integer(power.getPowerPrice()));
+            }
+        }
+
+        checkPlayerPower(power, credit);
+    }
+
+    private void buyPower(PowerUpsModel power, String powerCount, String credit) {
+        if (powerCount.equals("3")) {
+            showAlert(getString(R.string.maximum_power));
         } else {
-            String credit = string(integer(player.getCredit()) - integer(power.getPowerPrice()));
-            buyPower(power, player.hasPremium() ? null : credit);
+            showLoading(true);
+            buyPowerUpsController.buyPowerUps(player.getId(),
+                    power.getPowerId(),
+                    powerCount, new DataRetriever<List<PowerUpsModel>>() {
+                        @Override
+                        public void onDataRetrieved(List<PowerUpsModel> data) {
+                            updateCredit(player.getId(), credit);
+                            showLoading(false);
+                        }
+
+                        @Override
+                        public void onDataFailed(String message, int code) {
+                            showLoading(false);
+                            showAlert(getString(R.string.default_alert));
+                        }
+                    });
         }
     }
 
-    private void buyPower(PowerUpsModel power, String credit) {
-        showLoading(true);
-        buyPowerUpsController.buyPowerUps(player.getId(),
-                power.getId(),
-                power.getPowerCount() == null ? "0" : power.getPowerCount(), new DataRetriever<List<PowerUpsModel>>() {
-                    @Override
-                    public void onDataRetrieved(List<PowerUpsModel> data) {
-                        if (credit != null) {
-                            updateCredit(player.getId(), credit);
-                        } else {
-                            showLoading(false);
-                        }
-                    }
+    private void updateCredit(String playerId, String credit) {
+        if (credit != null) {
+            buyPowerUpsController.updateCredit(playerId, credit, new DataRetriever<PlayerModel>() {
+                @Override
+                public void onDataRetrieved(PlayerModel data) {
+                    showLoading(false);
+                    player = data;
+                    buyPowerUpsController.cachePlayer(data);
+                }
 
-                    @Override
-                    public void onDataFailed(String message, int code) {
-                        showLoading(false);
-                        showAlert(getString(R.string.default_alert));
-                    }
-                });
+                @Override
+                public void onDataFailed(String message, int code) {
+                    showLoading(false);
+                    showAlert(getString(R.string.default_alert));
+                }
+            });
+        }
     }
 
-    private void updateCredit(String playerId, String credit) {
-        buyPowerUpsController.updateCredit(playerId, credit, new DataRetriever<PlayerModel>() {
+    private void checkPlayerPower(PowerUpsModel power, String credit) {
+        buyPowerUpsController.checkPlayerPower(player.getId(), power.getPowerId(), new DataRetriever<List<PowerUpsModel>>() {
             @Override
-            public void onDataRetrieved(PlayerModel data) {
-                showLoading(false);
-                player = data;
-                buyPowerUpsController.cachePlayer(data);
+            public void onDataRetrieved(List<PowerUpsModel> data) {
+                if (data.size() == 0) {
+                    buyPower(power, "0", credit);
+                } else {
+                    PowerUpsModel powerModel = data.get(0);
+                    buyPower(powerModel, powerModel.getPowerCount(), credit);
+                }
+
             }
 
             @Override

@@ -3,47 +3,79 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:background="@drawable/round_white_rectangle"
-    android:padding="5dp">
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/iv_power_ups_item_icon"
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_power_up_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:padding="5dp"
-        android:src="@drawable/buy_bonus"
+
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toLeftOf="@id/cl_power_up_item"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tv_power_ups_item_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/iv_power_ups_item_icon"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Power up" />
+        <TextView
+            android:padding="5dp"
+            android:id="@+id/tv_power_up_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textColor="@color/dark_green"
+            android:textSize="15sp" />
+    </android.support.v7.widget.CardView>
 
-    <TextView
-        android:id="@+id/tv_power_ups_item_sell"
-        android:layout_width="wrap_content"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_power_up_item"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/ranking_number"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?attr/selectableItemBackground"
+        android:layout_margin="5dp"
+        android:background="@drawable/round_white_rectangle"
         android:padding="5dp"
-        android:text="@string/power_up_sell"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/cv_power_up_count"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/iv_power_ups_item_icon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:src="@drawable/buy_bonus"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_power_ups_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/iv_power_ups_item_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Power up" />
+
+        <TextView
+            android:id="@+id/tv_power_ups_item_sell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ranking_number"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:padding="5dp"
+            android:text="@string/power_up_sell"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

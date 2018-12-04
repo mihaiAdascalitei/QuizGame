@@ -6,6 +6,7 @@ import com.dasteam.quiz.quizgame.gui.powerups.buypowerups.BuyPowerUpsActivity;
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.model.powerups.PowerUpsModel;
 import com.dasteam.quiz.quizgame.network.call.BuyPowerUpsCall;
+import com.dasteam.quiz.quizgame.network.call.CheckPlayerPowerCall;
 import com.dasteam.quiz.quizgame.network.call.GetPowerUpsCall;
 import com.dasteam.quiz.quizgame.network.call.LoginCall;
 import com.dasteam.quiz.quizgame.network.call.PlayerPowerUpsCall;
@@ -212,6 +213,27 @@ public class RetrofitRepository {
         });
 
     }
+
+    public void checkPlayerPowerUp(String playerId, String powerId, DataRetriever<List<PowerUpsModel>> retriever) {
+        Call<List<PowerUpsModel>> call = RetrofitService.getInstance().getRetrofit().create(CheckPlayerPowerCall.class).checkPlayerPower(playerId, powerId);
+        call.enqueue(new Callback<List<PowerUpsModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<PowerUpsModel>> call, @NonNull Response<List<PowerUpsModel>> response) {
+                if (response.code() == HttpURLConnection.HTTP_OK && response.isSuccessful()) {
+                    retriever.onDataRetrieved(response.body());
+                } else {
+                    retriever.onDataFailed(response.message(), response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<PowerUpsModel>> call, @NonNull Throwable t) {
+                retriever.onDataFailed(t.getMessage(), HttpURLConnection.HTTP_BAD_REQUEST);
+            }
+        });
+    }
+
+
 }
 
 

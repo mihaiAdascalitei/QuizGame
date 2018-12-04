@@ -62,7 +62,7 @@ public class PowerUpsActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        player = powerUpsController.getPlayer();
+        updateUIData();
     }
 
     @SuppressLint("MissingSuperCall")
@@ -197,5 +197,11 @@ public class PowerUpsActivity extends BaseActivity {
                 initAdapterData();
             }
         }
+    }
+
+    private void updateUIData() {
+        player = powerUpsController.getPlayer();
+        tvToolbarCredit.setText(player.getCredit());
+
     }
 }
