@@ -12,14 +12,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.dasteam.quiz.quizgame.R;
-import com.dasteam.quiz.quizgame.model.LobbyPlayerModel;
-import com.dasteam.quiz.quizgame.model.PlayerModel;
+import com.dasteam.quiz.quizgame.model.player.LobbyPlayerModel;
 
 import java.util.List;
 
-import static com.dasteam.quiz.quizgame.model.PlayerModel.RANK_FIRST;
-import static com.dasteam.quiz.quizgame.model.PlayerModel.RANK_SECOND;
-import static com.dasteam.quiz.quizgame.model.PlayerModel.RANK_THIRD;
+import static com.dasteam.quiz.quizgame.model.player.PlayerModel.RANK_FIRST;
+import static com.dasteam.quiz.quizgame.model.player.PlayerModel.RANK_SECOND;
+import static com.dasteam.quiz.quizgame.model.player.PlayerModel.RANK_THIRD;
 
 public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.RankingHolder> {
 

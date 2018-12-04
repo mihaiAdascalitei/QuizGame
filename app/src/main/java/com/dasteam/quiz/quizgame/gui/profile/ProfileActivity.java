@@ -15,8 +15,9 @@ import com.bumptech.glide.Glide;
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
 import com.dasteam.quiz.quizgame.gui.login.LoginActivity;
+import com.dasteam.quiz.quizgame.gui.powerups.PowerUpsActivity;
 import com.dasteam.quiz.quizgame.gui.profile.background.LogoutTask;
-import com.dasteam.quiz.quizgame.model.PlayerModel;
+import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 
 public class ProfileActivity extends BaseActivity {
     private static final int IMAGE_PICK = 10;
@@ -27,6 +28,10 @@ public class ProfileActivity extends BaseActivity {
     private Button btnLogout;
     private ImageView ivProfileIcon;
     private TextView tvUsername;
+    private TextView tvPowerUps;
+    private TextView tvSettings;
+    private TextView tvResetPassword;
+    private TextView tvCredit;
 
 
     @SuppressLint("MissingSuperCall")
@@ -42,6 +47,10 @@ public class ProfileActivity extends BaseActivity {
         btnLogout = findViewById(R.id.btn_logout);
         ivProfileIcon = findViewById(R.id.iv_profile_icon);
         tvUsername = findViewById(R.id.tv_profile_name);
+        tvPowerUps = findViewById(R.id.tv_profile_power_ups);
+        tvResetPassword = findViewById(R.id.tv_profile_reset_password);
+        tvSettings = findViewById(R.id.tv_profile_settings);
+        tvCredit = findViewById(R.id.tv_profile_credit);
     }
 
     @Override
@@ -53,6 +62,13 @@ public class ProfileActivity extends BaseActivity {
     protected void setListeners() {
         btnLogout.setOnClickListener(v -> logout());
         ivProfileIcon.setOnClickListener(v -> loadImage());
+        tvPowerUps.setOnClickListener(v -> openPowerUps());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getExtraData();
     }
 
     @Override
@@ -75,17 +91,14 @@ public class ProfileActivity extends BaseActivity {
     }
 
     private void getExtraData() {
-        profileController.getPlayer(playerModel -> {
-
-            player = playerModel;
-            updateFields();
-        });
+        player = profileController.getPlayer();
+        updateFields();
     }
 
     private void logout() {
-        showDialog(true);
+        showLoading(true);
         new LogoutTask(() -> {
-            showDialog(false);
+            showLoading(false);
             openLoginScreen();
         }).execute();
     }
@@ -133,11 +146,16 @@ public class ProfileActivity extends BaseActivity {
 
     private void updateFields() {
         tvUsername.setText(player.getUsername());
+        tvCredit.setText(player.getCredit());
 
         String profileImage = player.getProfileImage();
         if (profileImage != null) {
             loadImageIntoView(Uri.parse(profileImage));
         }
 
+    }
+
+    private void openPowerUps() {
+        startActivity(new Intent(this, PowerUpsActivity.class).putExtra(PowerUpsActivity.POWER_UPS_PLAYER, player));
     }
 }

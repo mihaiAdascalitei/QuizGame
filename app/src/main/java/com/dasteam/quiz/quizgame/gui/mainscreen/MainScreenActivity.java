@@ -1,14 +1,10 @@
 package com.dasteam.quiz.quizgame.gui.mainscreen;
 
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -16,14 +12,11 @@ import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
 import com.dasteam.quiz.quizgame.gui.lobby.LobbyActivity;
 import com.dasteam.quiz.quizgame.gui.mainscreen.animate.AnimatorTouchListener;
+import com.dasteam.quiz.quizgame.gui.powerups.PowerUpsActivity;
 import com.dasteam.quiz.quizgame.gui.premium.PremiumAccountActivity;
 import com.dasteam.quiz.quizgame.gui.profile.ProfileActivity;
 import com.dasteam.quiz.quizgame.gui.ranking.RankingActivity;
-import com.dasteam.quiz.quizgame.model.PlayerModel;
-import com.dasteam.quiz.quizgame.utils.Animator;
-
-import static com.dasteam.quiz.quizgame.utils.Animator.animate;
-import static com.dasteam.quiz.quizgame.utils.Animator.rotate;
+import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 
 public class MainScreenActivity extends BaseActivity {
 
@@ -94,6 +87,7 @@ public class MainScreenActivity extends BaseActivity {
         rlMultiplayer.setOnTouchListener(new AnimatorTouchListener(this::openLobbyScreen));
         tvRanking.setOnClickListener(v -> openRankings());
         tvAds.setOnClickListener(v -> openPremiumAccount());
+        tvPowerUps.setOnClickListener(v -> openPowerUps());
     }
 
     private void fetchCachedData() {
@@ -133,6 +127,10 @@ public class MainScreenActivity extends BaseActivity {
     private void openPremiumAccount() {
         startActivity(new Intent(this, PremiumAccountActivity.class)
                 .putExtra(PremiumAccountActivity.PREMIUM_PLAYER, player));
+    }
+
+    private void openPowerUps() {
+        startActivity(new Intent(this, PowerUpsActivity.class).putExtra(PowerUpsActivity.POWER_UPS_PLAYER, player));
     }
 
 }

@@ -20,7 +20,7 @@
     <string name="premium">Premium</string>
     <string name="settings">Settings</string>
     <string name="main_screen">Hi, </string>
-    <string name="power_ups_title">Power-ups bank</string>
+    <string name="power_ups_title">Power-ups</string>
     <string name="singleplayer">Singleplayer</string>
     <string name="multiplayer">Multiplayer</string>
     <string name="logout">Logout</string>
@@ -42,4 +42,15 @@
     <string name="exp_date_alert">Expiration date must not be empty!</string>
     <string name="cancel">Cancel</string>
     <string name="default_alert">Something went wrong, please try again!</string>
+    <string name="buy_power_ups">Buy power ups</string>
+    <string name="power_up_sell">Sell</string>
+    <string name="current_players">Current lobby players : </string>
+    <string name="try_again">Try again</string>
+    <string name="credit_description">Credit:</string>
+    <string name="free_bonus">Free</string>
+    <string name="current_credit">Current credit:</string>
+    <string name="no_power_ups">Uhh…you have no power ups yet! Clicking the button below you are able to buy some !</string>
+    <string name="not_enough_credit">You have not enough credit!</string>
+    <string name="maximum_power">You cannot have more than 3 power ups of the same type!</string>
+    <string name="default_buy">You have bought</string>
 </resources>

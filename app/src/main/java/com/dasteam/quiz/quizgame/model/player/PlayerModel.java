@@ -1,4 +1,4 @@
-package com.dasteam.quiz.quizgame.model;
+package com.dasteam.quiz.quizgame.model.player;
 
 import android.net.Uri;
 
@@ -23,6 +23,9 @@ public class PlayerModel implements Serializable {
 
     @SerializedName("has_premium")
     private int hasPremium;
+
+    @SerializedName("credit")
+    private String credit;
 
 
     private String profileImage;
@@ -59,11 +62,19 @@ public class PlayerModel implements Serializable {
         this.profileImage = profileImage;
     }
 
-    public int hasPremium() {
-        return hasPremium;
+    public boolean hasPremium() {
+        return hasPremium == 1;
     }
 
     public void setHasPremium(int hasPremium) {
         this.hasPremium = hasPremium;
+    }
+
+    public String getCredit() {
+        return credit;
+    }
+
+    public void setCredit(String credit) {
+        this.credit = credit;
     }
 }

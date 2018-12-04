@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
 import com.dasteam.quiz.quizgame.gui.ranking.adapter.RankingAdapter;
-import com.dasteam.quiz.quizgame.model.LobbyPlayerModel;
+import com.dasteam.quiz.quizgame.model.player.LobbyPlayerModel;
 
 import java.util.ArrayList;
 import java.util.List;

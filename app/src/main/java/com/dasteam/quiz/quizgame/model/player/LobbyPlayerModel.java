@@ -1,4 +1,4 @@
-package com.dasteam.quiz.quizgame.model;
+package com.dasteam.quiz.quizgame.model.player;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -3,7 +3,7 @@ package com.dasteam.quiz.quizgame.gui.premium;
 import android.text.TextUtils;
 
 import com.dasteam.quiz.quizgame.gui.premium.status.PremiumValidateStatus;
-import com.dasteam.quiz.quizgame.model.PlayerModel;
+import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
 import com.dasteam.quiz.quizgame.network.RetrofitRepository;
 import com.dasteam.quiz.quizgame.provider.QuizProvider;

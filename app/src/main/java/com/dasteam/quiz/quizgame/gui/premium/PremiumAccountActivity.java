@@ -10,13 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
-import com.dasteam.quiz.quizgame.gui.premium.picker.DatePickerCallback;
 import com.dasteam.quiz.quizgame.gui.premium.status.PremiumValidateStatus;
-import com.dasteam.quiz.quizgame.model.PlayerModel;
+import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.gui.premium.picker.DatePickerDialog;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
 
@@ -94,7 +92,7 @@ public class PremiumAccountActivity extends BaseActivity {
 
     private void setPremiumMode() {
 
-        boolean hasPremium = player.hasPremium() == 1;
+        boolean hasPremium = player.hasPremium();
         clCardForm.setVisibility(hasPremium ? View.GONE : View.VISIBLE);
         tvAlreadyPremium.setVisibility(hasPremium ? View.VISIBLE : View.GONE);
         ivAlreadyPremium.setVisibility(hasPremium ? View.VISIBLE : View.GONE);
@@ -156,11 +154,11 @@ public class PremiumAccountActivity extends BaseActivity {
 
     private void makeAccountAsPremium() {
         hideAlerts();
-        showDialog(true);
+        showLoading(true);
         accountController.makePremium(player.getId(), new DataRetriever<PlayerModel>() {
             @Override
             public void onDataRetrieved(PlayerModel data) {
-                showDialog(false);
+                showLoading(false);
                 accountController.cachePlayer(data);
                 player = data;
                 setPremiumMode();
@@ -168,7 +166,7 @@ public class PremiumAccountActivity extends BaseActivity {
 
             @Override
             public void onDataFailed(String message, int code) {
-                showDialog(false);
+                showLoading(false);
                 showAlert(getString(R.string.default_alert));
             }
         });
