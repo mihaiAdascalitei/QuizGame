@@ -139,11 +139,17 @@ public class PowerUpsActivity extends BaseActivity {
     }
 
     private void sell(PowerUpsModel power, int position) {
-        showLoading(true);
-        String credit = string(integer(power.getPowerPrice()) + integer(player.getCredit()));
-        player.setCredit(credit);
-        tvToolbarCredit.setText(credit);
+        String credit = null;
+        if (!player.hasPremium()) {
+            credit = string(integer(power.getPowerPrice()) + integer(player.getCredit()));
+            player.setCredit(credit);
+            tvToolbarCredit.setText(credit);
+        }
+        sellPower(power, credit);
+    }
 
+    private void sellPower(PowerUpsModel power, String credit) {
+        showLoading(true);
         powerUpsController.sellPowerUps(power.getPlayerId(), power.getPowerId(), power.getPowerCount(), new DataRetriever<List<PowerUpsModel>>() {
             @Override
             public void onDataRetrieved(List<PowerUpsModel> data) {
@@ -173,20 +179,24 @@ public class PowerUpsActivity extends BaseActivity {
     }
 
     private void updateCredit(String playerId, String credit) {
-        powerUpsController.updateCredit(playerId, credit, new DataRetriever<PlayerModel>() {
-            @Override
-            public void onDataRetrieved(PlayerModel data) {
-                showLoading(false);
-                player = data;
-                powerUpsController.cachePlayer(data);
-            }
+        if (credit != null) {
+            powerUpsController.updateCredit(playerId, credit, new DataRetriever<PlayerModel>() {
+                @Override
+                public void onDataRetrieved(PlayerModel data) {
+                    showLoading(false);
+                    player = data;
+                    powerUpsController.cachePlayer(data);
+                }
 
-            @Override
-            public void onDataFailed(String message, int code) {
-                showLoading(false);
-                showAlert(getString(R.string.default_alert));
-            }
-        });
+                @Override
+                public void onDataFailed(String message, int code) {
+                    showLoading(false);
+                    showAlert(getString(R.string.default_alert));
+                }
+            });
+        } else {
+            showLoading(false);
+        }
     }
 
     @Override

@@ -52,4 +52,5 @@
     <string name="no_power_ups">Uhh…you have no power ups yet! Clicking the button below you are able to buy some !</string>
     <string name="not_enough_credit">You have not enough credit!</string>
     <string name="maximum_power">You cannot have more than 3 power ups of the same type!</string>
+    <string name="default_buy">You have bought</string>
 </resources>

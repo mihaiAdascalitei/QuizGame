@@ -129,17 +129,19 @@ public class BuyPowerUpsActivity extends BaseActivity {
         checkPlayerPower(power, credit);
     }
 
-    private void buyPower(PowerUpsModel power, String powerCount, String credit) {
+    private void buyPower(String powerId, String powerCount, String powerName, String credit) {
         if (powerCount.equals("3")) {
             showAlert(getString(R.string.maximum_power));
         } else {
             showLoading(true);
             buyPowerUpsController.buyPowerUps(player.getId(),
-                    power.getPowerId(),
+                    powerId,
                     powerCount, new DataRetriever<List<PowerUpsModel>>() {
                         @Override
                         public void onDataRetrieved(List<PowerUpsModel> data) {
                             updateCredit(player.getId(), credit);
+                            String message = getString(R.string.default_buy) + " " + powerName + " power.";
+                            showSnackBar(findViewById(R.id.cl_buy_power_ups_main), message);
                             showLoading(false);
                         }
 
@@ -176,10 +178,10 @@ public class BuyPowerUpsActivity extends BaseActivity {
             @Override
             public void onDataRetrieved(List<PowerUpsModel> data) {
                 if (data.size() == 0) {
-                    buyPower(power, "0", credit);
+                    buyPower(power.getPowerId(), "0", power.getPowerName(), credit);
                 } else {
                     PowerUpsModel powerModel = data.get(0);
-                    buyPower(powerModel, powerModel.getPowerCount(), credit);
+                    buyPower(powerModel.getPowerId(), powerModel.getPowerCount(), power.getPowerName(), credit);
                 }
 
             }
