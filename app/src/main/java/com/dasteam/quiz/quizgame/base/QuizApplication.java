@@ -1,6 +1,8 @@
 package com.dasteam.quiz.quizgame.base;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 public class QuizApplication extends Application {
 
@@ -12,7 +14,13 @@ public class QuizApplication extends Application {
         application = this;
     }
 
-    public static QuizApplication getApplication(){
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
+    public static QuizApplication getApplication() {
         return application;
     }
 

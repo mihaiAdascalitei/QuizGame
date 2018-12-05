@@ -53,4 +53,6 @@
     <string name="not_enough_credit">You have not enough credit!</string>
     <string name="maximum_power">You cannot have more than 3 power ups of the same type!</string>
     <string name="default_buy">You have bought</string>
+    <string name="check_premium_details">Check details</string>
+    <string name="time_left">Time left:</string>
 </resources>

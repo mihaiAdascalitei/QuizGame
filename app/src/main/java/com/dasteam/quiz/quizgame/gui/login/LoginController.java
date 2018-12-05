@@ -1,6 +1,5 @@
 package com.dasteam.quiz.quizgame.gui.login;
 
-import android.text.TextUtils;
 
 import com.dasteam.quiz.quizgame.gui.login.status.CachedPlayerCallback;
 import com.dasteam.quiz.quizgame.gui.login.status.LoginResponseStatus;
@@ -8,6 +7,9 @@ import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
 import com.dasteam.quiz.quizgame.network.RetrofitRepository;
 import com.dasteam.quiz.quizgame.provider.QuizProvider;
+
+import static com.dasteam.quiz.quizgame.utils.QuizUtils.isEmpty;
+
 
 public class LoginController {
 
@@ -18,7 +20,7 @@ public class LoginController {
     }
 
     public void validateData(String username, String password, ControllerCallback callback) {
-        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+        if (isEmpty(username) || isEmpty(password)) {
             callback.onLoginAttempt(LoginResponseStatus.EMPTY);
 
         } else if (username.length() < 5 || password.length() < 5) {

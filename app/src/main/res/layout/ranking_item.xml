@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_margin="8dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground"
@@ -18,7 +18,7 @@
         android:background="@drawable/ranking_number"
         android:padding="10dp"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -31,7 +31,7 @@
         android:layout_margin="5dp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/iv_ranking_top_three"
         app:layout_constraintStart_toEndOf="@id/tv_ranking_number"
@@ -39,8 +39,8 @@
 
     <ImageView
         android:id="@+id/iv_ranking_top_three"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_margin="5dp"
         android:src="@drawable/ic_crown"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,8 +49,8 @@
 
     <ImageView
         android:id="@+id/iv_ranking_player_rank"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_margin="5dp"
         android:src="@drawable/ic_trophy_first"
         app:layout_constraintBottom_toBottomOf="parent"

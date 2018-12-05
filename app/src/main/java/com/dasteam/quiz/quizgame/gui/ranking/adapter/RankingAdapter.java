@@ -100,24 +100,16 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.RankingH
         }
 
         private void setTopThree() {
-            int topThreeIconName = 0;
             int topThreeIconPlace = 0;
             switch (getAdapterPosition()) {
                 case 0:
-                    Glide.with(context).load(R.drawable.ic_crown).into(ivTopThree);
                     topThreeIconPlace = R.drawable.ic_crown;
-                    topThreeIconName = R.drawable.ic_place_first;
-                    tvRankNumber.setTextColor(ContextCompat.getColor(context, R.color.first_place));
                     break;
                 case 1:
                     topThreeIconPlace = R.drawable.ic_bag;
-                    topThreeIconName = R.drawable.ic_place_second;
-                    tvRankNumber.setTextColor(ContextCompat.getColor(context, R.color.second_place));
                     break;
                 case 2:
                     topThreeIconPlace = R.drawable.ic_scroll;
-                    topThreeIconName = R.drawable.ic_place_third;
-                    tvRankNumber.setTextColor(ContextCompat.getColor(context, R.color.third_place));
                     break;
                 default:
                     ivTopThree.setVisibility(View.INVISIBLE);
@@ -128,9 +120,6 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.RankingH
                 Glide.with(context).load(topThreeIconPlace).into(ivTopThree);
             }
 
-            if (topThreeIconName != 0) {
-                tvRankName.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context, topThreeIconName), null, null, null);
-            }
         }
     }
 }

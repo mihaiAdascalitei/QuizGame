@@ -33,6 +33,9 @@ public class PremiumAccountActivity extends BaseActivity {
     private TextView tvBottomAlert;
     private TextView tvAlreadyPremium;
     private ImageView ivAlreadyPremium;
+    private TextView tvCheckDetails;
+    private ConstraintLayout clDetails;
+    private ImageView ivDetailsClose;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,6 +76,9 @@ public class PremiumAccountActivity extends BaseActivity {
         tvBottomAlert = findViewById(R.id.tv_premium_bottom_alert);
         tvAlreadyPremium = findViewById(R.id.tv_premium_activated);
         ivAlreadyPremium = findViewById(R.id.iv_premium_activated);
+        tvCheckDetails = findViewById(R.id.tv_premium_check_details);
+        clDetails = findViewById(R.id.cl_premium_details);
+        ivDetailsClose = findViewById(R.id.iv_details_close);
     }
 
     @Override
@@ -84,6 +90,8 @@ public class PremiumAccountActivity extends BaseActivity {
     protected void setListeners() {
         btnBuyPremium.setOnClickListener(v -> buyPremium());
         tvCardExpDate.setOnClickListener(v -> popupDate());
+        tvCheckDetails.setOnClickListener(v -> checkDetails());
+        ivDetailsClose.setOnClickListener(v -> closeDetails());
     }
 
     private void getExtraData() {
@@ -96,6 +104,7 @@ public class PremiumAccountActivity extends BaseActivity {
         clCardForm.setVisibility(hasPremium ? View.GONE : View.VISIBLE);
         tvAlreadyPremium.setVisibility(hasPremium ? View.VISIBLE : View.GONE);
         ivAlreadyPremium.setVisibility(hasPremium ? View.VISIBLE : View.GONE);
+        tvCheckDetails.setVisibility(hasPremium ? View.VISIBLE : View.GONE);
     }
 
     private void buyPremium() {
@@ -172,4 +181,13 @@ public class PremiumAccountActivity extends BaseActivity {
         });
     }
 
+    private void checkDetails() {
+        tvCheckDetails.setVisibility(View.GONE);
+        clDetails.setVisibility(View.VISIBLE);
+    }
+
+    private void closeDetails() {
+        clDetails.setVisibility(View.GONE);
+        tvCheckDetails.setVisibility(View.VISIBLE);
+    }
 }

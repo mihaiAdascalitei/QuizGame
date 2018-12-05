@@ -8,6 +8,8 @@ import com.dasteam.quiz.quizgame.network.DataRetriever;
 import com.dasteam.quiz.quizgame.network.RetrofitRepository;
 import com.dasteam.quiz.quizgame.provider.QuizProvider;
 
+import static com.dasteam.quiz.quizgame.utils.QuizUtils.isEmpty;
+
 public class PremiumAccountController {
 
     private RetrofitRepository repository;
@@ -19,7 +21,7 @@ public class PremiumAccountController {
     public void validateData(String cardNumber, String ccv, String expDate, PremiumCallback callback) {
         if (cardNumber.trim().length() != 16) {
             callback.onBuyPremiumAttempt(PremiumValidateStatus.CREDIT_CARD_LENGTH);
-        } else if (TextUtils.isEmpty(expDate)) {
+        } else if (isEmpty(expDate)) {
             callback.onBuyPremiumAttempt(PremiumValidateStatus.EMPTY_DATE);
         } else if (ccv.trim().length() != 3) {
             callback.onBuyPremiumAttempt(PremiumValidateStatus.CCV_LENGTH);

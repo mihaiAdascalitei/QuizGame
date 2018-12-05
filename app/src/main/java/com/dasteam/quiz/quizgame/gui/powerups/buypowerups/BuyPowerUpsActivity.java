@@ -25,6 +25,8 @@ import static com.dasteam.quiz.quizgame.utils.QuizUtils.string;
 public class BuyPowerUpsActivity extends BaseActivity {
 
     public static final String CURRENT_PLAYER = "CURRENT_PLAYER";
+    private static final String MAX_POWER_COUNT = "3";
+
     private RecyclerView rvBuyPowerUps;
     private TextView tvTryAgain;
     private BuyPowerUpsAdapter adapter;
@@ -121,6 +123,7 @@ public class BuyPowerUpsActivity extends BaseActivity {
         if (!player.hasPremium()) {
             if (integer(power.getPowerPrice()) > integer(player.getCredit())) {
                 showAlert(getString(R.string.not_enough_credit));
+                return;
             } else {
                 credit = string(integer(player.getCredit()) - integer(power.getPowerPrice()));
             }
@@ -130,7 +133,7 @@ public class BuyPowerUpsActivity extends BaseActivity {
     }
 
     private void buyPower(String powerId, String powerCount, String powerName, String credit) {
-        if (powerCount.equals("3")) {
+        if (powerCount.equals(MAX_POWER_COUNT)) {
             showAlert(getString(R.string.maximum_power));
         } else {
             showLoading(true);

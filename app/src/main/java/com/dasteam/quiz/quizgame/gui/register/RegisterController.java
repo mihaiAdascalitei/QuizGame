@@ -7,6 +7,8 @@ import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
 import com.dasteam.quiz.quizgame.network.RetrofitRepository;
 
+import static com.dasteam.quiz.quizgame.utils.QuizUtils.isEmpty;
+
 public class RegisterController {
     private RetrofitRepository repository;
 
@@ -15,7 +17,7 @@ public class RegisterController {
     }
 
     public void validateData(String username, String password, String confirm, boolean acceptedTerms, RegisterCallback callback) {
-        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirm)) {
+        if (isEmpty(username) || isEmpty(password) || isEmpty(confirm)) {
             callback.onRegisterAttempt(RegisterResponseStatus.EMPTY);
         } else if (username.length() < 5 || password.length() < 5) {
             callback.onRegisterAttempt(RegisterResponseStatus.LENGTH);
