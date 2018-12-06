@@ -55,4 +55,8 @@
     <string name="default_buy">You have bought</string>
     <string name="check_premium_details">Check details</string>
     <string name="time_left">Time left:</string>
+    <string name="premium_details_desc1">By activating the premium account there will be free power ups to buy, there will be no ads displayed during the game and also on the main screen.</string>
+    <string name="premium_details_desc2">A great advantage brought by the premium account is that when losing a game, there will be the option to sell a power up to continue a game or to pay a random amount of credit.</string>
+    <string name="premium_details_desc3">The premium account will expire in 10 days. Please enjoy !</string>
+    <string name="expand">Expand</string>
 </resources>

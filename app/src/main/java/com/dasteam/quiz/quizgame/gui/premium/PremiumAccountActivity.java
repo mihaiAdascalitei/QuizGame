@@ -17,6 +17,7 @@ import com.dasteam.quiz.quizgame.gui.premium.status.PremiumValidateStatus;
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.gui.premium.picker.DatePickerDialog;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
+import com.dasteam.quiz.quizgame.utils.DrawableUtil;
 
 public class PremiumAccountActivity extends BaseActivity {
     public static final String PREMIUM_PLAYER = "PREMIUM_PLAYER";
@@ -36,6 +37,8 @@ public class PremiumAccountActivity extends BaseActivity {
     private TextView tvCheckDetails;
     private ConstraintLayout clDetails;
     private ImageView ivDetailsClose;
+    private TextView tvExpand;
+    private TextView tvTimeLeft;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -79,6 +82,8 @@ public class PremiumAccountActivity extends BaseActivity {
         tvCheckDetails = findViewById(R.id.tv_premium_check_details);
         clDetails = findViewById(R.id.cl_premium_details);
         ivDetailsClose = findViewById(R.id.iv_details_close);
+        tvExpand = findViewById(R.id.tv_premium_expand);
+        tvTimeLeft = findViewById(R.id.tv_premium_details_timeleft);
     }
 
     @Override
@@ -190,4 +195,5 @@ public class PremiumAccountActivity extends BaseActivity {
         clDetails.setVisibility(View.GONE);
         tvCheckDetails.setVisibility(View.VISIBLE);
     }
+
 }
