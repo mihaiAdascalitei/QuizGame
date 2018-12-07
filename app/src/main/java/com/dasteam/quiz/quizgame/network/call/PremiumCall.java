@@ -7,6 +7,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface PremiumCall {
-    @GET("/premium/{id}")
-    public Call<PlayerModel> makePremium(@Path("id") String id);
+    @GET("/premium/{premium}/{id}/{date}")
+    Call<PlayerModel> makePremium(@Path("premium") int premium,
+                                  @Path("id") String id,
+                                  @Path("date") String date);
 }

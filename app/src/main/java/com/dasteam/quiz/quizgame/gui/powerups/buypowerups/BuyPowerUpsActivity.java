@@ -15,7 +15,6 @@ import com.dasteam.quiz.quizgame.gui.powerups.buypowerups.adapter.BuyPowerUpsAda
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.model.powerups.PowerUpsModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
-import com.dasteam.quiz.quizgame.utils.QuizUtils;
 
 import java.util.List;
 
@@ -122,7 +121,7 @@ public class BuyPowerUpsActivity extends BaseActivity {
 
         if (!player.hasPremium()) {
             if (integer(power.getPowerPrice()) > integer(player.getCredit())) {
-                showAlert(getString(R.string.not_enough_credit));
+                showDelayedAlert(getString(R.string.not_enough_credit));
                 return;
             } else {
                 credit = string(integer(player.getCredit()) - integer(power.getPowerPrice()));
@@ -134,7 +133,7 @@ public class BuyPowerUpsActivity extends BaseActivity {
 
     private void buyPower(String powerId, String powerCount, String powerName, String credit) {
         if (powerCount.equals(MAX_POWER_COUNT)) {
-            showAlert(getString(R.string.maximum_power));
+            showDelayedAlert(getString(R.string.maximum_power));
         } else {
             showLoading(true);
             buyPowerUpsController.buyPowerUps(player.getId(),

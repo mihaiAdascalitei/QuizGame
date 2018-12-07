@@ -293,7 +293,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:text=" 5 days"
+            android:text="5"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@id/iv_premium_details_time"
             app:layout_constraintLeft_toRightOf="@id/tv_premium_details_timeleft"

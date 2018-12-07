@@ -17,11 +17,12 @@ import com.dasteam.quiz.quizgame.gui.premium.status.PremiumValidateStatus;
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.gui.premium.picker.DatePickerDialog;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
-import com.dasteam.quiz.quizgame.utils.DrawableUtil;
+
+import static com.dasteam.quiz.quizgame.utils.QuizUtils.getDaysDifference;
 
 public class PremiumAccountActivity extends BaseActivity {
     public static final String PREMIUM_PLAYER = "PREMIUM_PLAYER";
-
+    public static final int MAX_PREMIUM_DAY_LIMIT = 10;
     private PremiumAccountController accountController;
     private PlayerModel player;
 
@@ -38,7 +39,7 @@ public class PremiumAccountActivity extends BaseActivity {
     private ConstraintLayout clDetails;
     private ImageView ivDetailsClose;
     private TextView tvExpand;
-    private TextView tvTimeLeft;
+    private TextView tvDaysLeft;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -83,7 +84,7 @@ public class PremiumAccountActivity extends BaseActivity {
         clDetails = findViewById(R.id.cl_premium_details);
         ivDetailsClose = findViewById(R.id.iv_details_close);
         tvExpand = findViewById(R.id.tv_premium_expand);
-        tvTimeLeft = findViewById(R.id.tv_premium_details_timeleft);
+        tvDaysLeft = findViewById(R.id.tv_premium_days_left);
     }
 
     @Override
@@ -110,6 +111,8 @@ public class PremiumAccountActivity extends BaseActivity {
         tvAlreadyPremium.setVisibility(hasPremium ? View.VISIBLE : View.GONE);
         ivAlreadyPremium.setVisibility(hasPremium ? View.VISIBLE : View.GONE);
         tvCheckDetails.setVisibility(hasPremium ? View.VISIBLE : View.GONE);
+
+        handleTimeleft();
     }
 
     private void buyPremium() {
@@ -196,4 +199,14 @@ public class PremiumAccountActivity extends BaseActivity {
         tvCheckDetails.setVisibility(View.VISIBLE);
     }
 
+    private void handleTimeleft() {
+        if (player.hasPremium()) {
+            String premiumDate = player.getPremiumDateActivated();
+            if (premiumDate != null) {
+                int differenceDay = getDaysDifference(premiumDate);
+                String daysLeft = String.valueOf(MAX_PREMIUM_DAY_LIMIT - differenceDay) + " " + getString(R.string.days);
+                tvDaysLeft.setText(daysLeft);
+            }
+        }
+    }
 }

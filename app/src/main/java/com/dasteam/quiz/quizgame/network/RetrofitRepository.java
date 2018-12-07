@@ -14,13 +14,17 @@ import com.dasteam.quiz.quizgame.network.call.PremiumCall;
 import com.dasteam.quiz.quizgame.network.call.RegisterCall;
 import com.dasteam.quiz.quizgame.network.call.SellPowerUpsCall;
 import com.dasteam.quiz.quizgame.network.call.UpdateCreditCall;
+import com.dasteam.quiz.quizgame.utils.QuizUtils;
 
 import java.net.HttpURLConnection;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.dasteam.quiz.quizgame.utils.QuizUtils.dateString;
 
 public class RetrofitRepository {
 
@@ -85,8 +89,8 @@ public class RetrofitRepository {
 
     }
 
-    public void makePremium(String id, DataRetriever<PlayerModel> retriever) {
-        Call<PlayerModel> call = RetrofitService.getInstance().getRetrofit().create(PremiumCall.class).makePremium(id);
+    public void makePremium(int premium, String id, DataRetriever<PlayerModel> retriever) {
+        Call<PlayerModel> call = RetrofitService.getInstance().getRetrofit().create(PremiumCall.class).makePremium(premium, id, dateString(new Date()));
         call.enqueue(new Callback<PlayerModel>() {
             @Override
             public void onResponse(@NonNull Call<PlayerModel> call, @NonNull Response<PlayerModel> response) {

@@ -17,6 +17,8 @@ import com.dasteam.quiz.quizgame.base.BaseActivity;
 import com.dasteam.quiz.quizgame.gui.login.LoginActivity;
 import com.dasteam.quiz.quizgame.gui.powerups.PowerUpsActivity;
 import com.dasteam.quiz.quizgame.gui.profile.background.LogoutTask;
+import com.dasteam.quiz.quizgame.gui.resetpassword.ResetPasswordActivity;
+import com.dasteam.quiz.quizgame.gui.resetpassword.status.ResetPasswordStatus;
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 
 public class ProfileActivity extends BaseActivity {
@@ -63,6 +65,7 @@ public class ProfileActivity extends BaseActivity {
         btnLogout.setOnClickListener(v -> logout());
         ivProfileIcon.setOnClickListener(v -> loadImage());
         tvPowerUps.setOnClickListener(v -> openPowerUps());
+        tvResetPassword.setOnClickListener(v -> openResetPassword());
     }
 
     @Override
@@ -157,5 +160,9 @@ public class ProfileActivity extends BaseActivity {
 
     private void openPowerUps() {
         startActivity(new Intent(this, PowerUpsActivity.class).putExtra(PowerUpsActivity.POWER_UPS_PLAYER, player));
+    }
+
+    private void openResetPassword() {
+        startActivity(new Intent(this, ResetPasswordActivity.class).putExtra(ResetPasswordActivity.RESET_PASSWORD_PLAYER, player));
     }
 }

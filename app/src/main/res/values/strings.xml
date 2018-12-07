@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">QuizGame</string>
     <string name="username_hint">Username</string>
-    <string name="passwors_hint">Password</string>
+    <string name="password_hint">Password</string>
     <string name="login_text">Login</string>
     <string name="registration_question">New here? <u>Register!</u></string>
     <string name="confirm_hint">Confirm password</string>
@@ -50,7 +50,7 @@
     <string name="free_bonus">Free</string>
     <string name="current_credit">Current credit:</string>
     <string name="no_power_ups">Uhh…you have no power ups yet! Clicking the button below you are able to buy some !</string>
-    <string name="not_enough_credit">You have not enough credit!</string>
+    <string name="not_enough_credit">You don\'t have enough credit!</string>
     <string name="maximum_power">You cannot have more than 3 power ups of the same type!</string>
     <string name="default_buy">You have bought</string>
     <string name="check_premium_details">Check details</string>
@@ -59,4 +59,12 @@
     <string name="premium_details_desc2">A great advantage brought by the premium account is that when losing a game, there will be the option to sell a power up to continue a game or to pay a random amount of credit.</string>
     <string name="premium_details_desc3">The premium account will expire in 10 days. Please enjoy !</string>
     <string name="expand">Expand</string>
+    <string name="days">days</string>
+    <string name="reset_password">Reset your password</string>
+    <string name="reset_password_description">Please insert below your current password and the new password that you want to be set.</string>
+    <string name="reset_password_current_error">Please enter your current password.</string>
+    <string name="new_password_hint">New password</string>
+    <string name="reset">Reset</string>
+    <string name="account_password_error">Enter the correct account password.</string>
+    <string name="same_password_error">Must not be as same as the current one.</string>
 </resources>

@@ -18,13 +18,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".gui.quiz.QuizActivity" />
-        <activity android:name=".gui.login.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".gui.login.LoginActivity" />
         <activity android:name=".gui.register.RegisterActivity" />
         <activity android:name=".gui.mainscreen.MainScreenActivity" />
         <activity android:name=".gui.profile.ProfileActivity" />
@@ -32,8 +26,19 @@
         <activity android:name=".gui.ranking.RankingActivity" />
         <activity android:name=".gui.premium.PremiumAccountActivity" />
         <activity android:name=".gui.powerups.PowerUpsActivity" />
-        <activity android:name=".gui.powerups.buypowerups.BuyPowerUpsActivity"
-            android:theme="@style/TranslucentTheme"/>
+        <activity
+            android:name=".gui.powerups.buypowerups.BuyPowerUpsActivity"
+            android:theme="@style/TranslucentTheme" />
+        <activity
+            android:name=".gui.splash.SplashScreenActivity"
+            android:theme="@style/AppTheme.Launcher">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".gui.resetpassword.ResetPasswordActivity"></activity>
     </application>
 
 </manifest>

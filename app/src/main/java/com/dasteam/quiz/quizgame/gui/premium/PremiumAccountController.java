@@ -8,6 +8,9 @@ import com.dasteam.quiz.quizgame.network.DataRetriever;
 import com.dasteam.quiz.quizgame.network.RetrofitRepository;
 import com.dasteam.quiz.quizgame.provider.QuizProvider;
 
+import java.util.Date;
+
+import static com.dasteam.quiz.quizgame.utils.QuizUtils.date;
 import static com.dasteam.quiz.quizgame.utils.QuizUtils.isEmpty;
 
 public class PremiumAccountController {
@@ -31,7 +34,7 @@ public class PremiumAccountController {
     }
 
     public void makePremium(String id, DataRetriever<PlayerModel> retriever) {
-        repository.makePremium(id, retriever);
+        repository.makePremium(1, id, retriever);
     }
 
     public void cachePlayer(PlayerModel player) {
