@@ -80,17 +80,19 @@ public class FeedbackHistoryAdapter extends RecyclerView.Adapter<FeedbackHistory
         }
 
         private void expandElement(FeedbackModel feedback) {
+
             boolean isSelected = feedback.isSelected();
             if (isSelected) {
                 tvDescription.setMaxLines(SINGLE_LINE);
                 tvDescription.setEllipsize(TextUtils.TruncateAt.END);
                 llReviewed.setVisibility(View.GONE);
+
             } else {
                 tvDescription.setMaxLines(Integer.MAX_VALUE);
                 tvDescription.setEllipsize(null);
                 llReviewed.setVisibility(View.VISIBLE);
-            }
 
+            }
             feedback.setSelected(!isSelected);
             notifyDataSetChanged();
         }
