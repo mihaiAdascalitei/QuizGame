@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
+import com.dasteam.quiz.quizgame.gui.feedback.FeedbackActivity;
 import com.dasteam.quiz.quizgame.gui.login.LoginActivity;
 import com.dasteam.quiz.quizgame.gui.profile.background.LogoutTask;
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
@@ -72,6 +73,7 @@ public class SettingsActivity extends BaseActivity {
     @Override
     protected void setListeners() {
         btnRemoveAccount.setOnClickListener(v -> showRemoveAccountAlert());
+        tvFeedback.setOnClickListener(v -> openFeedbackScreen());
     }
 
     private void getExtraData() {
@@ -117,5 +119,9 @@ public class SettingsActivity extends BaseActivity {
         finishAffinity();
         startActivity(new Intent(this, LoginActivity.class));
         finish();
+    }
+
+    private void openFeedbackScreen() {
+        startActivity(new Intent(this, FeedbackActivity.class).putExtra(FeedbackActivity.FEEDBACK_PLAYER, player));
     }
 }

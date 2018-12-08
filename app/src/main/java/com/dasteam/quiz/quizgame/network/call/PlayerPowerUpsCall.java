@@ -10,5 +10,5 @@ import retrofit2.http.Path;
 
 public interface PlayerPowerUpsCall {
     @GET("/getPlayerPowerUps/{id}")
-    public Call<List<PowerUpsModel>> getPlayerPowerUps(@Path("id") String id);
+    Call<List<PowerUpsModel>> getPlayerPowerUps(@Path("id") String id);
 }

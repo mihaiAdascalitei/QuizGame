@@ -3,18 +3,22 @@ package com.dasteam.quiz.quizgame.network;
 import android.support.annotation.NonNull;
 
 import com.dasteam.quiz.quizgame.gui.powerups.buypowerups.BuyPowerUpsActivity;
+import com.dasteam.quiz.quizgame.model.feedback.FeedbackModel;
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.model.powerups.PowerUpsModel;
 import com.dasteam.quiz.quizgame.network.call.BuyPowerUpsCall;
 import com.dasteam.quiz.quizgame.network.call.CheckPlayerPowerCall;
 import com.dasteam.quiz.quizgame.network.call.GetPowerUpsCall;
 import com.dasteam.quiz.quizgame.network.call.LoginCall;
+import com.dasteam.quiz.quizgame.network.call.PlayerFeedbackCall;
 import com.dasteam.quiz.quizgame.network.call.PlayerPowerUpsCall;
 import com.dasteam.quiz.quizgame.network.call.PremiumCall;
 import com.dasteam.quiz.quizgame.network.call.RegisterCall;
 import com.dasteam.quiz.quizgame.network.call.RemoveAccountCall;
+import com.dasteam.quiz.quizgame.network.call.RemoveFeedbackCall;
 import com.dasteam.quiz.quizgame.network.call.ResetPasswordCall;
 import com.dasteam.quiz.quizgame.network.call.SellPowerUpsCall;
+import com.dasteam.quiz.quizgame.network.call.SendFeedbackCall;
 import com.dasteam.quiz.quizgame.network.call.UpdateCreditCall;
 import com.dasteam.quiz.quizgame.utils.QuizUtils;
 
@@ -27,6 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.dasteam.quiz.quizgame.utils.QuizUtils.dateString;
+import static com.dasteam.quiz.quizgame.utils.QuizUtils.string;
 
 public class RetrofitRepository {
 
@@ -279,6 +284,65 @@ public class RetrofitRepository {
     }
 
 
+    public void sendFeedback(String playerId, String category, String description, DataRetriever<String> retriever) {
+        FeedbackModel feedback = new FeedbackModel(playerId, category, description, dateString(new Date()));
+
+        Call<String> call = RetrofitService.getInstance().getRetrofit().create(SendFeedbackCall.class).sendFeedback(feedback);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+                if (response.code() == HttpURLConnection.HTTP_OK && response.isSuccessful()) {
+                    retriever.onDataRetrieved(response.body());
+                } else {
+                    retriever.onDataFailed(response.message(), response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+                retriever.onDataFailed(t.getMessage(), HttpURLConnection.HTTP_BAD_REQUEST);
+            }
+        });
+    }
+
+    public void getPlayerFeedback(String id, DataRetriever<List<FeedbackModel>> retriever) {
+        Call<List<FeedbackModel>> call = RetrofitService.getInstance().getRetrofit().create(PlayerFeedbackCall.class).getPlayerFeedback(id);
+        call.enqueue(new Callback<List<FeedbackModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<FeedbackModel>> call, @NonNull Response<List<FeedbackModel>> response) {
+                if (response.code() == HttpURLConnection.HTTP_OK && response.isSuccessful()) {
+                    retriever.onDataRetrieved(response.body());
+                } else {
+                    retriever.onDataFailed(response.message(), response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<FeedbackModel>> call, @NonNull Throwable t) {
+                retriever.onDataFailed(t.getMessage(), HttpURLConnection.HTTP_BAD_REQUEST);
+            }
+        });
+    }
+
+
+    public void removeFeedback(String feedbackId, String playerId, DataRetriever<List<FeedbackModel>> retriever) {
+        Call<List<FeedbackModel>> call = RetrofitService.getInstance().getRetrofit().create(RemoveFeedbackCall.class).removeFeedback(feedbackId, playerId);
+        call.enqueue(new Callback<List<FeedbackModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<FeedbackModel>> call, @NonNull Response<List<FeedbackModel>> response) {
+                if (response.code() == HttpURLConnection.HTTP_OK && response.isSuccessful()) {
+                    retriever.onDataRetrieved(response.body());
+                } else {
+                    retriever.onDataFailed(response.message(), response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<FeedbackModel>> call, @NonNull Throwable t) {
+                retriever.onDataFailed(t.getMessage(), HttpURLConnection.HTTP_BAD_REQUEST);
+            }
+        });
+    }
 }
 
 

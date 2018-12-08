@@ -73,4 +73,23 @@
     <string name="settings_terms">Terms and conditions</string>
     <string name="remove_account">Remove account</string>
     <string name="remove_account_message">Are you sure you want to remove this account?</string>
+    <string name="select_feedback_category">Please select a feedback category from below </string>
+    <string name="feedback_send">Send feedback</string>
+    <string name="feedback_description">Description…</string>
+    <string name="category_error">You have to select a category.</string>
+    <string name="empty_description_error">Description must not be empty.</string>
+    <string name="length_description_error">Description must be at least 10 characters length long.</string>
+    <string name="feedback_successfully_sent">Feedback successfully sent!</string>
+    <string name="feedback_history">History</string>
+    <string name="no_history_feedback">You didn\'t send any feedback yet :)</string>
+
+    <string-array name="feedback_categories">
+        <item>Account issues</item>
+        <item>Credit</item>
+        <item>Power ups</item>
+        <item>Connection</item>
+        <item>Personal data</item>
+        <item>Usage</item>
+        <item>Other</item>
+    </string-array>
 </resources>

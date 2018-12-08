@@ -40,7 +40,8 @@
         </activity>
         <activity android:name=".gui.resetpassword.ResetPasswordActivity" />
         <activity android:name=".gui.settings.SettingsActivity" />
-        <activity android:name=".gui.feedback.FeedbackActivity"></activity>
+        <activity android:name=".gui.feedback.FeedbackActivity" />
+        <activity android:name=".gui.feedback.history.FeedbackHistoryActivity"></activity>
     </application>
 
 </manifest>
