@@ -12,6 +12,7 @@ import com.dasteam.quiz.quizgame.network.call.LoginCall;
 import com.dasteam.quiz.quizgame.network.call.PlayerPowerUpsCall;
 import com.dasteam.quiz.quizgame.network.call.PremiumCall;
 import com.dasteam.quiz.quizgame.network.call.RegisterCall;
+import com.dasteam.quiz.quizgame.network.call.RemoveAccountCall;
 import com.dasteam.quiz.quizgame.network.call.ResetPasswordCall;
 import com.dasteam.quiz.quizgame.network.call.SellPowerUpsCall;
 import com.dasteam.quiz.quizgame.network.call.UpdateCreditCall;
@@ -122,7 +123,7 @@ public class RetrofitRepository {
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<PowerUpsModel>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<PowerUpsModel>> call, @NonNull Throwable t) {
                 retriever.onDataFailed(t.getMessage(), HttpURLConnection.HTTP_BAD_REQUEST);
 
             }
@@ -253,6 +254,25 @@ public class RetrofitRepository {
 
             @Override
             public void onFailure(@NonNull Call<PlayerModel> call, @NonNull Throwable t) {
+                retriever.onDataFailed(t.getMessage(), HttpURLConnection.HTTP_BAD_REQUEST);
+            }
+        });
+    }
+
+    public void removeAccount(String id, DataRetriever<String> retriever) {
+        Call<String> call = RetrofitService.getInstance().getRetrofit().create(RemoveAccountCall.class).removeAccount(id);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+                if (response.code() == HttpURLConnection.HTTP_OK && response.isSuccessful()) {
+                    retriever.onDataRetrieved(response.body());
+                } else {
+                    retriever.onDataFailed(response.message(), response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                 retriever.onDataFailed(t.getMessage(), HttpURLConnection.HTTP_BAD_REQUEST);
             }
         });
