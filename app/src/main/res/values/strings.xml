@@ -82,6 +82,7 @@
     <string name="feedback_successfully_sent">Feedback successfully sent!</string>
     <string name="feedback_history">History</string>
     <string name="no_history_feedback">You didn\'t send any feedback yet :)</string>
+    <string name="feedback_reviewed">Feedback was reviewed :</string>
 
     <string-array name="feedback_categories">
         <item>Account issues</item>

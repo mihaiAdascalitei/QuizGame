@@ -19,6 +19,11 @@ public class FeedbackModel {
     @SerializedName("date_created")
     private String dateCreated;
 
+    @SerializedName("reviewed")
+    private int reviewed;
+
+    private boolean selected;
+
     public FeedbackModel() {
 
     }
@@ -68,5 +73,21 @@ public class FeedbackModel {
 
     public void setDateCreated(String dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public boolean isReviewed() {
+        return this.reviewed == 1;
+    }
+
+    public void setReviewed(int reviewed) {
+        this.reviewed = reviewed;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }

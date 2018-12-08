@@ -46,6 +46,29 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_feedback_history_category" />
 
+    <LinearLayout
+        android:id="@+id/ll_feedback_history_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_feedback_history_description">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:text="@string/feedback_reviewed"
+            android:textColor="@color/dark_green" />
+
+        <ImageView
+            android:id="@+id/iv_feedback_history_reviewed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/tv_feedback_history_date"
         android:layout_width="wrap_content"
@@ -55,6 +78,6 @@
         android:textColor="@color/dark_green"
         android:textSize="15sp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_feedback_history_description" />
+        app:layout_constraintTop_toBottomOf="@id/ll_feedback_history_review" />
 
 </android.support.constraint.ConstraintLayout>
