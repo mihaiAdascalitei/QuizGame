@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
-                android:hint="@string/passwors_hint"
+                android:hint="@string/password_hint"
                 android:imeOptions="actionNext"
                 android:inputType="textPassword"
                 android:textColor="@color/dark_green"

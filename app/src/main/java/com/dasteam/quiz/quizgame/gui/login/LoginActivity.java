@@ -35,7 +35,6 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_login);
-        checkChachedPlayer();
     }
 
     @Override
@@ -157,14 +156,6 @@ public class LoginActivity extends BaseActivity {
         finish();
     }
 
-    private void checkChachedPlayer() {
-        loginController.checkPlayerAlreadyLogged(player -> {
-            if (player != null) {
-                startMainScreen();
-
-            }
-        });
-    }
 
     private void cacheLoggingPlayer(PlayerModel player) {
         loginController.cachePlayer(player);

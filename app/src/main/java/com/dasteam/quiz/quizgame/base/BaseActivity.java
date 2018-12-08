@@ -1,6 +1,7 @@
 package com.dasteam.quiz.quizgame.base;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -13,6 +14,7 @@ import com.dasteam.quiz.quizgame.custom.LoadingDialog;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+    private static final long DIALOG_TIME = 1500;
     private LoadingDialog loading;
 
     protected void onCreate(@Nullable Bundle savedInstanceState, int layout) {
@@ -39,13 +41,26 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void showAlert(String message) {
         new AlertDialog
-                .Builder(this)
+                .Builder(this, R.style.AlertDialogStyle)
                 .setTitle(getString(R.string.alert_title))
                 .setPositiveButton(getString(R.string.button_ok), null)
                 .setMessage(message)
                 .create()
                 .show();
     }
+
+    protected void showDelayedAlert(String message) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle)
+                .setMessage(message);
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        new Handler().postDelayed(() -> {
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+            }
+        }, DIALOG_TIME);
+    }
+
 
     protected void showLoading(boolean show) {
         if (show) {

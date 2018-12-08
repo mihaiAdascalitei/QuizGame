@@ -27,6 +27,9 @@ public class PlayerModel implements Serializable {
     @SerializedName("credit")
     private String credit;
 
+    @SerializedName("premium_date_activated")
+    private String premiumDateActivated;
+
 
     private String profileImage;
 
@@ -76,5 +79,13 @@ public class PlayerModel implements Serializable {
 
     public void setCredit(String credit) {
         this.credit = credit;
+    }
+
+    public String getPremiumDateActivated() {
+        return premiumDateActivated;
+    }
+
+    public void setPremiumDateActivated(String premiumDateActivated) {
+        this.premiumDateActivated = premiumDateActivated;
     }
 }

@@ -188,12 +188,25 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="10dp"
+        android:animateLayoutChanges="true"
         android:background="@drawable/round_login_layout"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_premium_activated">
+
+        <TextView
+            android:id="@+id/tv_premium_expand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/expand"
+            android:textColor="@color/dark_green"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/sl_details_description"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/iv_details_close"
@@ -206,34 +219,86 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="To do here"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <ScrollView
+            android:id="@+id/sl_details_description"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toTopOf="@id/iv_premium_details_time"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/iv_details_close">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:text="@string/premium_details_desc1"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_green"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:text="@string/premium_details_desc2"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_green"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:text="@string/premium_details_desc3"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_green"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <ImageView
+            android:id="@+id/iv_premium_details_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:src="@drawable/ic_timelapse"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/tv_premium_details_timeleft"
+            app:layout_constraintTop_toBottomOf="@id/sl_details_description" />
 
         <TextView
             android:id="@+id/tv_premium_details_timeleft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="4dp"
             android:text="@string/time_left"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@id/iv_premium_details_time"
+            app:layout_constraintLeft_toRightOf="@id/iv_premium_details_time"
+            app:layout_constraintRight_toLeftOf="@+id/tv_premium_days_left"
+            app:layout_constraintTop_toTopOf="@id/iv_premium_details_time" />
 
         <TextView
+            android:id="@+id/tv_premium_days_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text=" 5 days"
+            android:layout_margin="4dp"
+            android:text="5"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/tv_premium_details_timeleft" />
+            app:layout_constraintBottom_toBottomOf="@id/iv_premium_details_time"
+            app:layout_constraintLeft_toRightOf="@id/tv_premium_details_timeleft"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_premium_details_time" />
     </android.support.constraint.ConstraintLayout>
 
 
