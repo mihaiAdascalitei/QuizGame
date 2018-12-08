@@ -67,4 +67,5 @@
     <string name="reset">Reset</string>
     <string name="account_password_error">Enter the correct account password.</string>
     <string name="same_password_error">Must not be as same as the current one.</string>
+    <string name="successfully_password_reset">Your password has been successfully reset!</string>
 </resources>

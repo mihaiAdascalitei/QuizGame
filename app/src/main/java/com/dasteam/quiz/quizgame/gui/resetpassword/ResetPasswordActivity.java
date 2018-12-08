@@ -13,6 +13,7 @@ import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
 import com.dasteam.quiz.quizgame.gui.resetpassword.status.ResetPasswordStatus;
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
+import com.dasteam.quiz.quizgame.network.DataRetriever;
 
 public class ResetPasswordActivity extends BaseActivity {
     public static String RESET_PASSWORD_PLAYER = "RESET_PASSWORD_PLAYER";
@@ -124,7 +125,23 @@ public class ResetPasswordActivity extends BaseActivity {
     }
 
     private void resetPassword() {
+        String password = etNewPassword.getText().toString();
         hideAlert();
+        showLoading(true);
+        passwordController.resetPassword(player.getId(), password, new DataRetriever<PlayerModel>() {
+            @Override
+            public void onDataRetrieved(PlayerModel data) {
+                showLoading(false);
+                passwordController.cachePlayer(data);
+                showSnackBar(findViewById(R.id.cl_main_reset_password), getString(R.string.successfully_password_reset));
+            }
+
+            @Override
+            public void onDataFailed(String message, int code) {
+                showLoading(false);
+                showAlert(getString(R.string.default_alert));
+            }
+        });
     }
 
 }
