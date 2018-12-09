@@ -26,6 +26,15 @@ public class PowerUpsModel {
     @SerializedName("power_id")
     private String powerId;
 
+    public PowerUpsModel() {
+    }
+
+    public PowerUpsModel(String playerId, String powerId, String powerCount) {
+        this.playerId = playerId;
+        this.powerId = powerId;
+        this.powerCount = powerCount;
+    }
+
 
     public String getPowerName() {
         return powerName;

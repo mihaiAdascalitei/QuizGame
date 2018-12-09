@@ -12,11 +12,4 @@ public class DrawableUtil {
         return context.getResources().getIdentifier(resIdName, "drawable", context.getPackageName());
     }
 
-    public static void alignParentTop(ConstraintLayout view) {
-
-    }
-
-    public static void alignBelowView(View mainView, View alignedView) {
-
-    }
 }
