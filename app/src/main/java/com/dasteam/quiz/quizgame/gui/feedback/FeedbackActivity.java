@@ -38,23 +38,20 @@ public class FeedbackActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_keyboard_backspace);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.feedback_menu, menu);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
             case R.id.feedback_menu_history:
                 openFeedbackHistory();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+
         }
 
     }

@@ -40,24 +40,6 @@ public class PowerUpsActivity extends BaseActivity {
     private ImageView ivNoPowerUps;
     private TextView tvTryAgain;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_keyboard_backspace);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-    }
 
     @Override
     protected void onResume() {
@@ -94,6 +76,16 @@ public class PowerUpsActivity extends BaseActivity {
     protected void setListeners() {
         btnBuy.setOnClickListener(v -> buyPowerUps());
         tvTryAgain.setOnClickListener(v -> initAdapterData());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == BUY_POWER_UPS_CODE) {
+            if (resultCode == RESULT_OK) {
+                initAdapterData();
+            }
+        }
     }
 
     private void init() {
@@ -199,15 +191,6 @@ public class PowerUpsActivity extends BaseActivity {
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == BUY_POWER_UPS_CODE) {
-            if (resultCode == RESULT_OK) {
-                initAdapterData();
-            }
-        }
-    }
 
     private void updateUIData() {
         player = powerUpsController.getPlayer();

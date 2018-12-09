@@ -30,24 +30,6 @@ public class SettingsActivity extends BaseActivity {
     private TextView tvTerms;
     private Button btnRemoveAccount;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_keyboard_backspace);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-    }
 
     @SuppressLint("MissingSuperCall")
     @Override

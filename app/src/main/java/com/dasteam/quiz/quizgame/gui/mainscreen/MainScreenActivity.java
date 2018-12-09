@@ -102,12 +102,6 @@ public class MainScreenActivity extends BaseActivity {
         fetchCachedData();
     }
 
-    private void fetchPlayerIfUpdated() {
-        PlayerModel fetchedPlayer = mainController.getPlayer();
-        if (fetchedPlayer != null) {
-            player = fetchedPlayer;
-        }
-    }
 
     private void configureToolbar() {
         String title = getString(R.string.main_screen) + " " + player.getUsername();
