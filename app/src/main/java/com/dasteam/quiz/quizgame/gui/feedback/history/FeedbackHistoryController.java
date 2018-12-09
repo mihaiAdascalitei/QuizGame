@@ -2,22 +2,18 @@ package com.dasteam.quiz.quizgame.gui.feedback.history;
 
 import com.dasteam.quiz.quizgame.model.feedback.FeedbackModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
-import com.dasteam.quiz.quizgame.network.RetrofitRepository;
 
 import java.util.List;
 
-public class FeedbackHistoryController {
-    private RetrofitRepository repository;
+import static com.dasteam.quiz.quizgame.provider.QuizProvider.provideRepository;
 
-    public FeedbackHistoryController() {
-        repository = new RetrofitRepository();
-    }
+public class FeedbackHistoryController {
 
     public void getPlayerFeedback(String playerId, DataRetriever<List<FeedbackModel>> retriever) {
-        repository.getPlayerFeedback(playerId, retriever);
+        provideRepository().getPlayerFeedback(playerId, retriever);
     }
 
     public void removeFeedback(String feedbackId, String playerId, DataRetriever<List<FeedbackModel>> retriever) {
-        repository.removeFeedback(feedbackId, playerId, retriever);
+        provideRepository().removeFeedback(feedbackId, playerId, retriever);
     }
 }
