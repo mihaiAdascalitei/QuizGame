@@ -4,17 +4,14 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
 import com.dasteam.quiz.quizgame.gui.ranking.adapter.RankingAdapter;
-import com.dasteam.quiz.quizgame.model.player.LobbyPlayerModel;
+import com.dasteam.quiz.quizgame.model.player.PlayerModel;
+import com.dasteam.quiz.quizgame.network.DataRetriever;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class RankingActivity extends BaseActivity {
 
@@ -30,6 +27,7 @@ public class RankingActivity extends BaseActivity {
         init();
         initAdapter();
         configureToolbar(getString(R.string.ranking));
+        setAdapterData();
     }
 
     @Override
@@ -55,16 +53,24 @@ public class RankingActivity extends BaseActivity {
     private void initAdapter() {
         rvRanking.setLayoutManager(new LinearLayoutManager(this));
         rvRanking.setAdapter(rankingAdapter);
-        Random testRandom = new Random();
-        List<LobbyPlayerModel> dummyData = new ArrayList<>();
-        for (int i = 0; i < 15; i++) {
-            LobbyPlayerModel player = new LobbyPlayerModel();
-            player.setUsername("Player " + String.valueOf(i));
-            player.setRank(testRandom.nextInt(4));
-            dummyData.add(player);
-        }
+    }
 
-        rankingAdapter.setData(dummyData);
+
+    private void setAdapterData() {
+        showLoading(true);
+        rankingController.getRankingPlayers(new DataRetriever<List<PlayerModel>>() {
+            @Override
+            public void onDataRetrieved(List<PlayerModel> data) {
+                showLoading(false);
+                rankingAdapter.setData(data);
+            }
+
+            @Override
+            public void onDataFailed(String message, int code) {
+                showLoading(false);
+                showAlert(getString(R.string.default_alert));
+            }
+        });
     }
 }
 

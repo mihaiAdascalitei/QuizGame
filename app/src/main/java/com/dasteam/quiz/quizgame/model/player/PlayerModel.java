@@ -1,16 +1,10 @@
 package com.dasteam.quiz.quizgame.model.player;
 
-import android.net.Uri;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
 public class PlayerModel implements Serializable {
-
-    public static final int RANK_FIRST = 1;
-    public static final int RANK_SECOND = 2;
-    public static final int RANK_THIRD = 3;
 
     @SerializedName("id")
     private String id;
@@ -29,6 +23,12 @@ public class PlayerModel implements Serializable {
 
     @SerializedName("premium_date_activated")
     private String premiumDateActivated;
+
+    @SerializedName("points")
+    private String points;
+
+    @SerializedName("ranking")
+    private Ranking ranking;
 
 
     private String profileImage;
@@ -95,5 +95,21 @@ public class PlayerModel implements Serializable {
 
     public void setPremiumDateActivated(String premiumDateActivated) {
         this.premiumDateActivated = premiumDateActivated;
+    }
+
+    public String getPoints() {
+        return points;
+    }
+
+    public void setPoints(String points) {
+        this.points = points;
+    }
+
+    public Ranking getRanking() {
+        return ranking;
+    }
+
+    public void setRanking(Ranking ranking) {
+        this.ranking = ranking;
     }
 }

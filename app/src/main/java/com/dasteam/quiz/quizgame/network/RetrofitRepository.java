@@ -12,6 +12,7 @@ import com.dasteam.quiz.quizgame.network.call.LoginCall;
 import com.dasteam.quiz.quizgame.network.call.PlayerFeedbackCall;
 import com.dasteam.quiz.quizgame.network.call.PlayerPowerUpsCall;
 import com.dasteam.quiz.quizgame.network.call.PremiumCall;
+import com.dasteam.quiz.quizgame.network.call.RankingPlayersCall;
 import com.dasteam.quiz.quizgame.network.call.RegisterCall;
 import com.dasteam.quiz.quizgame.network.call.RemoveAccountCall;
 import com.dasteam.quiz.quizgame.network.call.RemoveFeedbackCall;
@@ -19,6 +20,7 @@ import com.dasteam.quiz.quizgame.network.call.ResetPasswordCall;
 import com.dasteam.quiz.quizgame.network.call.SellPowerUpsCall;
 import com.dasteam.quiz.quizgame.network.call.SendFeedbackCall;
 import com.dasteam.quiz.quizgame.network.call.UpdateCreditCall;
+import com.dasteam.quiz.quizgame.network.call.UpdatePointsCall;
 
 import java.net.HttpURLConnection;
 import java.util.Date;
@@ -125,6 +127,18 @@ public class RetrofitRepository {
 
     public void removeFeedback(String feedbackId, String playerId, DataRetriever<List<FeedbackModel>> retriever) {
         Call<List<FeedbackModel>> call = retrofit.create(RemoveFeedbackCall.class).removeFeedback(feedbackId, playerId);
+        requestExecute(call, retriever);
+    }
+
+
+    public void getRankingPlayers(DataRetriever<List<PlayerModel>> retriever) {
+        Call<List<PlayerModel>> call = retrofit.create(RankingPlayersCall.class).getRankingPlayers();
+        requestExecute(call, retriever);
+    }
+
+
+    public void updatePoints(String playerId, String points, DataRetriever<PlayerModel> retriever) {
+        Call<PlayerModel> call = retrofit.create(UpdatePointsCall.class).updatePoints(playerId, points);
         requestExecute(call, retriever);
     }
 

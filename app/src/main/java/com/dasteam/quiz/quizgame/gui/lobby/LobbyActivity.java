@@ -4,14 +4,12 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
 import com.dasteam.quiz.quizgame.gui.lobby.adapter.LobbyAdapter;
-import com.dasteam.quiz.quizgame.model.player.LobbyPlayerModel;
+import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,12 +54,11 @@ public class LobbyActivity extends BaseActivity {
     private void initAdapter() {
         rvLobby.setLayoutManager(new LinearLayoutManager(this));
         rvLobby.setAdapter(lobbyAdapter);
-        Random testRandom = new Random();
-        List<LobbyPlayerModel> dummyData = new ArrayList<>();
+        List<PlayerModel> dummyData = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
-            LobbyPlayerModel player = new LobbyPlayerModel();
+            PlayerModel player = new PlayerModel();
             player.setUsername("Player " + String.valueOf(i));
-            player.setRank(testRandom.nextInt(4));
+//            player.setRank(testRandom.nextInt(4));
             dummyData.add(player);
         }
 

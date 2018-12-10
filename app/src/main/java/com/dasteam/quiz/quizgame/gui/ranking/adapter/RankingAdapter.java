@@ -2,7 +2,6 @@ package com.dasteam.quiz.quizgame.gui.ranking.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,18 +11,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.dasteam.quiz.quizgame.R;
-import com.dasteam.quiz.quizgame.model.player.LobbyPlayerModel;
+import com.dasteam.quiz.quizgame.model.player.PlayerModel;
+import com.dasteam.quiz.quizgame.model.player.Ranking;
 
 import java.util.List;
 
-import static com.dasteam.quiz.quizgame.model.player.PlayerModel.RANK_FIRST;
-import static com.dasteam.quiz.quizgame.model.player.PlayerModel.RANK_SECOND;
-import static com.dasteam.quiz.quizgame.model.player.PlayerModel.RANK_THIRD;
 
 public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.RankingHolder> {
 
     private Context context;
-    private List<LobbyPlayerModel> players;
+    private List<PlayerModel> players;
 
     public RankingAdapter(Context context) {
         this.context = context;
@@ -51,7 +48,7 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.RankingH
         return players == null ? 0 : players.size();
     }
 
-    public void setData(List<LobbyPlayerModel> data) {
+    public void setData(List<PlayerModel> data) {
         players = data;
         notifyDataSetChanged();
     }
@@ -74,22 +71,22 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.RankingH
             ivTopThree = itemView.findViewById(R.id.iv_ranking_top_three);
         }
 
-        public void bind(LobbyPlayerModel player) {
+        public void bind(PlayerModel player) {
             tvRankNumber.setText(String.valueOf(getAdapterPosition() + 1));
             tvRankName.setText(player.getUsername());
-            setRankingData(player.getRank());
+            setRankingData(player.getRanking());
             setTopThree();
         }
 
-        private void setRankingData(int rank) {
+        private void setRankingData(Ranking rank) {
             switch (rank) {
-                case RANK_FIRST:
+                case TITAN:
                     Glide.with(context).load(R.drawable.ic_trophy_first).into(ivRankPicture);
                     break;
-                case RANK_SECOND:
+                case WARRIOR:
                     Glide.with(context).load(R.drawable.ic_trophy_second).into(ivRankPicture);
                     break;
-                case RANK_THIRD:
+                case HANDY:
                     Glide.with(context).load(R.drawable.ic_trophy_third).into(ivRankPicture);
                     break;
                 default:

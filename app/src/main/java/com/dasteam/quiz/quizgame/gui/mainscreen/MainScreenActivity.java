@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
@@ -54,7 +55,6 @@ public class MainScreenActivity extends BaseActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 
     @SuppressLint("MissingSuperCall")
@@ -75,11 +75,12 @@ public class MainScreenActivity extends BaseActivity {
         tvPowerUps = findViewById(R.id.tv_power_up);
     }
 
+
     @Override
     protected void attachController() {
         mainController = new MainScreenController();
-
     }
+
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -92,9 +93,11 @@ public class MainScreenActivity extends BaseActivity {
         tvPowerUps.setOnClickListener(v -> openPowerUps());
     }
 
+
     private void fetchCachedData() {
         player = mainController.getPlayer();
     }
+
 
     @Override
     public void onResume() {

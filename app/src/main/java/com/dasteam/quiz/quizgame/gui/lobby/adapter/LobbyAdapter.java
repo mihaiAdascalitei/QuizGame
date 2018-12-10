@@ -11,18 +11,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.dasteam.quiz.quizgame.R;
-import com.dasteam.quiz.quizgame.model.player.LobbyPlayerModel;
+import com.dasteam.quiz.quizgame.model.player.PlayerModel;
+import com.dasteam.quiz.quizgame.model.player.Ranking;
 
 import java.util.List;
 
-import static com.dasteam.quiz.quizgame.model.player.PlayerModel.RANK_FIRST;
-import static com.dasteam.quiz.quizgame.model.player.PlayerModel.RANK_SECOND;
-import static com.dasteam.quiz.quizgame.model.player.PlayerModel.RANK_THIRD;
 
 public class LobbyAdapter extends RecyclerView.Adapter<LobbyAdapter.LobbyHolder> {
 
     private final Context context;
-    private List<LobbyPlayerModel> data;
+    private List<PlayerModel> data;
 
     public LobbyAdapter(Context context) {
         this.context = context;
@@ -40,7 +38,7 @@ public class LobbyAdapter extends RecyclerView.Adapter<LobbyAdapter.LobbyHolder>
         lobbyHolder.bind(data.get(i));
     }
 
-    public void setData(List<LobbyPlayerModel> data) {
+    public void setData(List<PlayerModel> data) {
         this.data = data;
         notifyDataSetChanged();
     }
@@ -66,21 +64,21 @@ public class LobbyAdapter extends RecyclerView.Adapter<LobbyAdapter.LobbyHolder>
             ivRank = itemView.findViewById(R.id.iv_item_lobby_player_rank);
         }
 
-        private void bind(LobbyPlayerModel player) {
+        private void bind(PlayerModel player) {
             tvUsername.setText(player.getUsername());
-            setRankingData(player.getRank());
+            setRankingData(player.getRanking());
 
         }
 
-        private void setRankingData(int rank) {
+        private void setRankingData(Ranking rank) {
             switch (rank) {
-                case RANK_FIRST:
+                case TITAN:
                     Glide.with(context).load(R.drawable.ic_trophy_first).into(ivRank);
                     break;
-                case RANK_SECOND:
+                case WARRIOR:
                     Glide.with(context).load(R.drawable.ic_trophy_second).into(ivRank);
                     break;
-                case RANK_THIRD:
+                case HANDY:
                     Glide.with(context).load(R.drawable.ic_trophy_third).into(ivRank);
                     break;
                 default:
