@@ -2,7 +2,6 @@ package com.dasteam.quiz.quizgame.gui.splash;
 
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
-import com.dasteam.quiz.quizgame.network.RetrofitRepository;
 import com.dasteam.quiz.quizgame.provider.QuizProvider;
 
 import static com.dasteam.quiz.quizgame.provider.QuizProvider.provideRepository;

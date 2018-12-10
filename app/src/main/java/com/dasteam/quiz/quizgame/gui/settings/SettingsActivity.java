@@ -13,9 +13,11 @@ import android.widget.TextView;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
+import com.dasteam.quiz.quizgame.gui.about.AboutActivity;
 import com.dasteam.quiz.quizgame.gui.feedback.FeedbackActivity;
 import com.dasteam.quiz.quizgame.gui.login.LoginActivity;
 import com.dasteam.quiz.quizgame.gui.profile.background.LogoutTask;
+import com.dasteam.quiz.quizgame.gui.terms.TermsAndConditionsActivity;
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
 
@@ -56,6 +58,8 @@ public class SettingsActivity extends BaseActivity {
     protected void setListeners() {
         btnRemoveAccount.setOnClickListener(v -> showRemoveAccountAlert());
         tvFeedback.setOnClickListener(v -> openFeedbackScreen());
+        tvTerms.setOnClickListener(v -> openTermsScreen());
+        tvAbout.setOnClickListener(v -> openAboutScreen());
     }
 
     private void getExtraData() {
@@ -105,5 +109,13 @@ public class SettingsActivity extends BaseActivity {
 
     private void openFeedbackScreen() {
         startActivity(new Intent(this, FeedbackActivity.class).putExtra(FeedbackActivity.FEEDBACK_PLAYER, player));
+    }
+
+    private void openTermsScreen() {
+        startActivity(new Intent(this, TermsAndConditionsActivity.class));
+    }
+
+    private void openAboutScreen() {
+        startActivity(new Intent(this, AboutActivity.class).putExtra(AboutActivity.ABOUT_PLAYER, player));
     }
 }

@@ -83,6 +83,20 @@
     <string name="feedback_history">History</string>
     <string name="no_history_feedback">You didn\'t send any feedback yet :)</string>
     <string name="feedback_reviewed">Feedback was reviewed :</string>
+    <string name="terms_first">By reading this you are explained how to respect our terms and conditions. QuizGame does represent a personal project that implies the
+    self learning and auto knowledge.</string>
+    <string name="terms_second">By using this application you help us in testing of new technologies included in this application. </string>
+    <string name="accepted">Accepted!</string>
+    <string name="about_first">QuizGame represent a cultural knowledge game. The main goal of this game is learning. By being challenged with questions in order to take the lead of the ranking system you will find yourself
+    in the position of trying to reach the top rank.</string>
+    <string name="about_second">in this game there are some interesting features implemented. As you\'ve seen above, there was something discussed about rankings.</string>
+    <string name="go_rankings">Check rankings</string>
+    <string name="about_third">Also, this application allows you to send feedback or report an issue whenever a problem occurs.</string>
+    <string name="go_feedback">Send feedback</string>
+    <string name="about_fourth">More of it, you can also edit your profile whenever you need and check your profile details.</string>
+    <string name="go_profile">Check profile</string>
+    <string name="about_fifth">The most important one comes now, you can buy and use power ups while playing.</string>
+    <string name="go_powerups">Check power ups</string>
 
     <string-array name="feedback_categories">
         <item>Account issues</item>
