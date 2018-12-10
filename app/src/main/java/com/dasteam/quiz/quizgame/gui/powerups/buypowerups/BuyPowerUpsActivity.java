@@ -35,7 +35,7 @@ public class BuyPowerUpsActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_close);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override

@@ -1,23 +1,16 @@
 package com.dasteam.quiz.quizgame.gui.login;
 
 
-import com.dasteam.quiz.quizgame.gui.login.status.CachedPlayerCallback;
 import com.dasteam.quiz.quizgame.gui.login.status.LoginResponseStatus;
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
-import com.dasteam.quiz.quizgame.network.RetrofitRepository;
 import com.dasteam.quiz.quizgame.provider.QuizProvider;
 
+import static com.dasteam.quiz.quizgame.provider.QuizProvider.provideRepository;
 import static com.dasteam.quiz.quizgame.utils.QuizUtils.isEmpty;
 
 
 public class LoginController {
-
-    private RetrofitRepository repository;
-
-    public LoginController() {
-        repository = new RetrofitRepository();
-    }
 
     public void validateData(String username, String password, ControllerCallback callback) {
         if (isEmpty(username) || isEmpty(password)) {
@@ -31,17 +24,10 @@ public class LoginController {
     }
 
     public void login(String username, String password, DataRetriever<PlayerModel> retriever) {
-        repository.login(username, password, retriever);
+        provideRepository().login(username, password, retriever);
     }
 
     public void cachePlayer(PlayerModel player) {
         QuizProvider.provideIoManager().savePlayer(player);
     }
-
-    public void checkPlayerAlreadyLogged(CachedPlayerCallback callback) {
-        PlayerModel player = QuizProvider.provideIoManager().getPlayer();
-        callback.onPlayerAlreadyLogged(player);
-    }
-
-
 }

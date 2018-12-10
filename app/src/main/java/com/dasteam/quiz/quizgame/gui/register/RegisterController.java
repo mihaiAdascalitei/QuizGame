@@ -6,15 +6,12 @@ import com.dasteam.quiz.quizgame.gui.register.status.RegisterResponseStatus;
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
 import com.dasteam.quiz.quizgame.network.RetrofitRepository;
+import com.dasteam.quiz.quizgame.provider.QuizProvider;
 
+import static com.dasteam.quiz.quizgame.provider.QuizProvider.provideRepository;
 import static com.dasteam.quiz.quizgame.utils.QuizUtils.isEmpty;
 
 public class RegisterController {
-    private RetrofitRepository repository;
-
-    public RegisterController() {
-        repository = new RetrofitRepository();
-    }
 
     public void validateData(String username, String password, String confirm, boolean acceptedTerms, RegisterCallback callback) {
         if (isEmpty(username) || isEmpty(password) || isEmpty(confirm)) {
@@ -31,7 +28,7 @@ public class RegisterController {
     }
 
     public void register(String username, String password, DataRetriever<PlayerModel> retriever) {
-        repository.register(username, password, retriever);
+        provideRepository().register(username, password, retriever);
     }
 
 

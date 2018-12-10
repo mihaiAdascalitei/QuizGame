@@ -10,16 +10,11 @@ import com.dasteam.quiz.quizgame.provider.QuizProvider;
 
 import java.util.Date;
 
+import static com.dasteam.quiz.quizgame.provider.QuizProvider.provideRepository;
 import static com.dasteam.quiz.quizgame.utils.QuizUtils.date;
 import static com.dasteam.quiz.quizgame.utils.QuizUtils.isEmpty;
 
 public class PremiumAccountController {
-
-    private RetrofitRepository repository;
-
-    public PremiumAccountController() {
-        repository = new RetrofitRepository();
-    }
 
     public void validateData(String cardNumber, String ccv, String expDate, PremiumCallback callback) {
         if (cardNumber.trim().length() != 16) {
@@ -34,7 +29,7 @@ public class PremiumAccountController {
     }
 
     public void makePremium(String id, DataRetriever<PlayerModel> retriever) {
-        repository.makePremium(1, id, retriever);
+        provideRepository().makePremium(1, id, retriever);
     }
 
     public void cachePlayer(PlayerModel player) {

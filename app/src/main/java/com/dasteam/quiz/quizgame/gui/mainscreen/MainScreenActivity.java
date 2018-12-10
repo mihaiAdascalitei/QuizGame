@@ -16,6 +16,7 @@ import com.dasteam.quiz.quizgame.gui.powerups.PowerUpsActivity;
 import com.dasteam.quiz.quizgame.gui.premium.PremiumAccountActivity;
 import com.dasteam.quiz.quizgame.gui.profile.ProfileActivity;
 import com.dasteam.quiz.quizgame.gui.ranking.RankingActivity;
+import com.dasteam.quiz.quizgame.gui.settings.SettingsActivity;
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 
 public class MainScreenActivity extends BaseActivity {
@@ -48,6 +49,7 @@ public class MainScreenActivity extends BaseActivity {
                 openPremiumAccount();
                 return true;
             case R.id.menu_item_settings:
+                openSettings();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -100,12 +102,6 @@ public class MainScreenActivity extends BaseActivity {
         fetchCachedData();
     }
 
-    private void fetchPlayerIfUpdated() {
-        PlayerModel fetchedPlayer = mainController.getPlayer();
-        if (fetchedPlayer != null) {
-            player = fetchedPlayer;
-        }
-    }
 
     private void configureToolbar() {
         String title = getString(R.string.main_screen) + " " + player.getUsername();
@@ -131,6 +127,10 @@ public class MainScreenActivity extends BaseActivity {
 
     private void openPowerUps() {
         startActivity(new Intent(this, PowerUpsActivity.class).putExtra(PowerUpsActivity.POWER_UPS_PLAYER, player));
+    }
+
+    private void openSettings() {
+        startActivity(new Intent(this, SettingsActivity.class).putExtra(SettingsActivity.SETTINGS_PLAYER, player));
     }
 
 }

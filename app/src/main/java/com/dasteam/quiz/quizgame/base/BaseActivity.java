@@ -7,6 +7,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.dasteam.quiz.quizgame.R;
@@ -16,6 +18,25 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private static final long DIALOG_TIME = 1500;
     private LoadingDialog loading;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_keyboard_backspace);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
 
     protected void onCreate(@Nullable Bundle savedInstanceState, int layout) {
         super.onCreate(savedInstanceState);

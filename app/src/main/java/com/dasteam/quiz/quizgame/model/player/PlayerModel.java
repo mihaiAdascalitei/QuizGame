@@ -33,6 +33,14 @@ public class PlayerModel implements Serializable {
 
     private String profileImage;
 
+    public PlayerModel() {
+    }
+
+    public PlayerModel(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public String getId() {
         return id;
     }

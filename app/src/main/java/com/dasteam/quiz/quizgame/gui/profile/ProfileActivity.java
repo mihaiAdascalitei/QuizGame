@@ -19,6 +19,7 @@ import com.dasteam.quiz.quizgame.gui.powerups.PowerUpsActivity;
 import com.dasteam.quiz.quizgame.gui.profile.background.LogoutTask;
 import com.dasteam.quiz.quizgame.gui.resetpassword.ResetPasswordActivity;
 import com.dasteam.quiz.quizgame.gui.resetpassword.status.ResetPasswordStatus;
+import com.dasteam.quiz.quizgame.gui.settings.SettingsActivity;
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 
 public class ProfileActivity extends BaseActivity {
@@ -66,6 +67,7 @@ public class ProfileActivity extends BaseActivity {
         ivProfileIcon.setOnClickListener(v -> loadImage());
         tvPowerUps.setOnClickListener(v -> openPowerUps());
         tvResetPassword.setOnClickListener(v -> openResetPassword());
+        tvSettings.setOnClickListener(v -> openSettings());
     }
 
     @Override
@@ -74,24 +76,6 @@ public class ProfileActivity extends BaseActivity {
         getExtraData();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_keyboard_backspace);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-    }
 
     private void getExtraData() {
         player = profileController.getPlayer();
@@ -165,4 +149,10 @@ public class ProfileActivity extends BaseActivity {
     private void openResetPassword() {
         startActivity(new Intent(this, ResetPasswordActivity.class).putExtra(ResetPasswordActivity.RESET_PASSWORD_PLAYER, player));
     }
+
+
+    private void openSettings() {
+        startActivity(new Intent(this, SettingsActivity.class).putExtra(SettingsActivity.SETTINGS_PLAYER, player));
+    }
+
 }

@@ -38,7 +38,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".gui.resetpassword.ResetPasswordActivity"></activity>
+        <activity android:name=".gui.resetpassword.ResetPasswordActivity" />
+        <activity android:name=".gui.settings.SettingsActivity" />
+        <activity android:name=".gui.feedback.FeedbackActivity" />
+        <activity android:name=".gui.feedback.history.FeedbackHistoryActivity" />
+        <activity android:name=".gui.terms.TermsAndConditionsActivity" />
+        <activity android:name=".gui.about.AboutActivity"></activity>
     </application>
 
 </manifest>
