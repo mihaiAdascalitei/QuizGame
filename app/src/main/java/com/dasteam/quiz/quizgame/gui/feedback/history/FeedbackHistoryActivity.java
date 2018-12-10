@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dasteam.quiz.quizgame.R;
@@ -30,6 +31,7 @@ public class FeedbackHistoryActivity extends BaseActivity {
     private FeedbackHistoryAdapter adapter;
     private TextView tvNoFeedback;
     private ImageView ivNoFeedback;
+    private LinearLayout llError;
 
 
     @SuppressLint("MissingSuperCall")
@@ -47,6 +49,7 @@ public class FeedbackHistoryActivity extends BaseActivity {
         rvHistory = findViewById(R.id.rv_feedback_history);
         tvNoFeedback = findViewById(R.id.tv_feedback_history_no_feedback);
         ivNoFeedback = findViewById(R.id.iv_feedback_history_no_feedback);
+        llError = findViewById(R.id.ll_feedback_error);
     }
 
     @Override
@@ -56,7 +59,7 @@ public class FeedbackHistoryActivity extends BaseActivity {
 
     @Override
     protected void setListeners() {
-
+        llError.setOnClickListener(v -> setAdapterData());
     }
 
     private void getExtraData() {
@@ -76,6 +79,7 @@ public class FeedbackHistoryActivity extends BaseActivity {
             @Override
             public void onDataRetrieved(List<FeedbackModel> data) {
                 showLoading(false);
+                showConnectionError(false);
                 adapter.setData(data);
                 setNoFeedbackVisibility(data.size() == 0);
 
@@ -84,6 +88,8 @@ public class FeedbackHistoryActivity extends BaseActivity {
             @Override
             public void onDataFailed(String message, int code) {
                 showLoading(false);
+                showConnectionError(true);
+                setNoFeedbackVisibility(false);
                 showAlert(getString(R.string.default_alert));
             }
         });
@@ -110,5 +116,9 @@ public class FeedbackHistoryActivity extends BaseActivity {
     private void setNoFeedbackVisibility(boolean visible) {
         tvNoFeedback.setVisibility(visible ? View.VISIBLE : View.GONE);
         ivNoFeedback.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
+    private void showConnectionError(boolean visible) {
+        llError.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 }

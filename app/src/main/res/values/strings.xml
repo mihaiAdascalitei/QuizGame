@@ -97,6 +97,7 @@
     <string name="go_profile">Check profile</string>
     <string name="about_fifth">The most important one comes now, you can buy and use power ups while playing.</string>
     <string name="go_powerups">Check power ups</string>
+    <string name="error_conn_message">Uhh...Try again</string>
 
     <string-array name="feedback_categories">
         <item>Account issues</item>
