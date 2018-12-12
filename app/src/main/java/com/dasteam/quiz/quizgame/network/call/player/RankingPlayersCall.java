@@ -1,4 +1,4 @@
-package com.dasteam.quiz.quizgame.network.call;
+package com.dasteam.quiz.quizgame.network.call.player;
 
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 

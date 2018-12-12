@@ -5,22 +5,11 @@ import android.support.annotation.NonNull;
 import com.dasteam.quiz.quizgame.model.feedback.FeedbackModel;
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.model.powerups.PowerUpsModel;
-import com.dasteam.quiz.quizgame.network.call.BuyPowerUpsCall;
-import com.dasteam.quiz.quizgame.network.call.CheckPlayerPowerCall;
-import com.dasteam.quiz.quizgame.network.call.GetPowerUpsCall;
-import com.dasteam.quiz.quizgame.network.call.LoginCall;
-import com.dasteam.quiz.quizgame.network.call.PlayerFeedbackCall;
-import com.dasteam.quiz.quizgame.network.call.PlayerPowerUpsCall;
-import com.dasteam.quiz.quizgame.network.call.PremiumCall;
-import com.dasteam.quiz.quizgame.network.call.RankingPlayersCall;
-import com.dasteam.quiz.quizgame.network.call.RegisterCall;
-import com.dasteam.quiz.quizgame.network.call.RemoveAccountCall;
-import com.dasteam.quiz.quizgame.network.call.RemoveFeedbackCall;
-import com.dasteam.quiz.quizgame.network.call.ResetPasswordCall;
-import com.dasteam.quiz.quizgame.network.call.SellPowerUpsCall;
-import com.dasteam.quiz.quizgame.network.call.SendFeedbackCall;
-import com.dasteam.quiz.quizgame.network.call.UpdateCreditCall;
-import com.dasteam.quiz.quizgame.network.call.UpdatePointsCall;
+import com.dasteam.quiz.quizgame.network.call.powerups.PowerUpsCall;
+import com.dasteam.quiz.quizgame.network.call.auth.AuthAccountCall;
+import com.dasteam.quiz.quizgame.network.call.feedback.FeedbackCall;
+import com.dasteam.quiz.quizgame.network.call.player.UpdatePlayerEntriesCall;
+import com.dasteam.quiz.quizgame.network.call.player.RankingPlayersCall;
 
 import java.net.HttpURLConnection;
 import java.util.Date;
@@ -51,82 +40,82 @@ public class RetrofitRepository {
 
     public void login(String username, String password, DataRetriever<PlayerModel> retriever) {
         PlayerModel player = new PlayerModel(username, password);
-        Call<PlayerModel> call = retrofit.create(LoginCall.class).login(player);
+        Call<PlayerModel> call = retrofit.create(AuthAccountCall.class).login(player);
         requestExecute(call, retriever);
 
     }
 
     public void register(String username, String password, DataRetriever<PlayerModel> retriever) {
         PlayerModel player = new PlayerModel(username, password);
-        Call<PlayerModel> call = retrofit.create(RegisterCall.class).register(player);
+        Call<PlayerModel> call = retrofit.create(AuthAccountCall.class).register(player);
         requestExecute(call, retriever);
 
     }
 
     public void makePremium(int premium, String id, DataRetriever<PlayerModel> retriever) {
-        Call<PlayerModel> call = retrofit.create(PremiumCall.class).makePremium(premium, id, dateString(new Date()));
+        Call<PlayerModel> call = retrofit.create(UpdatePlayerEntriesCall.class).makePremium(premium, id, dateString(new Date()));
         requestExecute(call, retriever);
     }
 
     public void getPowerUps(DataRetriever<List<PowerUpsModel>> retriever) {
-        Call<List<PowerUpsModel>> call = retrofit.create(GetPowerUpsCall.class).getPowerUps();
+        Call<List<PowerUpsModel>> call = retrofit.create(PowerUpsCall.class).getAllPowerUps();
         requestExecute(call, retriever);
     }
 
     public void getPlayerPowerUps(String id, DataRetriever<List<PowerUpsModel>> retriever) {
-        Call<List<PowerUpsModel>> call = retrofit.create(PlayerPowerUpsCall.class).getPlayerPowerUps(id);
+        Call<List<PowerUpsModel>> call = retrofit.create(PowerUpsCall.class).getPlayerPowerUps(id);
         requestExecute(call, retriever);
     }
 
     public void sellPowerUps(String playerId, String powerId, String powerCount, DataRetriever<List<PowerUpsModel>> retriever) {
         PowerUpsModel power = new PowerUpsModel(playerId, powerId, powerCount);
-        Call<List<PowerUpsModel>> call = retrofit.create(SellPowerUpsCall.class).sellPowerUps(power);
+        Call<List<PowerUpsModel>> call = retrofit.create(PowerUpsCall.class).sellPowerUps(power);
         requestExecute(call, retriever);
 
     }
 
     public void updateCredit(String playerId, String credit, DataRetriever<PlayerModel> retriever) {
-        Call<PlayerModel> call = retrofit.create(UpdateCreditCall.class).updatePlayerCredit(playerId, credit);
+        Call<PlayerModel> call = retrofit.create(UpdatePlayerEntriesCall.class).updatePlayerCredit(playerId, credit);
         requestExecute(call, retriever);
     }
 
     public void buyPowerUps(String playerId, String powerId, String powerCount, DataRetriever<List<PowerUpsModel>> retriever) {
         PowerUpsModel power = new PowerUpsModel(playerId, powerId, powerCount);
-        Call<List<PowerUpsModel>> call = retrofit.create(BuyPowerUpsCall.class).buyPowerUps(power);
+        Call<List<PowerUpsModel>> call = retrofit.create(PowerUpsCall.class).buyPowerUps(power);
         requestExecute(call, retriever);
     }
 
     public void checkPlayerPowerUp(String playerId, String powerId, DataRetriever<List<PowerUpsModel>> retriever) {
-        Call<List<PowerUpsModel>> call = retrofit.create(CheckPlayerPowerCall.class).checkPlayerPower(playerId, powerId);
+        Call<List<PowerUpsModel>> call = retrofit.create(PowerUpsCall.class).checkPlayerPowerExists(playerId, powerId);
         requestExecute(call, retriever);
     }
 
 
     public void resetPassword(String id, String password, DataRetriever<PlayerModel> retriever) {
-        Call<PlayerModel> call = retrofit.create(ResetPasswordCall.class).resetPassword(id, password);
+        Call<PlayerModel> call = retrofit.create(UpdatePlayerEntriesCall.class).resetPassword(id, password);
         requestExecute(call, retriever);
     }
 
     public void removeAccount(String id, DataRetriever<String> retriever) {
-        Call<String> call = retrofit.create(RemoveAccountCall.class).removeAccount(id);
+        Call<String> call = retrofit.create(AuthAccountCall.class).removeAccount(id);
         requestExecute(call, retriever);
     }
 
 
     public void sendFeedback(String playerId, String category, String description, DataRetriever<String> retriever) {
         FeedbackModel feedback = new FeedbackModel(playerId, category, description, dateString(new Date()));
-        Call<String> call = retrofit.create(SendFeedbackCall.class).sendFeedback(feedback);
+        Call<String> call = retrofit.create(FeedbackCall.class).sendFeedback(feedback);
         requestExecute(call, retriever);
     }
 
     public void getPlayerFeedback(String id, DataRetriever<List<FeedbackModel>> retriever) {
-        Call<List<FeedbackModel>> call = retrofit.create(PlayerFeedbackCall.class).getPlayerFeedback(id);
+        Call<List<FeedbackModel>> call = retrofit.create(FeedbackCall.class).getPlayerFeedbackList(id);
         requestExecute(call, retriever);
     }
 
 
     public void removeFeedback(String feedbackId, String playerId, DataRetriever<List<FeedbackModel>> retriever) {
-        Call<List<FeedbackModel>> call = retrofit.create(RemoveFeedbackCall.class).removeFeedback(feedbackId, playerId);
+        Call<List<FeedbackModel>> call = retrofit.create(FeedbackCall.class).removeFeedback(feedbackId, playerId);
         requestExecute(call, retriever);
     }
 
@@ -138,7 +127,7 @@ public class RetrofitRepository {
 
 
     public void updatePoints(String playerId, String points, DataRetriever<PlayerModel> retriever) {
-        Call<PlayerModel> call = retrofit.create(UpdatePointsCall.class).updatePoints(playerId, points);
+        Call<PlayerModel> call = retrofit.create(UpdatePlayerEntriesCall.class).updatePoints(playerId, points);
         requestExecute(call, retriever);
     }
 
