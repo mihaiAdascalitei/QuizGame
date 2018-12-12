@@ -58,7 +58,6 @@ public class LobbyActivity extends BaseActivity {
         for (int i = 0; i < 15; i++) {
             PlayerModel player = new PlayerModel();
             player.setUsername("Player " + String.valueOf(i));
-//            player.setRank(testRandom.nextInt(4));
             dummyData.add(player);
         }
 

@@ -31,7 +31,6 @@ public class FeedbackHistoryActivity extends BaseActivity {
     private FeedbackHistoryAdapter adapter;
     private TextView tvNoFeedback;
     private ImageView ivNoFeedback;
-    private LinearLayout llError;
 
 
     @SuppressLint("MissingSuperCall")
@@ -42,6 +41,7 @@ public class FeedbackHistoryActivity extends BaseActivity {
         getExtraData();
         initAdapter();
         setAdapterData();
+        setConnectionErrorIfAvailable();
     }
 
     @Override
@@ -49,7 +49,6 @@ public class FeedbackHistoryActivity extends BaseActivity {
         rvHistory = findViewById(R.id.rv_feedback_history);
         tvNoFeedback = findViewById(R.id.tv_feedback_history_no_feedback);
         ivNoFeedback = findViewById(R.id.iv_feedback_history_no_feedback);
-        llError = findViewById(R.id.ll_feedback_error);
     }
 
     @Override
@@ -59,7 +58,12 @@ public class FeedbackHistoryActivity extends BaseActivity {
 
     @Override
     protected void setListeners() {
-        llError.setOnClickListener(v -> setAdapterData());
+
+    }
+
+    @Override
+    protected void connectionErrorListener() {
+        setAdapterData();
     }
 
     private void getExtraData() {
@@ -118,7 +122,4 @@ public class FeedbackHistoryActivity extends BaseActivity {
         ivNoFeedback.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
-    private void showConnectionError(boolean visible) {
-        llError.setVisibility(visible ? View.VISIBLE : View.GONE);
-    }
 }

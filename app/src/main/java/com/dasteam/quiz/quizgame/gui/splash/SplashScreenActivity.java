@@ -5,14 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.gui.login.LoginActivity;
 import com.dasteam.quiz.quizgame.gui.mainscreen.MainScreenActivity;
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
-import com.dasteam.quiz.quizgame.provider.QuizProvider;
-
-import java.security.Provider;
 
 import static com.dasteam.quiz.quizgame.gui.premium.PremiumAccountActivity.MAX_PREMIUM_DAY_LIMIT;
 import static com.dasteam.quiz.quizgame.utils.QuizUtils.getDaysDifference;

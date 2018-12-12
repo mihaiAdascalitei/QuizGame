@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -38,7 +36,6 @@ public class PowerUpsActivity extends BaseActivity {
     private TextView tvToolbarCredit;
     private TextView tvNoPowerUps;
     private ImageView ivNoPowerUps;
-    private TextView tvTryAgain;
 
 
     @Override
@@ -54,7 +51,8 @@ public class PowerUpsActivity extends BaseActivity {
         init();
         configureToolbar();
         initAdapter();
-        initAdapterData();
+        setAdapterData();
+        setConnectionErrorIfAvailable();
     }
 
     @Override
@@ -64,7 +62,6 @@ public class PowerUpsActivity extends BaseActivity {
         tvToolbarCredit = findViewById(R.id.tv_power_ups_toolbar_credit);
         tvNoPowerUps = findViewById(R.id.tv_no_power_ups);
         ivNoPowerUps = findViewById(R.id.iv_power_ups_ninja);
-        tvTryAgain = findViewById(R.id.tv_power_ups_try_again);
     }
 
     @Override
@@ -75,7 +72,11 @@ public class PowerUpsActivity extends BaseActivity {
     @Override
     protected void setListeners() {
         btnBuy.setOnClickListener(v -> buyPowerUps());
-        tvTryAgain.setOnClickListener(v -> initAdapterData());
+    }
+
+    @Override
+    protected void connectionErrorListener() {
+        setAdapterData();
     }
 
     @Override
@@ -83,7 +84,7 @@ public class PowerUpsActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == BUY_POWER_UPS_CODE) {
             if (resultCode == RESULT_OK) {
-                initAdapterData();
+                setAdapterData();
             }
         }
     }
@@ -100,21 +101,21 @@ public class PowerUpsActivity extends BaseActivity {
 
     }
 
-    private void initAdapterData() {
+    private void setAdapterData() {
         showLoading(true);
         powerUpsController.getPlayerPowerUps(player.getId(), new DataRetriever<List<PowerUpsModel>>() {
             @Override
             public void onDataRetrieved(List<PowerUpsModel> data) {
                 showLoading(false);
                 adapter.setData(data);
-                setTryAgainVisibility(false);
+                showConnectionError(false);
                 setNoPowerUpsVisibility(adapter.getItemCount() == 0);
             }
 
             @Override
             public void onDataFailed(String message, int code) {
                 showLoading(false);
-                setTryAgainVisibility(true);
+                showConnectionError(true);
                 showAlert(getString(R.string.default_alert));
             }
         });
@@ -166,9 +167,6 @@ public class PowerUpsActivity extends BaseActivity {
         ivNoPowerUps.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
-    private void setTryAgainVisibility(boolean visibile) {
-        tvTryAgain.setVisibility(visibile ? View.VISIBLE : View.GONE);
-    }
 
     private void updateCredit(String playerId, String credit) {
         if (credit != null) {

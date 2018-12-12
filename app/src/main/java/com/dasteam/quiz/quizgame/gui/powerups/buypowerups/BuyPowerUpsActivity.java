@@ -27,7 +27,6 @@ public class BuyPowerUpsActivity extends BaseActivity {
     private static final String MAX_POWER_COUNT = "3";
 
     private RecyclerView rvBuyPowerUps;
-    private TextView tvTryAgain;
     private BuyPowerUpsAdapter adapter;
     private BuyPowerUpsController buyPowerUpsController;
     private PlayerModel player;
@@ -61,12 +60,12 @@ public class BuyPowerUpsActivity extends BaseActivity {
         init();
         initAdapter();
         setAdapterData();
+        setConnectionErrorIfAvailable();
     }
 
     @Override
     protected void attachViews() {
         rvBuyPowerUps = findViewById(R.id.rv_buy_power_ups);
-        tvTryAgain = findViewById(R.id.tv_buy_power_ups_try_again);
     }
 
     @Override
@@ -76,7 +75,12 @@ public class BuyPowerUpsActivity extends BaseActivity {
 
     @Override
     protected void setListeners() {
-        tvTryAgain.setOnClickListener(v -> setAdapterData());
+
+    }
+
+    @Override
+    protected void connectionErrorListener() {
+        setAdapterData();
     }
 
     private void init() {
@@ -95,7 +99,7 @@ public class BuyPowerUpsActivity extends BaseActivity {
             @Override
             public void onDataRetrieved(List<PowerUpsModel> data) {
                 showLoading(false);
-                setTryAgainVisibility(false);
+                showConnectionError(false);
                 adapter.setData(data);
             }
 
@@ -103,13 +107,9 @@ public class BuyPowerUpsActivity extends BaseActivity {
             public void onDataFailed(String message, int code) {
                 showLoading(false);
                 showAlert(getString(R.string.default_alert));
-                setTryAgainVisibility(true);
+                showConnectionError(true);
             }
         });
-    }
-
-    private void setTryAgainVisibility(boolean visible) {
-        tvTryAgain.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     private void getExtraData() {

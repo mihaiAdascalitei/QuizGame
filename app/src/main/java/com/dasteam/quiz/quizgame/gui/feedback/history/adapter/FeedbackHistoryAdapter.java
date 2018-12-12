@@ -44,6 +44,12 @@ public class FeedbackHistoryAdapter extends RecyclerView.Adapter<FeedbackHistory
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+
+    @Override
     public int getItemCount() {
         return feedbacks == null ? 0 : feedbacks.size();
     }
@@ -96,5 +102,6 @@ public class FeedbackHistoryAdapter extends RecyclerView.Adapter<FeedbackHistory
             feedback.setSelected(!isSelected);
             notifyDataSetChanged();
         }
+
     }
 }

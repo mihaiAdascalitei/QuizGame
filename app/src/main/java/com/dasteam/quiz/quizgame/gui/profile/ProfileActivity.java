@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,7 +16,6 @@ import com.dasteam.quiz.quizgame.gui.login.LoginActivity;
 import com.dasteam.quiz.quizgame.gui.powerups.PowerUpsActivity;
 import com.dasteam.quiz.quizgame.gui.profile.background.LogoutTask;
 import com.dasteam.quiz.quizgame.gui.resetpassword.ResetPasswordActivity;
-import com.dasteam.quiz.quizgame.gui.resetpassword.status.ResetPasswordStatus;
 import com.dasteam.quiz.quizgame.gui.settings.SettingsActivity;
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 

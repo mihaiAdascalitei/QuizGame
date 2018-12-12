@@ -66,7 +66,7 @@ public class LobbyAdapter extends RecyclerView.Adapter<LobbyAdapter.LobbyHolder>
 
         private void bind(PlayerModel player) {
             tvUsername.setText(player.getUsername());
-            setRankingData(player.getRanking());
+//            setRankingData(player.getRanking());
 
         }
 

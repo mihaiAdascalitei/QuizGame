@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.custom.LoadingDialog;
@@ -18,6 +19,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private static final long DIALOG_TIME = 1500;
     private LoadingDialog loading;
+    private LinearLayout llConnectionError;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -52,6 +54,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void attachController();
 
     protected abstract void setListeners();
+
+    protected void connectionErrorListener() {
+        //nothing in parent
+    }
 
     protected void configureToolbar(String title) {
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -90,6 +96,16 @@ public abstract class BaseActivity extends AppCompatActivity {
             loading.cancel();
         }
     }
+
+    protected void setConnectionErrorIfAvailable() {
+        llConnectionError = findViewById(R.id.ll_connection_error);
+        llConnectionError.setOnClickListener(v -> connectionErrorListener());
+    }
+
+    protected void showConnectionError(boolean visible) {
+        llConnectionError.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
 
     protected void showSnackBar(View view, String message) {
         Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();

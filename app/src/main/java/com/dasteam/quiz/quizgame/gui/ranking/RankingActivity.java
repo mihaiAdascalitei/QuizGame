@@ -20,7 +20,6 @@ public class RankingActivity extends BaseActivity {
     private RecyclerView rvRanking;
     private RankingAdapter rankingAdapter;
     private RankingController rankingController;
-    private LinearLayout llError;
 
     @SuppressLint("MissingSuperCall")
     @Override
@@ -30,12 +29,12 @@ public class RankingActivity extends BaseActivity {
         initAdapter();
         configureToolbar(getString(R.string.ranking));
         setAdapterData();
+        setConnectionErrorIfAvailable();
     }
 
     @Override
     protected void attachViews() {
         rvRanking = findViewById(R.id.rv_ranking);
-        llError = findViewById(R.id.ll_ranking_error);
 
     }
 
@@ -46,7 +45,12 @@ public class RankingActivity extends BaseActivity {
 
     @Override
     protected void setListeners() {
-        llError.setOnClickListener(v -> setAdapterData());
+
+    }
+
+    @Override
+    protected void connectionErrorListener() {
+        setAdapterData();
     }
 
     private void init() {
@@ -65,21 +69,19 @@ public class RankingActivity extends BaseActivity {
             @Override
             public void onDataRetrieved(List<PlayerModel> data) {
                 showLoading(false);
-                setConnectionError(false);
+                showConnectionError(false);
                 rankingAdapter.setData(data);
             }
 
             @Override
             public void onDataFailed(String message, int code) {
                 showLoading(false);
-                setConnectionError(true);
+                showConnectionError(true);
                 showAlert(getString(R.string.default_alert));
             }
         });
     }
 
-    private void setConnectionError(boolean visible) {
-        llError.setVisibility(visible ? View.VISIBLE : View.GONE);
-    }
+
 }
 

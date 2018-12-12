@@ -46,8 +46,7 @@ public class QuizUtils {
     public static int getDaysDifference(String premiumDate) {
         Date premium = date(premiumDate);
         Date currentDate = new Date();
-        return Math.abs((int)
-                (premium.getTime() / MILLISECS_PER_DAY)
-                - (int) (currentDate.getTime() / MILLISECS_PER_DAY));
+        return Math.abs((int) (premium.getTime() / MILLISECS_PER_DAY) -
+                        (int) (currentDate.getTime() / MILLISECS_PER_DAY));
     }
 }
