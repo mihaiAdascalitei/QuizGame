@@ -36,10 +36,6 @@ public class PowerUpsAdapter extends RecyclerView.Adapter<PowerUpsAdapter.PowerU
         this.callback = callback;
     }
 
-    public void removeItem(PowerUpsModel power, int position) {
-        powers.remove(power);
-        notifyItemRemoved(position);
-    }
 
     @NonNull
     @Override

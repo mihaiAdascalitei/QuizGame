@@ -27,7 +27,7 @@ public class RetrofitRepository {
     private static RetrofitRepository INSTANCE;
     private Retrofit retrofit;
 
-    public RetrofitRepository() {
+    private RetrofitRepository() {
         retrofit = RetrofitService.getInstance().getRetrofit();
     }
 

@@ -22,6 +22,8 @@ public class IOManager {
         return INSTANCE;
     }
 
+    private IOManager(){}
+
     public void savePlayer(Object object) {
         try {
             FileOutputStream fos = QuizProvider.provideAppContext().openFileOutput(INTERNAL_PLAYER, Context.MODE_PRIVATE);

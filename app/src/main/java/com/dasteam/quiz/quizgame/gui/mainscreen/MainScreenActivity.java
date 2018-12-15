@@ -16,6 +16,7 @@ import com.dasteam.quiz.quizgame.gui.mainscreen.animate.AnimatorTouchListener;
 import com.dasteam.quiz.quizgame.gui.powerups.PowerUpsActivity;
 import com.dasteam.quiz.quizgame.gui.premium.PremiumAccountActivity;
 import com.dasteam.quiz.quizgame.gui.profile.ProfileActivity;
+import com.dasteam.quiz.quizgame.gui.quiz.QuizActivity;
 import com.dasteam.quiz.quizgame.gui.ranking.RankingActivity;
 import com.dasteam.quiz.quizgame.gui.settings.SettingsActivity;
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
@@ -85,8 +86,7 @@ public class MainScreenActivity extends BaseActivity {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void setListeners() {
-        rlSingleplayer.setOnTouchListener(new AnimatorTouchListener(() -> {
-        }));
+        rlSingleplayer.setOnTouchListener(new AnimatorTouchListener(this::openQuizScreen));
         rlMultiplayer.setOnTouchListener(new AnimatorTouchListener(this::openLobbyScreen));
         tvRanking.setOnClickListener(v -> openRankings());
         tvAds.setOnClickListener(v -> openPremiumAccount());
@@ -134,6 +134,10 @@ public class MainScreenActivity extends BaseActivity {
 
     private void openSettings() {
         startActivity(new Intent(this, SettingsActivity.class).putExtra(SettingsActivity.SETTINGS_PLAYER, player));
+    }
+
+    private void openQuizScreen() {
+        startActivity(new Intent(this, QuizActivity.class));
     }
 
 }

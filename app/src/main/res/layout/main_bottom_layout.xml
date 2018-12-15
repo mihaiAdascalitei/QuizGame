@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/background_color"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/tv_power_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:drawableTop="@drawable/ic_power_ups"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="Power ups"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@id/tv_ranking"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_ranking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:drawableTop="@drawable/ic_dashboard"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="Ranking"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@id/tv_power_up"
+        app:layout_constraintStart_toEndOf="@id/tv_ads" />
+
+    <TextView
+        android:id="@+id/tv_ads"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:clickable="true"
+        android:drawableTop="@drawable/ic_ads"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="Remove ads"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_ranking" />
+
+</android.support.constraint.ConstraintLayout>

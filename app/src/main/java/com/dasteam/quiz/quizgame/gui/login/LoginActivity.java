@@ -93,7 +93,7 @@ public class LoginActivity extends BaseActivity {
     private void handleLoginResponse(LoginResponseStatus response) {
         switch (response) {
             case EMPTY:
-                showEmptyErrorMessage();
+                setLoginAlert(true, true);
                 break;
             case LENGTH:
                 showLengthErrorMessage();
@@ -109,9 +109,6 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-    private void showEmptyErrorMessage() {
-        setLoginAlert(true, true);
-    }
 
     private void showLengthErrorMessage() {
         setLoginAlert(true, false);

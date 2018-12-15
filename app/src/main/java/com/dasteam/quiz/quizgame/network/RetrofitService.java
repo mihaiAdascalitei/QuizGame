@@ -11,6 +11,7 @@ public class RetrofitService {
     private Retrofit retrofit;
     private static final String BASE_URL = "http://192.168.100.16:7070/";
 
+
     public static RetrofitService getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new RetrofitService();

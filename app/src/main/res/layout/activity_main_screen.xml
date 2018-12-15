@@ -191,10 +191,11 @@
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
         android:text="Power ups"
+        android:textAlignment="center"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tv_ranking"
-        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -208,6 +209,7 @@
         android:foreground="?attr/selectableItemBackground"
         android:text="Ranking"
         android:textColor="@color/white"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tv_power_up"
         app:layout_constraintStart_toEndOf="@id/tv_ads" />
@@ -217,6 +219,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:textAlignment="center"
         android:clickable="true"
         android:drawableTop="@drawable/ic_ads"
         android:focusable="true"
