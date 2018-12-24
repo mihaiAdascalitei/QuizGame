@@ -47,6 +47,10 @@ public class QuizUtils {
         Date premium = date(premiumDate);
         Date currentDate = new Date();
         return Math.abs((int) (premium.getTime() / MILLISECS_PER_DAY) -
-                        (int) (currentDate.getTime() / MILLISECS_PER_DAY));
+                (int) (currentDate.getTime() / MILLISECS_PER_DAY));
+    }
+
+    public static String capitalize(String s) {
+        return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
     }
 }

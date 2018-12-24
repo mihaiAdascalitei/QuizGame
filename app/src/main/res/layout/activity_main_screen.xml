@@ -183,7 +183,7 @@
 
     <TextView
         android:id="@+id/tv_power_up"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:clickable="true"
@@ -194,40 +194,40 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tv_ranking"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tv_ranking" />
 
     <TextView
         android:id="@+id/tv_ranking"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:clickable="true"
+        android:textAlignment="center"
         android:drawableTop="@drawable/ic_dashboard"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
         android:text="Ranking"
         android:textColor="@color/white"
-        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tv_power_up"
-        app:layout_constraintStart_toEndOf="@id/tv_ads" />
+        app:layout_constraintLeft_toRightOf="@id/tv_power_up"
+        app:layout_constraintRight_toLeftOf="@id/tv_ads" />
 
     <TextView
         android:id="@+id/tv_ads"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:textAlignment="center"
         android:clickable="true"
         android:drawableTop="@drawable/ic_ads"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
         android:text="Remove ads"
+        android:textAlignment="center"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_ranking" />
+        app:layout_constraintLeft_toRightOf="@id/tv_ranking"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

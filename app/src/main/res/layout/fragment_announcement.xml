@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color">
+
+    <TextView
+        android:id="@+id/tv_game_mode_selected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Game mode selected :"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/left_line_type"
+        android:layout_width="30dp"
+        android:layout_height="1dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/tv_game_selected_type"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tv_game_selected_type"
+        app:layout_constraintTop_toTopOf="@id/tv_game_selected_type" />
+
+    <TextView
+        android:id="@+id/tv_game_selected_type"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/empty_white_rectangle"
+        android:padding="5dp"
+        android:text="Multiple"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/middle_rectangle_separator"
+        app:layout_constraintLeft_toRightOf="@id/left_line_type"
+        app:layout_constraintRight_toLeftOf="@id/right_line_type"
+        app:layout_constraintTop_toBottomOf="@id/tv_game_mode_selected" />
+
+    <View
+        android:id="@+id/right_line_type"
+        android:layout_width="30dp"
+        android:layout_height="1dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/tv_game_selected_type"
+        app:layout_constraintLeft_toRightOf="@id/tv_game_selected_type"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_game_selected_type" />
+
+    <View
+        android:id="@+id/middle_separator"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/middle_dot_separator"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:background="@drawable/round_small_circle"
+        app:layout_constraintBottom_toBottomOf="@id/middle_separator"
+        app:layout_constraintLeft_toLeftOf="@id/middle_separator"
+        app:layout_constraintRight_toRightOf="@id/middle_separator"
+        app:layout_constraintTop_toTopOf="@id/middle_separator" />
+
+    <View
+        android:id="@+id/middle_rectangle_separator"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/empty_white_rectangle"
+        app:layout_constraintBottom_toBottomOf="@id/middle_separator"
+        app:layout_constraintLeft_toLeftOf="@id/middle_separator"
+        app:layout_constraintRight_toRightOf="@id/middle_separator"
+        app:layout_constraintTop_toTopOf="@id/middle_separator" />
+
+    <TextView
+        android:id="@+id/tv_announcement_loading_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Loading content..."
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/btn_announcement_cancel"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/middle_rectangle_separator" />
+
+    <ProgressBar
+        android:id="@+id/pb_announcement_counter_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:indeterminateDrawable="@drawable/rotate_progress_gradient"
+        app:layout_constraintBottom_toTopOf="@id/btn_announcement_cancel"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/middle_rectangle_separator" />
+
+    <TextView
+        android:id="@+id/tv_announcement_counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/pb_announcement_counter_loading"
+        app:layout_constraintLeft_toLeftOf="@id/pb_announcement_counter_loading"
+        app:layout_constraintRight_toRightOf="@id/pb_announcement_counter_loading"
+        app:layout_constraintTop_toTopOf="@id/pb_announcement_counter_loading" />
+
+    <Button
+        android:id="@+id/btn_announcement_cancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/round_red_rectangle"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/cancel"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

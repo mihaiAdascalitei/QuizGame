@@ -50,15 +50,13 @@ public class SplashScreenActivity extends AppCompatActivity {
     private void checkPremiumExpiration(PlayerModel player) {
         if (player.hasPremium()) {
             if (player.getPremiumDateActivated() != null) {
-                if (player.hasPremium()) {
-                    String premiumDate = player.getPremiumDateActivated();
-                    if (premiumDate != null) {
-                        int differenceDay = MAX_PREMIUM_DAY_LIMIT - getDaysDifference(premiumDate);
-                        if (differenceDay == 0) {
-                            disablePremium(player);
-                        } else {
-                            startMainScreen();
-                        }
+                String premiumDate = player.getPremiumDateActivated();
+                if (premiumDate != null) {
+                    int differenceDay = MAX_PREMIUM_DAY_LIMIT - getDaysDifference(premiumDate);
+                    if (differenceDay <= 0) {
+                        disablePremium(player);
+                    } else {
+                        startMainScreen();
                     }
                 }
             }
@@ -77,6 +75,8 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             @Override
             public void onDataFailed(String message, int code) {
+                player.setHasPremium(0);
+                controller.cachePlayer(player);
                 startMainScreen();
             }
         });

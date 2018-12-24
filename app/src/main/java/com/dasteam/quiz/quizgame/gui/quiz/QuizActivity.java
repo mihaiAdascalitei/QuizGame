@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
+import com.dasteam.quiz.quizgame.gui.quiz.announcement.AnnouncementFragment;
 import com.dasteam.quiz.quizgame.gui.quiz.options.OptionsFragment;
 
 public class QuizActivity extends BaseActivity {
@@ -16,7 +17,8 @@ public class QuizActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_quiz);
-        startFragment(new OptionsFragment());
+        configureToolbar(getString(R.string.game_selected));
+        startFragment(new AnnouncementFragment());
     }
 
     @Override
