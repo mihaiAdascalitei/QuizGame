@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:background="@color/background_color">
 
     <TextView
@@ -88,7 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="Loading content..."
+        android:text="@string/loading_content"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@id/btn_announcement_cancel"
@@ -116,6 +117,7 @@
         app:layout_constraintLeft_toLeftOf="@id/pb_announcement_counter_loading"
         app:layout_constraintRight_toRightOf="@id/pb_announcement_counter_loading"
         app:layout_constraintTop_toTopOf="@id/pb_announcement_counter_loading" />
+
 
     <Button
         android:id="@+id/btn_announcement_cancel"

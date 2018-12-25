@@ -2,9 +2,16 @@ package com.dasteam.quiz.quizgame.gui.quiz.announcement;
 
 import android.os.CountDownTimer;
 
+import com.dasteam.quiz.quizgame.model.question.QuestionModel;
+import com.dasteam.quiz.quizgame.network.DataRetriever;
+import com.dasteam.quiz.quizgame.network.RetrofitRepository;
+import com.dasteam.quiz.quizgame.provider.QuizProvider;
+
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static com.dasteam.quiz.quizgame.provider.QuizProvider.provideRepository;
 import static com.dasteam.quiz.quizgame.utils.QuizUtils.string;
 
 public class AnnouncementController {
@@ -38,7 +45,6 @@ public class AnnouncementController {
     public void stopCountDown() {
         if (countDownTimer != null) {
             countDownTimer.cancel();
-            ;
         }
     }
 }

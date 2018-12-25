@@ -3,13 +3,11 @@ package com.dasteam.quiz.quizgame.gui.quiz;
 import android.annotation.SuppressLint;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
 import com.dasteam.quiz.quizgame.gui.quiz.announcement.AnnouncementFragment;
-import com.dasteam.quiz.quizgame.gui.quiz.options.OptionsFragment;
 
 public class QuizActivity extends BaseActivity {
 

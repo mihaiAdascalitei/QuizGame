@@ -101,6 +101,8 @@
     <string name="game_selected">Game has been selected</string>
     <string name="submit">Submit</string>
     <string name="surrender">Surrender</string>
+    <string name="preparing_questions">Preparing questions...</string>
+    <string name="loading_content">Loading content...</string>
 
     <string-array name="feedback_categories">
         <item>Account issues</item>

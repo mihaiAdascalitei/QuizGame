@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,17 +14,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dasteam.quiz.quizgame.R;
-import com.dasteam.quiz.quizgame.gui.quiz.options.adpater.OptionsAdapter;
+import com.dasteam.quiz.quizgame.base.BaseActivity;
+import com.dasteam.quiz.quizgame.gui.quiz.options.adpater.VariantsAdapter;
+import com.dasteam.quiz.quizgame.model.question.AnswerModel;
+import com.dasteam.quiz.quizgame.model.question.QuestionModel;
+import com.dasteam.quiz.quizgame.network.DataRetriever;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class OptionsFragment extends Fragment {
+public class VariantsFragment extends Fragment {
 
     private RecyclerView rvOptions;
     private TextView tvQuestion;
-    private OptionsAdapter adapter;
-    private Toolbar toolbar;
+    private VariantsAdapter adapter;
+    private VariantsController controller;
 
     @Nullable
     @Override
@@ -33,7 +36,7 @@ public class OptionsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_options, container, false);
         attachViews(view);
         initAdapter();
-        setAdapterData();
+        getQuestions();
         return view;
     }
 
@@ -54,21 +57,38 @@ public class OptionsFragment extends Fragment {
     private void attachViews(View view) {
         rvOptions = view.findViewById(R.id.rv_options);
         tvQuestion = view.findViewById(R.id.tv_options_question);
-        toolbar = view.findViewById(R.id.toolbar);
+        controller = new VariantsController();
     }
 
     private void initAdapter() {
-        adapter = new OptionsAdapter();
+        adapter = new VariantsAdapter();
         rvOptions.setLayoutManager(new LinearLayoutManager(this.getContext()));
         rvOptions.setAdapter(adapter);
     }
 
-    private void setAdapterData() {
-        List<String> dummyData = new ArrayList<>();
-        for (int i = 0; i <= 3; i++) {
-            dummyData.add("");
-        }
-
-        adapter.setData(dummyData);
+    private void initQuestionData(List<QuestionModel> data) {
+        tvQuestion.setText(data.get(0).getQuestion());
+        adapter.setData(data.get(0).getAnswers());
     }
+
+    private void showLoading(boolean value) {
+        ((BaseActivity) Objects.requireNonNull(getActivity())).showLoading(value);
+    }
+
+    private void getQuestions() {
+        showLoading(true);
+        controller.getQuestions(new DataRetriever<List<QuestionModel>>() {
+            @Override
+            public void onDataRetrieved(List<QuestionModel> data) {
+                showLoading(false);
+                initQuestionData(data);
+            }
+
+            @Override
+            public void onDataFailed(String message, int code) {
+                showLoading(false);
+            }
+        });
+    }
+
 }

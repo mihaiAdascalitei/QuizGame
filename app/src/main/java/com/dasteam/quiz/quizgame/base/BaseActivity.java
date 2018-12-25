@@ -89,7 +89,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-    protected void showLoading(boolean show) {
+    public void showLoading(boolean show) {
         if (show) {
             loading.show();
         } else {

@@ -11,9 +11,9 @@
     android:padding="15dp">
 
     <TextView
+        android:id="@+id/tv_answer_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Answer"
         android:textColor="@color/dark_green"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"

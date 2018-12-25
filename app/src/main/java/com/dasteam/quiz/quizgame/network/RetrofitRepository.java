@@ -5,11 +5,13 @@ import android.support.annotation.NonNull;
 import com.dasteam.quiz.quizgame.model.feedback.FeedbackModel;
 import com.dasteam.quiz.quizgame.model.player.PlayerModel;
 import com.dasteam.quiz.quizgame.model.powerups.PowerUpsModel;
+import com.dasteam.quiz.quizgame.model.question.QuestionModel;
 import com.dasteam.quiz.quizgame.network.call.powerups.PowerUpsCall;
 import com.dasteam.quiz.quizgame.network.call.auth.AuthAccountCall;
 import com.dasteam.quiz.quizgame.network.call.feedback.FeedbackCall;
 import com.dasteam.quiz.quizgame.network.call.player.UpdatePlayerEntriesCall;
 import com.dasteam.quiz.quizgame.network.call.player.RankingPlayersCall;
+import com.dasteam.quiz.quizgame.network.call.question.QuestionCall;
 
 import java.net.HttpURLConnection;
 import java.util.Date;
@@ -128,6 +130,11 @@ public class RetrofitRepository {
 
     public void updatePoints(String playerId, String points, DataRetriever<PlayerModel> retriever) {
         Call<PlayerModel> call = retrofit.create(UpdatePlayerEntriesCall.class).updatePoints(playerId, points);
+        requestExecute(call, retriever);
+    }
+
+    public void getQuestions(DataRetriever<List<QuestionModel>> retriever) {
+        Call<List<QuestionModel>> call = retrofit.create(QuestionCall.class).getQuestions();
         requestExecute(call, retriever);
     }
 
