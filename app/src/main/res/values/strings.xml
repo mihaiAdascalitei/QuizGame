@@ -107,7 +107,7 @@
     <string name="go_home">Go home</string>
     <string name="finished_game">Game has been finished!</string>
     <string name="check_answers">Check answers</string>
-    <string name="may_check">You may also check :</string>
+    <string name="may_check">You may also :</string>
 
     <string-array name="feedback_categories">
         <item>Account issues</item>
@@ -120,9 +120,9 @@
     </string-array>
 
     <string-array name="end_game_also_options">
-        <item>Check ranking</item>
-        <item>Another match</item>
-        <item>See profile</item>
+        <item>Check the ranking</item>
+        <item>Have another match</item>
+        <item>See your profile</item>
     </string-array>
 
 </resources>
