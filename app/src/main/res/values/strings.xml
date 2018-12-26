@@ -97,14 +97,17 @@
     <string name="go_profile">Check profile</string>
     <string name="about_fifth">The most important one comes now, you can buy and use power ups while playing.</string>
     <string name="go_powerups">Check power ups</string>
-    <string name="error_conn_message">Uhh...Try again</string>
+    <string name="error_conn_message">Wait…Try again</string>
     <string name="game_selected">Game has been selected</string>
     <string name="submit">Submit</string>
     <string name="surrender">Surrender</string>
-    <string name="preparing_questions">Preparing questions...</string>
-    <string name="loading_content">Loading content...</string>
+    <string name="preparing_questions">Preparing questions…</string>
+    <string name="loading_content">Loading content…</string>
     <string name="lost_game_message">It seems you\'ve lost the game</string>
     <string name="go_home">Go home</string>
+    <string name="finished_game">Game has been finished!</string>
+    <string name="check_answers">Check answers</string>
+    <string name="may_check">You may also check :</string>
 
     <string-array name="feedback_categories">
         <item>Account issues</item>
@@ -114,6 +117,12 @@
         <item>Personal data</item>
         <item>Usage</item>
         <item>Other</item>
+    </string-array>
+
+    <string-array name="end_game_also_options">
+        <item>Check ranking</item>
+        <item>Another match</item>
+        <item>See profile</item>
     </string-array>
 
 </resources>
