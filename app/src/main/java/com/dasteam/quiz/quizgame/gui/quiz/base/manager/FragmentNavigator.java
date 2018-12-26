@@ -17,7 +17,7 @@ public class FragmentNavigator {
     }
 
     public void replace(Fragment f) {
-        fragmentManager.beginTransaction().replace(R.id.quiz_container, f).commit();
+        fragmentManager.beginTransaction().replace(R.id.quiz_container, f).addToBackStack(null).commit();
     }
 
     public void pop() {

@@ -6,19 +6,76 @@
     android:animateLayoutChanges="true"
     android:background="@color/background_color">
 
+    <ImageView
+        android:id="@+id/iv_option_points_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_valor"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_options_points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_option_points_icon"
+        app:layout_constraintStart_toEndOf="@id/iv_option_points_icon"
+        app:layout_constraintTop_toTopOf="@id/iv_option_points_icon" />
+
+    <ImageView
+        android:id="@+id/iv_options_lives"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:src="@drawable/heart_bonus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_options_lives"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="2"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_options_lives"
+        app:layout_constraintEnd_toStartOf="@id/iv_options_lives"
+        app:layout_constraintTop_toTopOf="@id/iv_options_lives" />
+
+    <TextView
+        android:id="@+id/tv_options_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="00:00"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_options_lives"
+        app:layout_constraintStart_toEndOf="@id/tv_options_points"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <TextView
         android:id="@+id/tv_options_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:text="Question is that how are you and now can it be tested so sure"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="19sp"
+        app:layout_constraintBottom_toTopOf="@id/rv_options"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/iv_option_points_icon" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_options"
@@ -83,4 +140,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/tv_option_power_up"
         app:layout_constraintRight_toRightOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

@@ -103,6 +103,8 @@
     <string name="surrender">Surrender</string>
     <string name="preparing_questions">Preparing questions...</string>
     <string name="loading_content">Loading content...</string>
+    <string name="lost_game_message">It seems you\'ve lost the game</string>
+    <string name="go_home">Go home</string>
 
     <string-array name="feedback_categories">
         <item>Account issues</item>
