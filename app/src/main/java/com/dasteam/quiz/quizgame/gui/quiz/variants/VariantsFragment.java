@@ -1,5 +1,6 @@
 package com.dasteam.quiz.quizgame.gui.quiz.variants;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,14 +13,15 @@ import android.widget.TextView;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
+import com.dasteam.quiz.quizgame.gui.quiz.QuizActivity;
 import com.dasteam.quiz.quizgame.gui.quiz.base.BaseFragment;
 import com.dasteam.quiz.quizgame.gui.quiz.endgame.EndGameFragment;
 import com.dasteam.quiz.quizgame.gui.quiz.nolives.NoLivesFragment;
+import com.dasteam.quiz.quizgame.gui.quiz.powerups.PowerUpsQuizActivity;
 import com.dasteam.quiz.quizgame.gui.quiz.variants.adpater.VariantsAdapter;
 import com.dasteam.quiz.quizgame.model.question.AnswerModel;
 import com.dasteam.quiz.quizgame.model.question.QuestionModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
-import com.dasteam.quiz.quizgame.utils.QuizUtils;
 
 import java.util.List;
 import java.util.Objects;
@@ -32,6 +34,7 @@ public class VariantsFragment extends BaseFragment {
 
     private static int CURRENT_QUESTION_INDEX = 0;
     private static final int MAX_INITIAL_LIVES = 2;
+    private static final int POWER_UPS_REQUEST_CODEW = 11;
 
     private RecyclerView rvOptions;
     private TextView tvQuestion;
@@ -39,6 +42,8 @@ public class VariantsFragment extends BaseFragment {
     private TextView tvPoints;
     private TextView tvLives;
     private TextView tvError;
+    private TextView tvSurrender;
+    private TextView tvPowerUps;
 
     private VariantsAdapter adapter;
     private VariantsController controller;
@@ -66,6 +71,8 @@ public class VariantsFragment extends BaseFragment {
         tvPoints = view.findViewById(R.id.tv_options_points);
         tvLives = view.findViewById(R.id.tv_options_lives);
         tvError = view.findViewById(R.id.tv_options_error);
+        tvSurrender = view.findViewById(R.id.tv_option_quit);
+        tvPowerUps = view.findViewById(R.id.tv_option_power_up);
         controller = new VariantsController();
     }
 
@@ -79,6 +86,8 @@ public class VariantsFragment extends BaseFragment {
     private void setListeners() {
         tvSubmit.setOnClickListener(v -> submit());
         tvError.setOnClickListener(v -> getQuestions());
+        tvSurrender.setOnClickListener(v -> ((QuizActivity) Objects.requireNonNull(getContext())).showSurrenderAlert());
+        tvPowerUps.setOnClickListener(v -> openPowerUps());
     }
 
     private void updateQuestions() {
@@ -179,6 +188,9 @@ public class VariantsFragment extends BaseFragment {
         args.putString(EndGameFragment.END_GAME_POINTS, tvPoints.getText().toString());
         args.putString(EndGameFragment.END_GAME_LIST, saveArrayAsStringJson(questions));
         fragmentNavigator().replace(new EndGameFragment(), args);
+    }
 
+    private void openPowerUps() {
+        startActivityForResult(new Intent(getContext(), PowerUpsQuizActivity.class), POWER_UPS_REQUEST_CODEW);
     }
 }

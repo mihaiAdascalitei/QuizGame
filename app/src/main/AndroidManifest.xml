@@ -43,7 +43,10 @@
         <activity android:name=".gui.feedback.FeedbackActivity" />
         <activity android:name=".gui.feedback.history.FeedbackHistoryActivity" />
         <activity android:name=".gui.terms.TermsAndConditionsActivity" />
-        <activity android:name=".gui.about.AboutActivity"></activity>
+        <activity android:name=".gui.about.AboutActivity" />
+        <activity
+            android:name=".gui.quiz.powerups.PowerUpsQuizActivity"
+            android:theme="@style/TranslucentTheme" />
     </application>
 
 </manifest>

@@ -1,6 +1,8 @@
 package com.dasteam.quiz.quizgame.gui.quiz;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -42,5 +44,17 @@ public class QuizActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         //nothing
+    }
+
+    public void showSurrenderAlert() {
+        new AlertDialog.Builder(this, R.style.AlertDialogStyle)
+                .setTitle(getString(R.string.surrender))
+                .setMessage(getString(R.string.surrender_message))
+                .setPositiveButton(getString(R.string.button_ok), (dialog, which) -> {
+                    QuizActivity.this.finish();
+                })
+                .setNegativeButton(getString(R.string.cancel), null)
+                .create()
+                .show();
     }
 }

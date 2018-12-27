@@ -7,18 +7,20 @@ import com.dasteam.quiz.quizgame.provider.QuizProvider;
 
 import java.util.List;
 
+import static com.dasteam.quiz.quizgame.provider.QuizProvider.provideRepository;
+
 public class PowerUpsController {
 
     public void getPlayerPowerUps(String id, DataRetriever<List<PowerUpsModel>> retriever) {
-        QuizProvider.provideRepository().getPlayerPowerUps(id, retriever);
+        provideRepository().getPlayerPowerUps(id, retriever);
     }
 
     public void sellPowerUps(String playerId, String powerId, String powerCount, DataRetriever<List<PowerUpsModel>> retriever) {
-        QuizProvider.provideRepository().sellPowerUps(playerId, powerId, powerCount, retriever);
+        provideRepository().sellPowerUps(playerId, powerId, powerCount, retriever);
     }
 
     public void updateCredit(String playerId, String credit, DataRetriever<PlayerModel> retriever) {
-        QuizProvider.provideRepository().updateCredit(playerId, credit, retriever);
+        provideRepository().updateCredit(playerId, credit, retriever);
     }
 
     public void cachePlayer(PlayerModel player) {

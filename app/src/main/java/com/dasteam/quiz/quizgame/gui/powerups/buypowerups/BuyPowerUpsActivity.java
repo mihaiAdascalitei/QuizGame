@@ -41,8 +41,7 @@ public class BuyPowerUpsActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                setResult(RESULT_OK);
-                finish();
+                exit();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -50,6 +49,10 @@ public class BuyPowerUpsActivity extends BaseActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        exit();
+    }
 
     @SuppressLint("MissingSuperCall")
     @Override
@@ -62,6 +65,7 @@ public class BuyPowerUpsActivity extends BaseActivity {
         setAdapterData();
         setConnectionErrorIfAvailable();
     }
+
 
     @Override
     protected void attachViews() {
@@ -194,6 +198,11 @@ public class BuyPowerUpsActivity extends BaseActivity {
                 showAlert(getString(R.string.default_alert));
             }
         });
+    }
+
+    private void exit() {
+        setResult(RESULT_OK);
+        finish();
     }
 
 }
