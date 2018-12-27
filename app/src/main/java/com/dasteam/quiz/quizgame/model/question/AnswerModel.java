@@ -2,7 +2,9 @@ package com.dasteam.quiz.quizgame.model.question;
 
 import com.google.gson.annotations.SerializedName;
 
-public class AnswerModel {
+import java.io.Serializable;
+
+public class AnswerModel implements Serializable {
 
     @SerializedName("answer_id")
     private String id;
@@ -12,6 +14,8 @@ public class AnswerModel {
 
     @SerializedName("is_correct")
     private int isCorrect;
+
+    private boolean isSelected;
 
     public String getId() {
         return id;
@@ -31,5 +35,13 @@ public class AnswerModel {
 
     public boolean isCorrect() {
         return isCorrect == 1;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

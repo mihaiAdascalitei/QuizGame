@@ -2,7 +2,9 @@ package com.dasteam.quiz.quizgame.model.powerups;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PowerUpsModel {
+import java.io.Serializable;
+
+public class PowerUpsModel implements Serializable {
 
 
     @SerializedName("power_name")

@@ -1,4 +1,4 @@
-package com.dasteam.quiz.quizgame.gui.quiz.options.adpater;
+package com.dasteam.quiz.quizgame.gui.quiz.variants.adpater;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.model.question.AnswerModel;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -51,6 +49,10 @@ public class VariantsAdapter extends RecyclerView.Adapter<VariantsAdapter.Varian
     @Override
     public int getItemCount() {
         return answers == null ? 0 : answers.size();
+    }
+
+    public int getSelectedPosition() {
+        return selectedPosition;
     }
 
     public void resetPosition() {

@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:padding="5dp"
-    android:background="@drawable/round_white_rectangle">
+    android:background="@drawable/round_white_rectangle"
+    android:padding="5dp">
 
     <TextView
         android:id="@+id/tv_end_item_question"
@@ -31,11 +31,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_end_item_question" />
 
+    <TextView
+        android:id="@+id/tv_end_right_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textStyle="italic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_end_item_answer" />
+
     <ImageView
         android:id="@+id/iv_end_item_answer_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_cancel"
         app:layout_constraintBottom_toBottomOf="@id/tv_end_item_answer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_end_item_answer" />

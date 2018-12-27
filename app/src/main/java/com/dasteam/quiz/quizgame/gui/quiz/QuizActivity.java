@@ -38,4 +38,9 @@ public class QuizActivity extends BaseActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.quiz_container, fragment).commit();
     }
+
+    @Override
+    public void onBackPressed() {
+        //nothing
+    }
 }

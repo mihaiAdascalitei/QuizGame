@@ -13,6 +13,11 @@ import java.util.List;
 
 public class EndGameAlsoAdapter extends RecyclerView.Adapter<EndGameAlsoAdapter.EndGameAlsoHolder> {
     private List<String> data;
+    private AlsoItemListener callback;
+
+    public void setCallback(AlsoItemListener callback) {
+        this.callback = callback;
+    }
 
     public void setData(List<String> data) {
         this.data = data;
@@ -47,6 +52,7 @@ public class EndGameAlsoAdapter extends RecyclerView.Adapter<EndGameAlsoAdapter.
 
         public void bind(String item) {
             tvItem.setText(item);
+            itemView.setOnClickListener(v -> callback.onItemClick(getAdapterPosition()));
         }
     }
 }

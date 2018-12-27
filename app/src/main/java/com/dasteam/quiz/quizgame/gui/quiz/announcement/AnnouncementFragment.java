@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.gui.quiz.base.BaseFragment;
 import com.dasteam.quiz.quizgame.gui.quiz.closerange.CloseRangeFragment;
-import com.dasteam.quiz.quizgame.gui.quiz.options.VariantsFragment;
+import com.dasteam.quiz.quizgame.gui.quiz.variants.VariantsFragment;
 
 import java.util.Objects;
 

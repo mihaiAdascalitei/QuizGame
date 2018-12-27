@@ -108,6 +108,8 @@
     <string name="finished_game">Game has been finished!</string>
     <string name="check_answers">Check answers</string>
     <string name="may_check">You may also :</string>
+    <string name="variants_option_error">Something went wrong, click here to try again. If the problem is still occurring please try again later!</string>
+    <string name="points">Points:</string>
 
     <string-array name="feedback_categories">
         <item>Account issues</item>

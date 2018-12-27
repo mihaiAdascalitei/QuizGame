@@ -20,4 +20,5 @@ public class BaseFragment extends Fragment {
     protected FragmentNavigator fragmentNavigator() {
         return this.navigator;
     }
+
 }

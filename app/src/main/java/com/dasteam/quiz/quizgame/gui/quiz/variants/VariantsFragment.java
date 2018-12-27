@@ -1,4 +1,4 @@
-package com.dasteam.quiz.quizgame.gui.quiz.options;
+package com.dasteam.quiz.quizgame.gui.quiz.variants;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,15 +15,17 @@ import com.dasteam.quiz.quizgame.base.BaseActivity;
 import com.dasteam.quiz.quizgame.gui.quiz.base.BaseFragment;
 import com.dasteam.quiz.quizgame.gui.quiz.endgame.EndGameFragment;
 import com.dasteam.quiz.quizgame.gui.quiz.nolives.NoLivesFragment;
-import com.dasteam.quiz.quizgame.gui.quiz.options.adpater.VariantsAdapter;
+import com.dasteam.quiz.quizgame.gui.quiz.variants.adpater.VariantsAdapter;
 import com.dasteam.quiz.quizgame.model.question.AnswerModel;
 import com.dasteam.quiz.quizgame.model.question.QuestionModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
+import com.dasteam.quiz.quizgame.utils.QuizUtils;
 
 import java.util.List;
 import java.util.Objects;
 
 import static com.dasteam.quiz.quizgame.utils.QuizUtils.integer;
+import static com.dasteam.quiz.quizgame.utils.QuizUtils.saveArrayAsStringJson;
 import static com.dasteam.quiz.quizgame.utils.QuizUtils.string;
 
 public class VariantsFragment extends BaseFragment {
@@ -36,6 +38,7 @@ public class VariantsFragment extends BaseFragment {
     private TextView tvSubmit;
     private TextView tvPoints;
     private TextView tvLives;
+    private TextView tvError;
 
     private VariantsAdapter adapter;
     private VariantsController controller;
@@ -62,6 +65,7 @@ public class VariantsFragment extends BaseFragment {
         tvSubmit = view.findViewById(R.id.tv_option_submit);
         tvPoints = view.findViewById(R.id.tv_options_points);
         tvLives = view.findViewById(R.id.tv_options_lives);
+        tvError = view.findViewById(R.id.tv_options_error);
         controller = new VariantsController();
     }
 
@@ -74,6 +78,7 @@ public class VariantsFragment extends BaseFragment {
 
     private void setListeners() {
         tvSubmit.setOnClickListener(v -> submit());
+        tvError.setOnClickListener(v -> getQuestions());
     }
 
     private void updateQuestions() {
@@ -92,33 +97,44 @@ public class VariantsFragment extends BaseFragment {
             @Override
             public void onDataRetrieved(List<QuestionModel> data) {
                 showLoading(false);
+                showError(false);
                 questions = data;
                 updateQuestions();
             }
 
             @Override
             public void onDataFailed(String message, int code) {
+                showError(true);
                 showLoading(false);
             }
         });
     }
 
     private void submit() {
-        checkCountersAndPoints();
+        if (questions != null && currentAnswer != null) {
+            markSelectedAnswer();
+            checkCountersAndPoints();
 
-        if (wrongAnswerCounter == MAX_INITIAL_LIVES) {
-            fragmentNavigator().replace(new NoLivesFragment());
-        } else {
-            CURRENT_QUESTION_INDEX++;
-            if (CURRENT_QUESTION_INDEX == questions.size()) {
-                fragmentNavigator().replace(new EndGameFragment());
+            if (wrongAnswerCounter == MAX_INITIAL_LIVES) {
+                fragmentNavigator().replace(new NoLivesFragment());
             } else {
-                updateQuestions();
-                resetAnswerData();
+                CURRENT_QUESTION_INDEX++;
+                if (CURRENT_QUESTION_INDEX == questions.size()) {
+                    showEndGame();
+                } else {
+                    updateQuestions();
+                    resetAnswerData();
+                }
             }
         }
     }
 
+    private void markSelectedAnswer() {
+        int p = adapter.getSelectedPosition();
+        if (p != -1) {
+            questions.get(CURRENT_QUESTION_INDEX).getAnswers().get(p).setSelected(true);
+        }
+    }
 
     private void calculatePoints() {
         int points = integer(tvPoints.getText().toString());
@@ -133,13 +149,11 @@ public class VariantsFragment extends BaseFragment {
     }
 
     private void checkCountersAndPoints() {
-        if (currentAnswer != null) {
-            if (!currentAnswer.isCorrect()) {
-                wrongAnswerCounter++;
-                decrementLives();
-            } else {
-                calculatePoints();
-            }
+        if (!currentAnswer.isCorrect()) {
+            wrongAnswerCounter++;
+            decrementLives();
+        } else {
+            calculatePoints();
         }
     }
 
@@ -152,7 +166,19 @@ public class VariantsFragment extends BaseFragment {
         CURRENT_QUESTION_INDEX = 0;
         currentAnswer = null;
         wrongAnswerCounter = 0;
-
     }
 
+    private void showError(boolean show) {
+        tvError.setVisibility(show ? View.VISIBLE : View.GONE);
+        rvOptions.setVisibility(show ? View.GONE : View.VISIBLE);
+        tvQuestion.setVisibility(show ? View.GONE : View.VISIBLE);
+    }
+
+    private void showEndGame() {
+        Bundle args = new Bundle();
+        args.putString(EndGameFragment.END_GAME_POINTS, tvPoints.getText().toString());
+        args.putString(EndGameFragment.END_GAME_LIST, saveArrayAsStringJson(questions));
+        fragmentNavigator().replace(new EndGameFragment(), args);
+
+    }
 }

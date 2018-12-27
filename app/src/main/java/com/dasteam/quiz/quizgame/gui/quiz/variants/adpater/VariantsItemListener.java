@@ -1,4 +1,4 @@
-package com.dasteam.quiz.quizgame.gui.quiz.options.adpater;
+package com.dasteam.quiz.quizgame.gui.quiz.variants.adpater;
 
 import com.dasteam.quiz.quizgame.model.question.AnswerModel;
 

@@ -1,6 +1,7 @@
 package com.dasteam.quiz.quizgame.gui.quiz.base.manager;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
@@ -18,6 +19,11 @@ public class FragmentNavigator {
 
     public void replace(Fragment f) {
         fragmentManager.beginTransaction().replace(R.id.quiz_container, f).addToBackStack(null).commit();
+    }
+
+    public void replace(Fragment f, Bundle args) {
+        f.setArguments(args);
+        replace(f);
     }
 
     public void pop() {

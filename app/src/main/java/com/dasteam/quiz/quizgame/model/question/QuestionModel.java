@@ -2,9 +2,10 @@ package com.dasteam.quiz.quizgame.model.question;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class QuestionModel {
+public class QuestionModel implements Serializable {
 
     @SerializedName("question_id")
     private String questionId;

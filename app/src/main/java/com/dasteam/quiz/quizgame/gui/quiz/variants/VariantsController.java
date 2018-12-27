@@ -1,4 +1,4 @@
-package com.dasteam.quiz.quizgame.gui.quiz.options;
+package com.dasteam.quiz.quizgame.gui.quiz.variants;
 
 import com.dasteam.quiz.quizgame.model.question.QuestionModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;

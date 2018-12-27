@@ -2,7 +2,9 @@ package com.dasteam.quiz.quizgame.model.feedback;
 
 import com.google.gson.annotations.SerializedName;
 
-public class FeedbackModel {
+import java.io.Serializable;
+
+public class FeedbackModel implements Serializable {
 
     @SerializedName("feedback_id")
     private String feedbackId;
