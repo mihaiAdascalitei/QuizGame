@@ -1,6 +1,7 @@
 package com.dasteam.quiz.quizgame.gui.quiz.variants.adpater;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -59,6 +60,11 @@ public class VariantsAdapter extends RecyclerView.Adapter<VariantsAdapter.Varian
         selectedPosition = -1;
     }
 
+    public void setPosition(int randomAnswer) {
+        selectedPosition = randomAnswer;
+        notifyDataSetChanged();
+    }
+
     class VariantsHolder extends RecyclerView.ViewHolder {
         private TextView tvAnswer;
 
@@ -70,16 +76,30 @@ public class VariantsAdapter extends RecyclerView.Adapter<VariantsAdapter.Varian
         public void bind(AnswerModel answer) {
             tvAnswer.setText(answer.getName());
             itemView.setOnClickListener(v -> handleClickAction(answer));
-            updateSelectedItems();
+            checkStrikeThru(answer);
+            updateSelectedItems(answer);
         }
 
-        private void updateSelectedItems() {
+        private void checkStrikeThru(AnswerModel answer) {
+            if (answer.isStrikeThru()) {
+                tvAnswer.setPaintFlags(tvAnswer.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                tvAnswer.setTextColor(ContextCompat.getColor(context, R.color.white));
+                itemView.setBackground(ContextCompat.getDrawable(context, R.drawable.round_gray_rectangle));
+            }
+            else {
+                tvAnswer.setPaintFlags(Paint.LINEAR_TEXT_FLAG);
+            }
+        }
+
+        private void updateSelectedItems(AnswerModel answer) {
             if (selectedPosition == getAdapterPosition()) {
                 tvAnswer.setTextColor(ContextCompat.getColor(context, R.color.white));
                 itemView.setBackground(ContextCompat.getDrawable(context, R.drawable.round_red_rectangle));
             } else {
-                tvAnswer.setTextColor(ContextCompat.getColor(context, R.color.dark_green));
-                itemView.setBackground(ContextCompat.getDrawable(context, R.drawable.round_white_rectangle));
+                if (!answer.isStrikeThru()) {
+                    tvAnswer.setTextColor(ContextCompat.getColor(context, R.color.dark_green));
+                    itemView.setBackground(ContextCompat.getDrawable(context, R.drawable.round_white_rectangle));
+                }
             }
         }
 

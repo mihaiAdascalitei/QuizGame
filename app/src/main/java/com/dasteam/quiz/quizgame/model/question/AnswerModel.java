@@ -17,6 +17,12 @@ public class AnswerModel implements Serializable {
 
     private boolean isSelected;
 
+    private boolean isStrikeThru;
+
+    public AnswerModel() {
+        isStrikeThru = false;
+    }
+
     public String getId() {
         return id;
     }
@@ -43,5 +49,13 @@ public class AnswerModel implements Serializable {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    public boolean isStrikeThru() {
+        return isStrikeThru;
+    }
+
+    public void setStrikeThru(boolean strikeThru) {
+        isStrikeThru = strikeThru;
     }
 }

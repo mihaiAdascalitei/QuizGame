@@ -5,13 +5,14 @@
     <color name="colorAccent">@color/dark_green</color>
 
     <color name="background_color">@color/colorPrimary</color>
-    <color name="translucent_black"> #F2000000</color>
+    <color name="translucent_black">#F2000000</color>
 
     <color name="white">#FFFFFF</color>
     <color name="smooth_black">#212121</color>
     <color name="dark_green">#1B5E20</color>
     <color name="alert_red">#F44336</color>
     <color name="player_mode_green">#009688</color>
+    <color name="simple_gray">#757575</color>
 
     <color name="first_place">#FFFF00</color>
     <color name="second_place">#BDBDBD</color>

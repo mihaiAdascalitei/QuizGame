@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
@@ -23,9 +24,17 @@ import com.dasteam.quiz.quizgame.model.question.AnswerModel;
 import com.dasteam.quiz.quizgame.model.question.QuestionModel;
 import com.dasteam.quiz.quizgame.network.DataRetriever;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
+import static com.dasteam.quiz.quizgame.gui.quiz.powerups.PowerUpsQuizActivity.HALF_RESULT;
+import static com.dasteam.quiz.quizgame.gui.quiz.powerups.PowerUpsQuizActivity.HEART_RESULT;
+import static com.dasteam.quiz.quizgame.gui.quiz.powerups.PowerUpsQuizActivity.RANDOM_RESULT;
+import static com.dasteam.quiz.quizgame.gui.quiz.powerups.PowerUpsQuizActivity.SUGGESTION_RESULT;
+import static com.dasteam.quiz.quizgame.gui.quiz.powerups.PowerUpsQuizActivity.SWITCH_RESULT;
+import static com.dasteam.quiz.quizgame.gui.quiz.powerups.PowerUpsQuizActivity.TIMER_RESULT;
 import static com.dasteam.quiz.quizgame.utils.QuizUtils.integer;
 import static com.dasteam.quiz.quizgame.utils.QuizUtils.saveArrayAsStringJson;
 import static com.dasteam.quiz.quizgame.utils.QuizUtils.string;
@@ -33,8 +42,8 @@ import static com.dasteam.quiz.quizgame.utils.QuizUtils.string;
 public class VariantsFragment extends BaseFragment {
 
     private static int CURRENT_QUESTION_INDEX = 0;
-    private static final int MAX_INITIAL_LIVES = 2;
-    private static final int POWER_UPS_REQUEST_CODEW = 11;
+    private static int MAX_INITIAL_LIVES = 2;
+    private static final int POWER_UPS_REQUEST_CODE = 11;
 
     private RecyclerView rvOptions;
     private TextView tvQuestion;
@@ -49,17 +58,16 @@ public class VariantsFragment extends BaseFragment {
     private VariantsController controller;
     private List<QuestionModel> questions;
     private AnswerModel currentAnswer = null;
-    private int wrongAnswerCounter = 0;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_options, container, false);
+        resetCounters();
         attachViews(view);
         initAdapter();
         getQuestions();
         setListeners();
-        resetCounters();
         return view;
     }
 
@@ -74,6 +82,7 @@ public class VariantsFragment extends BaseFragment {
         tvSurrender = view.findViewById(R.id.tv_option_quit);
         tvPowerUps = view.findViewById(R.id.tv_option_power_up);
         controller = new VariantsController();
+        tvLives.setText(string(MAX_INITIAL_LIVES));
     }
 
     private void initAdapter() {
@@ -124,7 +133,7 @@ public class VariantsFragment extends BaseFragment {
             markSelectedAnswer();
             checkCountersAndPoints();
 
-            if (wrongAnswerCounter == MAX_INITIAL_LIVES) {
+            if (MAX_INITIAL_LIVES == 0) {
                 fragmentNavigator().replace(new NoLivesFragment());
             } else {
                 CURRENT_QUESTION_INDEX++;
@@ -152,14 +161,11 @@ public class VariantsFragment extends BaseFragment {
     }
 
     private void decrementLives() {
-        int lives = integer(tvLives.getText().toString());
-        lives--;
-        tvLives.setText(string(lives));
+        tvLives.setText(string(--MAX_INITIAL_LIVES));
     }
 
     private void checkCountersAndPoints() {
         if (!currentAnswer.isCorrect()) {
-            wrongAnswerCounter++;
             decrementLives();
         } else {
             calculatePoints();
@@ -173,8 +179,8 @@ public class VariantsFragment extends BaseFragment {
 
     private void resetCounters() {
         CURRENT_QUESTION_INDEX = 0;
+        MAX_INITIAL_LIVES = 2;
         currentAnswer = null;
-        wrongAnswerCounter = 0;
     }
 
     private void showError(boolean show) {
@@ -191,6 +197,50 @@ public class VariantsFragment extends BaseFragment {
     }
 
     private void openPowerUps() {
-        startActivityForResult(new Intent(getContext(), PowerUpsQuizActivity.class), POWER_UPS_REQUEST_CODEW);
+        startActivityForResult(new Intent(getContext(), PowerUpsQuizActivity.class), POWER_UPS_REQUEST_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == POWER_UPS_REQUEST_CODE) {
+            handleResult(resultCode);
+        }
+    }
+
+    private void handleResult(int resultCode) {
+        switch (resultCode) {
+            case TIMER_RESULT:
+                break;
+            case HALF_RESULT:
+                adapter.setData(controller.halfData(questions.get(CURRENT_QUESTION_INDEX).getAnswers()));
+                break;
+            case HEART_RESULT:
+                tvLives.setText(string(++MAX_INITIAL_LIVES));
+                break;
+            case SUGGESTION_RESULT:
+                setSuggestionResult();
+                break;
+            case RANDOM_RESULT:
+                setRandomResult();
+                break;
+            case SWITCH_RESULT:
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void setRandomResult() {
+        int randomPos = controller.getRandomAnswer(questions.get(CURRENT_QUESTION_INDEX).getAnswers());
+        adapter.setPosition(randomPos);
+        currentAnswer = questions.get(CURRENT_QUESTION_INDEX).getAnswers().get(randomPos);
+    }
+
+    private void setSuggestionResult() {
+        List<AnswerModel> answers = questions.get(CURRENT_QUESTION_INDEX).getAnswers();
+        int randomPos = controller.getRandomWrongAnswer(answers);
+        answers.get(randomPos).setStrikeThru(true);
+        adapter.setData(answers);
     }
 }
