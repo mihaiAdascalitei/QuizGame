@@ -76,7 +76,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .show();
     }
 
-    protected void showDelayedAlert(String message) {
+    public void showDelayedAlert(String message) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle)
                 .setMessage(message);
         final AlertDialog dialog = builder.create();

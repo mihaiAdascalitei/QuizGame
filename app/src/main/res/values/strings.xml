@@ -113,6 +113,7 @@
     <string name="surrender_message">Do you really want to surrender?</string>
     <string name="use">Use</string>
     <string name="no_power_ups_quiz">You do not have any power ups!</string>
+    <string name="only_one_power">You are able to use only one power per question.</string>
 
     <string-array name="feedback_categories">
         <item>Account issues</item>

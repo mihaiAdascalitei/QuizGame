@@ -19,6 +19,7 @@ public class QuestionModel implements Serializable {
     @SerializedName("range_answer")
     private String rangeAnswer;
 
+
     public String getQuestion() {
         return question;
     }
@@ -50,4 +51,5 @@ public class QuestionModel implements Serializable {
     public void setRangeAnswer(String rangeAnswer) {
         this.rangeAnswer = rangeAnswer;
     }
+
 }

@@ -5,7 +5,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import com.dasteam.quiz.quizgame.gui.quiz.QuizActivity;
 import com.dasteam.quiz.quizgame.gui.quiz.base.manager.FragmentNavigator;
+
+import java.util.Objects;
 
 public class BaseFragment extends Fragment {
 
@@ -21,4 +24,7 @@ public class BaseFragment extends Fragment {
         return this.navigator;
     }
 
+    protected void showDelayedAlert(String message) {
+        ((QuizActivity) Objects.requireNonNull(getContext())).showDelayedAlert(message);
+    }
 }

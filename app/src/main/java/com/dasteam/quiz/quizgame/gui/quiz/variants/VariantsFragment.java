@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dasteam.quiz.quizgame.R;
 import com.dasteam.quiz.quizgame.base.BaseActivity;
@@ -27,8 +26,8 @@ import com.dasteam.quiz.quizgame.network.DataRetriever;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
+import static android.app.Activity.RESULT_OK;
 import static com.dasteam.quiz.quizgame.gui.quiz.powerups.PowerUpsQuizActivity.HALF_RESULT;
 import static com.dasteam.quiz.quizgame.gui.quiz.powerups.PowerUpsQuizActivity.HEART_RESULT;
 import static com.dasteam.quiz.quizgame.gui.quiz.powerups.PowerUpsQuizActivity.RANDOM_RESULT;
@@ -53,11 +52,14 @@ public class VariantsFragment extends BaseFragment {
     private TextView tvError;
     private TextView tvSurrender;
     private TextView tvPowerUps;
+    private TextView tvTimer;
 
     private VariantsAdapter adapter;
     private VariantsController controller;
     private List<QuestionModel> questions;
     private AnswerModel currentAnswer = null;
+    private boolean powerHasBeenUsed = false;
+    private List<Integer> questionPosition;
 
     @Nullable
     @Override
@@ -81,6 +83,7 @@ public class VariantsFragment extends BaseFragment {
         tvError = view.findViewById(R.id.tv_options_error);
         tvSurrender = view.findViewById(R.id.tv_option_quit);
         tvPowerUps = view.findViewById(R.id.tv_option_power_up);
+        tvTimer = view.findViewById(R.id.tv_options_timer);
         controller = new VariantsController();
         tvLives.setText(string(MAX_INITIAL_LIVES));
     }
@@ -100,9 +103,22 @@ public class VariantsFragment extends BaseFragment {
     }
 
     private void updateQuestions() {
+        if (CURRENT_QUESTION_INDEX >= questions.size()) {
+            for (Integer p : questionPosition) {
+                CURRENT_QUESTION_INDEX = p;
+            }
+        }
         tvQuestion.setText(questions.get(CURRENT_QUESTION_INDEX).getQuestion());
         adapter.setData(questions.get(CURRENT_QUESTION_INDEX).getAnswers());
+        powerHasBeenUsed = false;
 
+    }
+
+    private void updateQuestionsPosition() {
+        questionPosition = new ArrayList<>();
+        for (int i = 0; i < questions.size(); i++) {
+            questionPosition.add(i);
+        }
     }
 
     private void showLoading(boolean value) {
@@ -118,6 +134,7 @@ public class VariantsFragment extends BaseFragment {
                 showError(false);
                 questions = data;
                 updateQuestions();
+                updateQuestionsPosition();
             }
 
             @Override
@@ -132,12 +149,12 @@ public class VariantsFragment extends BaseFragment {
         if (questions != null && currentAnswer != null) {
             markSelectedAnswer();
             checkCountersAndPoints();
-
+            removeQuestionPosition();
             if (MAX_INITIAL_LIVES == 0) {
                 fragmentNavigator().replace(new NoLivesFragment());
             } else {
-                CURRENT_QUESTION_INDEX++;
-                if (CURRENT_QUESTION_INDEX == questions.size()) {
+                CURRENT_QUESTION_INDEX = getNextAvailablePosition();
+                if (questionPosition.size() == 0) {
                     showEndGame();
                 } else {
                     updateQuestions();
@@ -145,6 +162,19 @@ public class VariantsFragment extends BaseFragment {
                 }
             }
         }
+    }
+
+    private int getNextAvailablePosition() {
+        if (questionPosition.size() != 0) {
+            Integer pos = questionPosition.get(0);
+            return pos == null ? -1 : pos;
+        }
+        return -1;
+    }
+
+    private int getNextPositionFrom(int current) {
+        Integer pos = questionPosition.get(current + 1);
+        return pos == null ? -1 : pos;
     }
 
     private void markSelectedAnswer() {
@@ -158,6 +188,19 @@ public class VariantsFragment extends BaseFragment {
         int points = integer(tvPoints.getText().toString());
         points += points * 4.5 + 1.5 * 3;
         tvPoints.setText(string(points));
+    }
+
+    private void removeQuestionPosition() {
+        Integer pos = null;
+        for (Integer p : questionPosition) {
+            if (p == CURRENT_QUESTION_INDEX) {
+                pos = p;
+                break;
+            }
+        }
+        if (pos != null) {
+            questionPosition.remove(pos);
+        }
     }
 
     private void decrementLives() {
@@ -197,13 +240,20 @@ public class VariantsFragment extends BaseFragment {
     }
 
     private void openPowerUps() {
-        startActivityForResult(new Intent(getContext(), PowerUpsQuizActivity.class), POWER_UPS_REQUEST_CODE);
+        if (!powerHasBeenUsed) {
+            startActivityForResult(new Intent(getContext(), PowerUpsQuizActivity.class), POWER_UPS_REQUEST_CODE);
+        } else {
+            showDelayedAlert(getString(R.string.only_one_power));
+        }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == POWER_UPS_REQUEST_CODE) {
+            if (resultCode != RESULT_OK) {
+                powerHasBeenUsed = true;
+            }
             handleResult(resultCode);
         }
     }
@@ -211,6 +261,7 @@ public class VariantsFragment extends BaseFragment {
     private void handleResult(int resultCode) {
         switch (resultCode) {
             case TIMER_RESULT:
+                tvTimer.setText(controller.getRandomTimerBonus(tvTimer.getText().toString()));
                 break;
             case HALF_RESULT:
                 adapter.setData(controller.halfData(questions.get(CURRENT_QUESTION_INDEX).getAnswers()));
@@ -225,6 +276,7 @@ public class VariantsFragment extends BaseFragment {
                 setRandomResult();
                 break;
             case SWITCH_RESULT:
+                switchQuestion();
                 break;
             default:
                 break;
@@ -242,5 +294,13 @@ public class VariantsFragment extends BaseFragment {
         int randomPos = controller.getRandomWrongAnswer(answers);
         answers.get(randomPos).setStrikeThru(true);
         adapter.setData(answers);
+    }
+
+    private void switchQuestion() {
+        if (CURRENT_QUESTION_INDEX < questions.size()) {
+            CURRENT_QUESTION_INDEX = getNextPositionFrom(CURRENT_QUESTION_INDEX);
+        }
+        updateQuestions();
+        resetAnswerData();
     }
 }

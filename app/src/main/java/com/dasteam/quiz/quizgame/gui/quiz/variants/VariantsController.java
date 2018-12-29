@@ -6,9 +6,12 @@ import com.dasteam.quiz.quizgame.network.DataRetriever;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import static com.dasteam.quiz.quizgame.provider.QuizProvider.provideRepository;
+import static com.dasteam.quiz.quizgame.utils.QuizUtils.integer;
+import static com.dasteam.quiz.quizgame.utils.QuizUtils.string;
 
 public class VariantsController {
     private Random random;
@@ -55,5 +58,11 @@ public class VariantsController {
             pos = random.nextInt(4);
         }
         return pos;
+    }
+
+    public String getRandomTimerBonus(String currentTime) {
+        int randomTime = random.nextInt(6) + 5;
+        return String.format(Locale.getDefault(), "%02d", integer(currentTime + randomTime));
+
     }
 }
